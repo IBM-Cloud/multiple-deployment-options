@@ -2,3 +2,5 @@ node_modules
 .gitignore
 action
 deploy.js
+Dockerfile
+*-deployment.yml

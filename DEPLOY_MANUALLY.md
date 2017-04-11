@@ -48,6 +48,108 @@ To simulate a crash of the service, use the *POST /crash* API such as:
 
 This call will exit the underlying node.js app, simulating an error of the API.
 
+## Deploy the service as a container in Kubernetes
+
+1. Create a Kubernetes cluster in Bluemix
+
+   ```
+   bx cs cluster-create fibonacci-cluster
+   ```
+
+   > Note: you can also use an existing cluster
+
+ 1. Retrieve the cluster configuration
+
+   ```
+   bx cs cluster-config fibonacci-cluster
+   ```
+
+   Output will look like:
+
+   ```
+   Downloading cluster config for fibonacci-cluster
+   OK
+   The configuration for fibonacci-cluster was downloaded successfully. Export environment variables to start using Kubernetes.
+
+   export KUBECONFIG=/Users/john/.bluemix/plugins/container-service/clusters/fibonacci-cluster/kube-xxx-fibonacci-cluster.yml
+   ```
+
+1. Copy and paste the `export KUBECONFIG=...` line into your shell.
+
+1. Confirm the configuration worked by retrieving the cluster nodes:
+
+   ```
+   kubectl get nodes
+   ```
+
+1. Log in your local Docker client to the Bluemix Container registry:
+
+   ```
+   bx cr login
+   ```
+
+1. Retrieve the name of the namespace you are going to use to push your Docker images:
+
+   ```
+   bx cr namespace-list
+   ```
+
+1. Change to the **service** directory.
+
+   ```
+   cd multiple-deployment-options/service
+   ```
+
+1. Build the Docker image of the service
+
+   ```
+   docker build -t registry.ng.bluemix.net/<namespace>/fibonacci:latest .
+   ```
+
+   replacing *namespace* with your namespace name.
+
+1. Push the image to the registry
+
+   ```
+   docker push registry.ng.bluemix.net/<namespace>/fibonacci:latest
+   ```
+
+1. Modify the fibonacci-deployment.yml to point to the image in the Bluemix Container Registry by replacing the *namespace* value.
+
+1. Deploy the Fibonacci service in the cluster
+
+   ```
+   kubectl create -f fibonacci-deployment.yml
+   ```
+
+### Test the Kubernetes service
+
+Retrieve the public IP address of your Kubernetes cluster. If you are using the free plan of the Kubernetes cluster in Bluemix, your node name is its public IP address:
+
+   ```
+   kubectl get nodes
+   ```
+
+To compute the Fibonacci number after *n* iterations use the *GET /iteration/:n* API such as:
+
+   ```
+   curl -v http://<cluster-ip>:30080/iteration/1000
+   ```
+
+To let the computation run for *t* milliseconds use the *GET /duration/:t* API such as:
+
+   ```
+   curl -v http://<cluster-ip>:30080/duration/5000
+   ```
+
+To simulate a crash of the service, use the *POST /crash* API such as:
+
+   ```
+   curl -v -X POST http://<cluster-ip>:30080/crash
+   ```
+
+This call will exit the underlying node.js app running in the container, simulating an error of the API.
+
 ## Deploy the service as an OpenWhisk action
 
 1. Ensure your OpenWhisk command line interface is property configured with:

@@ -9,7 +9,11 @@ This project contains one simple micro-service that can be deployed as a Cloud F
 * IBM Bluemix account. [Sign up][bluemix_signup_url] for Bluemix, or use an existing account.
 * [Bluemix CLI](http://clis.ng.bluemix.net/)
 * [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli)
+* [Bluemix Container Registry plugin](https://console.ng.bluemix.net/docs/cli/plugins/registry/index.html)
+* [Bluemix Container Service plugin](https://console.ng.bluemix.net/docs/containers/cs_cli_devtools.html)
 * Node.js 6.9.1
+* Kubernetes CLI version 1.5.3 or later
+* Docker CLI version 1.9. or later
 
 ## About the micro-service
 
@@ -38,6 +42,16 @@ Follow [these instructions](./DEPLOY_MANUALLY.md).
 | [package.json](service/package.json) | List the packages required by the application |
 | [manifest.yml](service/manifest.yml) | Description of the application to be deployed |
 | [.cfignore](service/.cfignore) | List files to ignore when deploying the application to Cloud Foundry |
+
+### Kubernetes deployment
+
+| File | Description |
+| ---- | ----------- |
+| [app.js](service/app.js) | Main application, start the express web server and expose the service API|
+| [lib/fibonacci.js](service/lib/fibonacci.js) | The implementation of the Fibonacci sequence, shared by all deployment options|
+| [package.json](service/package.json) | List the packages required by the application |
+| [Dockerfile](service/Dockerfile) | Description of the Docker image |
+| [fibonacci-deployment.yml](service/fibonacci-deployment.yml) | Specification file for the deployment of the service in Kubernetes |
 
 ### OpenWhisk action
 

@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: fibonacci-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: fibonacci
+    spec:
+      containers:
+        - name: fibonacci-container
+          #image: "fibonacci:latest"
+          image: "registry.ng.bluemix.net/<namespace>/fibonacci:latest"
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fibonacci-service
+  labels:
+    run: fibonacci
+spec:
+  type: NodePort
+  selector:
+    run: fibonacci
+  ports:
+   - protocol: TCP
+     port: 8080
+     nodePort: 30080
