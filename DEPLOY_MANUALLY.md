@@ -58,7 +58,7 @@ This call will exit the underlying node.js app, simulating an error of the API.
 
    > Note: you can also use an existing cluster
 
- 1. Retrieve the cluster configuration
+1. Retrieve the cluster configuration
 
    ```
    bx cs cluster-config fibonacci-cluster
@@ -158,7 +158,7 @@ This call will exit the underlying node.js app running in the container, simulat
    wsk list
    ```
 
-  This shows the packages, actions, triggers and rules currently deployed in your OpenWhisk namespace.
+   This shows the packages, actions, triggers and rules currently deployed in your OpenWhisk namespace.
 
 1. Change to the **service** directory.
 
