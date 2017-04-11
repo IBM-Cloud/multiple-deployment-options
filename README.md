@@ -5,7 +5,7 @@ This project contains one simple micro-service that gets deployed:
 * as a container in a Kubernetes cluster
 * and as an OpenWhisk action.
 
-![](./architecture.png)
+  <img src="architecture.png" width="600" />
 
 ## Requirements
 
