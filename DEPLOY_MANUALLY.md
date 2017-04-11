@@ -13,14 +13,18 @@
 ## Deploy the service as a Cloud Foundry application
 
 1. Change to the **service** directory.
+
   ```
   cd multiple-deployment-options/service
   ```
-1. Push the application
+
+2. Push the application
+
   ```
   cf push
   ```
-1. After a short while, the application is available at a random route.
+
+3. After a short while, the application is available at a random route.
 
 ### Test the Cloud Foundry application
 
@@ -54,19 +58,19 @@ This call will exit the underlying node.js app, simulating an error of the API.
 
   This shows the packages, actions, triggers and rules currently deployed in your OpenWhisk namespace.
 
-1. Change to the **service** directory.
+2. Change to the **service** directory.
 
   ```
   cd multiple-deployment-options/service
   ```
 
-1. Install dependencies
+3. Install dependencies
 
   ```
   npm install
   ```
 
-1. Deploy the OpenWhisk action
+4. Deploy the OpenWhisk action
 
   ```
   node deploy.js --install
