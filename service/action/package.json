@@ -1,0 +1,14 @@
+{
+  "name": "fibonacci",
+  "version": "1.0.0",
+  "description": "Computes Fibonacci number",
+  "main": "handler.js",
+  "dependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IBM-Bluemix/multiple-deployment-options/"
+  },
+  "author": "IBM",
+  "license": "Apache-2.0"
+}

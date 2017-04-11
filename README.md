@@ -8,6 +8,8 @@ This project contains one simple micro-service that can be deployed as a Cloud F
 
 * IBM Bluemix account. [Sign up][bluemix_signup_url] for Bluemix, or use an existing account.
 * [Bluemix CLI](http://clis.ng.bluemix.net/)
+* [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli)
+* Node.js 6.9.1
 
 ## About the micro-service
 
@@ -36,6 +38,17 @@ Follow [these instructions](./DEPLOY_MANUALLY.md).
 | [package.json](service/package.json) | List the packages required by the application |
 | [manifest.yml](service/manifest.yml) | Description of the application to be deployed |
 | [.cfignore](service/.cfignore) | List files to ignore when deploying the application to Cloud Foundry |
+
+### OpenWhisk action
+
+The OpenWhisk action is deployed as a [zip action](https://console.ng.bluemix.net/docs/openwhisk/openwhisk_actions.html#openwhisk_create_action_js) where several files are packaged into a zip file and the zip file is passed to OpenWhisk as the implementation for the action. **[deploy.js](service/deploy.js)** takes care of packaging the zip file.
+
+| File | Description |
+| ---- | ----------- |
+| [handler.js](service/action/handler.js) | Implementation of the OpenWhisk action |
+| [lib/fibonacci.js](service/lib/fibonacci.js) | The implementation of the Fibonacci sequence, shared by all deployment options |
+| [package.json](service/action/package.json) | Specify the action entry point (handler.js) |
+| [deploy.js](service/deploy.js) | Helper to deploy and undeploy the OpenWhisk action |
 
 ## Contribute
 
