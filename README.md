@@ -1,8 +1,11 @@
 # One micro-service, multiple deployment options
 
-> :warning: WORK IN PROGRESS
+This project contains one simple micro-service that gets deployed:
+* as a Cloud Foundry application,
+* as a container in a Kubernetes cluster
+* and as an OpenWhisk action.
 
-This project contains one simple micro-service that can be deployed as a Cloud Foundry application, as a container in a Kubernetes cluster or as an OpenWhisk action.
+![](./architecture.png)
 
 ## Requirements
 
@@ -25,7 +28,7 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_number), *In mathematic
   0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
   ```
 
-The implementation of the sequence is done in **[service/lib/fibonacci.js](service/lib/fibonacci.js)**. The same implementation is used across all deployment options.
+The implementation of the Fibonacci sequence is done in **[service/lib/fibonacci.js](service/lib/fibonacci.js)**. The same implementation is used across all deployment options.
 
 ## Deploying the service manually in Bluemix
 
