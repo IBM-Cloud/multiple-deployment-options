@@ -2,7 +2,7 @@
 
 This project contains one simple micro-service that gets deployed:
 * as a Cloud Foundry application,
-* as a container in a Kubernetes cluster
+* as a container in a Kubernetes cluster,
 * and as an OpenWhisk action.
 
   <img src="architecture.png" width="600" />
@@ -79,7 +79,23 @@ Please create a pull request with your desired changes.
   ```
   cf logs fibonacci-service
   ```
-  to look at the live logs for the web application
+  to look at the live logs for the web application.
+
+### Kubernetes
+
+  Use
+  ```
+  kubectl proxy
+  ```
+  and look at the status of the resources in the console.
+
+### OpenWhisk
+
+  Use
+  ```
+  wsk activation poll
+  ```
+  and perform an invocation of the action.
 
 ## License
 
