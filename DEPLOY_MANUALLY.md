@@ -18,13 +18,13 @@
   cd multiple-deployment-options/service
   ```
 
-2. Push the application
+1. Push the application
 
   ```
   cf push
   ```
 
-3. After a short while, the application is available at a random route.
+1. After a short while, the application is available at a random route.
 
 ### Test the Cloud Foundry application
 
@@ -52,48 +52,48 @@ This call will exit the underlying node.js app, simulating an error of the API.
 
 1. Ensure your OpenWhisk command line interface is property configured with:
 
-  ```
-  wsk list
-  ```
+   ```
+   wsk list
+   ```
 
   This shows the packages, actions, triggers and rules currently deployed in your OpenWhisk namespace.
 
-2. Change to the **service** directory.
+1. Change to the **service** directory.
 
-  ```
-  cd multiple-deployment-options/service
-  ```
+   ```
+   cd multiple-deployment-options/service
+   ```
 
-3. Install dependencies
+1. Install dependencies
 
-  ```
-  npm install
-  ```
+   ```
+   npm install
+   ```
 
-4. Deploy the OpenWhisk action
+1. Deploy the OpenWhisk action
 
-  ```
-  node deploy.js --install
-  ```
+   ```
+   node deploy.js --install
+   ```
 
 ### Test the OpenWhisk action
 
 To compute the Fibonacci number after *n* iterations, pass the *iteration* parameter to the action:
 
-  ```
-  curl -v http://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?iteration=1000
-  ```
+   ```
+   curl -v http://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?iteration=1000
+   ```
 
 To let the computation run for *t* milliseconds, pass the *duration* parameter to the action:
 
-  ```
-  curl -v http://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?duration=5000
-  ```
+   ```
+   curl -v http://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?duration=5000
+   ```
 
 To simulate a crash of the service, pass the *crash* parameter to the action:
 
-  ```
-  curl -v -X POST http://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?crash=true
-  ```
+   ```
+   curl -v -X POST http://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?crash=true
+   ```
 
 This call will exit the underlying action invoker, simulating an error of the API.
