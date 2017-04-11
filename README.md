@@ -25,6 +25,18 @@ The implementation of the sequence is done in **[service/lib/fibonacci.js](servi
 
 Follow [these instructions](./DEPLOY_MANUALLY.md).
 
+## Code Structure
+
+### Cloud Foundry application
+
+| File | Description |
+| ---- | ----------- |
+| [app.js](service/app.js) | Main application, start the express web server and expose the service API|
+| [lib/fibonacci.js](service/lib/fibonacci.js) | The implementation of the Fibonacci sequence, shared by all deployment options|
+| [package.json](service/package.json) | List the packages required by the application |
+| [manifest.yml](service/manifest.yml) | Description of the application to be deployed |
+| [.cfignore](service/.cfignore) | List files to ignore when deploying the application to Cloud Foundry |
+
 ## Contribute
 
 Please create a pull request with your desired changes.
