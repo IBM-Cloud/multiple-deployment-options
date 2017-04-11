@@ -185,19 +185,19 @@ Retrieve your OpenWhisk namespace. You can find it by running `wsk namespace lis
 To compute the Fibonacci number after *n* iterations, pass the *iteration* parameter to the action:
 
    ```
-   curl -v http://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?iteration=1000
+   curl -v https://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?iteration=1000
    ```
 
 To let the computation run for *t* milliseconds, pass the *duration* parameter to the action:
 
    ```
-   curl -v http://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?duration=5000
+   curl -v https://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?duration=5000
    ```
 
 To simulate a crash of the service, pass the *crash* parameter to the action:
 
    ```
-   curl -v -X POST http://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?crash=true
+   curl -v -X POST https://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?crash=true
    ```
 
 This call will exit the underlying action invoker, simulating an error of the API.
