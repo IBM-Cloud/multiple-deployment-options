@@ -9,6 +9,18 @@ This project contains one simple micro-service that can be deployed as a Cloud F
 * IBM Bluemix account. [Sign up][bluemix_signup_url] for Bluemix, or use an existing account.
 * [Bluemix CLI](http://clis.ng.bluemix.net/)
 
+## About the micro-service
+
+The micro-service used in this project computes Fibonacci numbers.
+
+From [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_number), *In mathematics, the Fibonacci numbers are the numbers in the following integer sequence, called the Fibonacci sequence, and characterized by the fact that every number after the first two is the sum of the two preceding ones:*
+
+  ```
+  0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
+  ```
+
+The implementation of the sequence is done in **[service/lib/fibonacci.js](service/lib/fibonacci.js)**. The same implementation is used across all deployment options.
+
 ## Deploying the service manually in Bluemix
 
 Follow [these instructions](./DEPLOY_MANUALLY.md).
