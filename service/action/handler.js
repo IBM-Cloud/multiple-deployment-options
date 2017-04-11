@@ -15,7 +15,7 @@
  */
 
  /**
-  * Called by Whisk.
+  * Called by OpenWhisk.
   *
   * It expects the following parameters as attributes of 'args'
   * - crash: true - it will exit the running process
