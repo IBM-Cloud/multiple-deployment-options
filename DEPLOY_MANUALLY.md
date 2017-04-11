@@ -78,6 +78,8 @@ This call will exit the underlying node.js app, simulating an error of the API.
 
 ### Test the OpenWhisk action
 
+Retrieve your OpenWhisk namespace. You can find it by running `wsk namespace list`.
+
 To compute the Fibonacci number after *n* iterations, pass the *iteration* parameter to the action:
 
    ```
