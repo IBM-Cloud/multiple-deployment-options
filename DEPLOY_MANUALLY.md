@@ -13,17 +13,13 @@
 ## Deploy the service as a Cloud Foundry application
 
 1. Change to the **service** directory.
-
   ```
   cd multiple-deployment-options/service
   ```
-
 1. Push the application
-
   ```
   cf push
   ```
-
 1. After a short while, the application is available at a random route.
 
 ### Test the Cloud Foundry application
