@@ -53,7 +53,7 @@ This call will exit the underlying node.js app, simulating an error of the API.
 1. Create a Kubernetes cluster in Bluemix
 
    ```
-   bx cs cluster-create fibonacci-cluster
+   bx cs cluster-create --name fibonacci-cluster
    ```
 
    > Note: you can also use an existing cluster
