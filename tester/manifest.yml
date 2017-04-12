@@ -1,0 +1,4 @@
+applications:
+- name: deployment-options-tester
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  memory: 64M

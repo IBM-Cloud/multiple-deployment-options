@@ -1,0 +1,178 @@
+@import url(//fonts.googleapis.com/css?family=Rubik:400,500);
+@import url(//fonts.googleapis.com/icon?family=Material+Icons);
+
+body, html {
+  height: 100%;
+  margin: 0 auto;
+  font-size: 14px;
+  font-family: Rubik,Helvetica,sans-serif;
+  font-weight: 400;
+  /** smooth scrolling on mobile devices **/
+  -webkit-overflow-scrolling: touch;
+}
+
+/**
+  Header
+  **/
+
+.title {
+  font-weight: 500;
+}
+
+spinner {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.loadingProgress {
+  visibility: hidden;
+}
+
+md-progress-linear {
+  height: 2px;
+}
+
+md-progress-linear .md-bar {
+}
+
+md-progress-linear .md-container {
+  height: 2px;
+}
+
+md-progress-linear .md-container .md-bar {
+  height: 2px;
+}
+
+md-toolbar {
+  min-height: 50px;
+}
+
+.md-toolbar-tools {
+  font-size: 14px;
+  height: 50px;
+  max-height: 50px;
+}
+
+button.md-button.md-icon-button, a.md-button.md-icon-button {
+  margin-left: 8px;
+  padding: 0;
+}
+
+a.md-icon-button md-icon {
+  margin-top: 6px;
+}
+
+md-icon {
+  line-height: 28px;
+  width: 28px;
+  height: 28px;
+  font-size: 28px !important;
+}
+
+/**
+  Container
+  **/
+
+.wrapper {
+  overflow: hidden;
+}
+
+.wrapper > div {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/** Common **/
+
+h2 {
+  font-weight: 500;
+}
+
+h3 {
+  font-weight: 500;
+  border-bottom: 1px solid;
+  padding-bottom: 4px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/**
+ *
+ */
+
+.endpoints {
+  overflow: auto;
+}
+
+.endpoint-container {
+  font-size: 14px;
+  min-height: 200px;
+}
+
+.endpoint-information {
+  width: 200px;
+}
+
+.endpoint-title {
+  font-size: 18px;
+  font-weight: 500;
+  border-bottom: 1px solid;
+  margin-bottom: 10px;
+}
+
+.endpoint-icon {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.results {
+  display: inline;
+}
+
+.result {
+  display: inline-flex;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.result-status {
+  border-radius: 5px;
+  padding: 5px;
+  background-color: red;
+  color: white;
+}
+
+.result-status--666 {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+}
+
+.result-status-200 {
+  background-color: green;
+  color: white;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+/**
+ * footer
+ */
+
+.footer {
+  z-index: 1000;
+  padding: 20px;
+}

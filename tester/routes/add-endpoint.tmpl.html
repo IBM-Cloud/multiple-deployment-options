@@ -1,0 +1,54 @@
+<md-dialog class="add-endpoint-dialog" aria-label="Add Endpoint">
+  <form name="addEndpointForm" ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Endpoint Configuration</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-font-library="material-icons" aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content" layout="column">
+
+        <p>
+          Configure the location of your deployed endpoint. It must adhere to the specification of <a href="https://github.com/IBM-Bluemix/multiple-deployment-options">the GitHub project</a>.
+        </p>
+
+        <md-input-container>
+          <label>Name</label>
+          <input type="text" ng-model="endpoint.name" required>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Icon URL</label>
+          <input type="text" ng-model="endpoint.icon" required>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Iterate URL</label>
+          <input type="text" ng-model="endpoint.iterate" required>
+        </md-input-container>
+
+        <md-input-container>
+          <label>Crash URL</label>
+          <input type="text" ng-model="endpoint.crash" required>
+        </md-input-container>
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="cancel()">
+       Cancel
+      </md-button>
+      <md-button ng-disabled="!addEndpointForm.$valid" ng-click="submit()">
+        <span ng-if="isNew">Add</span>
+        <span ng-if="!isNew">Save</span>
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
