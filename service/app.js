@@ -37,6 +37,7 @@ const app = express();
 const fibonacci = require('./lib/fibonacci')();
 
 app.use(cors());
+app.disable('etag');
 
 app.get('/iteration/:number', (req, res) => {
   logger.info(`GET /iteration/${req.params.number}`);
