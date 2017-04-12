@@ -67,6 +67,10 @@ The OpenWhisk action is deployed as a [zip action](https://console.ng.bluemix.ne
 | [package.json](service/action/package.json) | Specify the action entry point (handler.js) |
 | [deploy.js](service/deploy.js) | Helper to deploy and undeploy the OpenWhisk action |
 
+### Tester web app
+
+Under the `tester` directory is a simple web application to register and test the deployed micro-services. It can be pushed to Bluemix with `cf push` or simply executed locally with `python -m SimpleHTTPServer 28080` as example.
+
 ## Contribute
 
 Please create a pull request with your desired changes.
