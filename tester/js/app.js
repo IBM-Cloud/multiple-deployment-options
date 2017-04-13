@@ -117,7 +117,7 @@
     $scope.startPingLoop = function() {
       $scope.pingLoopRunning = true;
       $scope.endPoints.forEach(function(endPoint) {
-        if (!endPoint.options.disabled) {
+        if (endPoint.options.enabled) {
           endPoint.startPing(function(err, response) {
             console.log(endPoint.options.name, err, response);
           });
@@ -134,7 +134,7 @@
 
     $scope.crash = function() {
       $scope.endPoints.forEach(function(endPoint) {
-        if (!endPoint.options.disabled) {
+        if (endPoint.options.enabled) {
           endPoint.crash(function(err, response) {
             console.log(endPoint.options.name, err, response);
           });
@@ -153,7 +153,8 @@
         name: null,
         icon: null,
         iterate: 'http://<host>/iteration/1000',
-        crash: 'http://<host>/crash'
+        crash: 'http://<host>/crash',
+        enabled: true
       };
       $scope.computeIcons = [
         '/images/cloudfoundry.png',

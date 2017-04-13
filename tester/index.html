@@ -60,37 +60,17 @@
 
     <div class="endpoints" layout="row" flex>
       <div layout="column">
-        <div md-whiteframe="1" layout="column" ng-repeat="endPoint in endPoints" ng-class="{ disabled: endPoint.options.disabled }" class="endpoint-row endpoint-information">
-          <div class="endpoint-title" layout="row" layout-align="center center">
-            <span flex>{{endPoint.options.name}}</span>
-            <md-menu>
-              <md-button class="md-icon-button" ng-click="$mdMenu.open()">
-                <md-icon md-font-library="material-icons">more_vert</md-icon>
-              </md-button>
-              <md-menu-content>
-                <md-menu-item>
-                  <md-button ng-click="toggleEndpoint(endPoint)">
-                    <span ng-if="endPoint.options.disabled">Enable</span>
-                    <span ng-if="!endPoint.options.disabled">Disable</span>
-                  </md-button>
-                </md-menu-item>
-                <md-menu-item>
-                  <md-button ng-click="editEndpoint(endPoint);">
-                    Edit
-                  </md-button>
-                </md-menu-item>
-                <md-menu-divider></md-menu-divider>
-                <md-menu-item>
-                  <md-button ng-click="removeEndpoint(endPoint);">
-                    Remove
-                  </md-button>
-                </md-menu-item>
-              </md-menu-content>
-            </md-menu>
-          </div>
-          <img class="endpoint-icon" ng-src="{{endPoint.options.icon}}" />
+        <div md-whiteframe="1" layout="column" ng-repeat="endPoint in endPoints" class="endpoint-row endpoint-information">
 
-          <div layout="row" layout-align="space-around center" flex>
+          <div class="endpoint-icon">
+            <img height="20" ng-class="{ disabled: !endPoint.options.enabled }" ng-src="{{endPoint.options.icon}}" />
+          </div>
+
+          <div ng-class="{ disabled: !endPoint.options.enabled }" class="endpoint-title" layout="row" layout-align="center center">
+            <span flex>{{endPoint.options.name}}</span>
+          </div>
+
+          <div flex ng-class="{ disabled: !endPoint.options.enabled }" layout="row" layout-align="space-around center">
             <div class="result-status-200">
               {{endPoint.successes().length}}
               <md-icon md-font-library="material-icons">check_circle</md-icon>
@@ -100,10 +80,23 @@
               <md-icon md-font-library="material-icons">cancel</md-icon>
             </div>
           </div>
+
+          <div class="endpoint-actions" layout="row" layout-align="center center">
+            <md-switch ng-model="endPoint.options.enabled">
+            </md-switch>
+            <span flex></span>
+            <md-button class="md-icon-button button-small" ng-click="editEndpoint(endPoint);">
+              <md-icon md-font-library="material-icons">edit</md-icon>
+            </md-button>
+            <md-button class="md-icon-button button-small" ng-click="removeEndpoint(endPoint);">
+              <md-icon md-font-library="material-icons">delete</md-icon>
+            </md-button>
+          </div>
+
         </div>
       </div>
       <div layout="column" flex>
-        <div flex="initial" ng-repeat="endPoint in endPoints" ng-class="{ disabled: endPoint.options.disabled }" class="endpoint-row endpoint-results">
+        <div flex="initial" ng-repeat="endPoint in endPoints" ng-class="{ disabled: !endPoint.options.enabled }" class="endpoint-row endpoint-results">
           <!-- <div style="left: {{ 20 * (entry.date.getTime() - pingLoopStart.getTime()) / 1000}}px" ng-repeat="entry in endPoint.results"
             class="result result-status result-status-{{entry.result.status}}">
             <md-icon ng-if="entry.result.status===200" md-font-library="material-icons">check_circle</md-icon>

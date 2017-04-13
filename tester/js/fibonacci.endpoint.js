@@ -28,7 +28,7 @@
       }
 
       FibonacciEndpoint.prototype.toggle = function() {
-        this.options.disabled = !this.options.disabled;
+        this.options.enabled = !this.options.enabled;
       }
 
       FibonacciEndpoint.prototype.crash = function(callback) {
@@ -77,7 +77,7 @@
           .then(function(response) {
             callback(null, response);
             entry.result = response;
-            if (self.pingLoopEnabled) {
+            if (self.pingLoopEnabled && self.options.enabled) {
               setTimeout(function() {
                 self.ping(callback);
               }, 1000);
@@ -86,7 +86,7 @@
           .catch(function(err) {
             callback(err);
             entry.result = err;
-            if (self.pingLoopEnabled) {
+            if (self.pingLoopEnabled && self.options.enabled) {
               setTimeout(function() {
                 self.ping(callback);
               }, 1000);

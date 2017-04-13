@@ -61,6 +61,19 @@ button.md-button.md-icon-button, a.md-button.md-icon-button {
   padding: 0;
 }
 
+.button-small {
+  margin-left: 4px !important;
+  margin-right: 4px !important;
+  line-height: 24px !important;
+  width: 24px !important;
+  min-height: 24px !important;
+  height: 24px !important;
+}
+
+.button-small md-icon {
+  font-size: 20px !important;
+}
+
 a.md-icon-button md-icon {
   margin-top: 6px;
 }
@@ -70,6 +83,10 @@ md-icon {
   width: 28px;
   height: 28px;
   font-size: 28px !important;
+}
+
+md-switch {
+  margin: 0;
 }
 
 /**
@@ -119,31 +136,41 @@ h4 {
 
 .endpoint-container {
   font-size: 14px;
-  min-height: 200px;
 }
 
 .endpoint-row {
   min-height: 150px;
   height: 150px;
   padding: 10px;
+  padding-bottom: 5px;
   margin-bottom: 10px;
   overflow-y: scroll;
 }
 
 .endpoint-information {
   margin-right: 10px;
+  width: 190px;
 }
 
 .endpoint-title {
-  font-size: 18px;
+  text-align: center;
+  font-size: 14px;
   font-weight: 500;
   border-bottom: 1px solid #eef0ef;
-  margin-bottom: 10px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
   white-space: nowrap;
 }
 
 .endpoint-icon {
-  max-width: 150px;
+  height: 30px;
+  text-align: center;
+}
+
+.endpoint-actions {
+  border-top: 1px solid #eef0ef;
+  margin-top: 5px;
+  padding-top: 5px;
 }
 
 .endpoint-results-container {
@@ -208,5 +235,8 @@ h4 {
 
 .footer {
   z-index: 50;
-  padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
