@@ -58,9 +58,9 @@
       <button class="md-button md-raised" ng-click="addEndpoint()">Add Endpoint...</button>
     </div>
 
-    <div class="endpoints" flex>
-      <div class="endpoint-container" ng-repeat="endPoint in endPoints" layout="row" layout-align="center center">
-        <div ng-class="{ disabled: endPoint.options.disabled }" class="endpoint-information">
+    <div class="endpoints" layout="row" flex>
+      <div layout="column">
+        <div md-whiteframe="1" layout="column" ng-repeat="endPoint in endPoints" ng-class="{ disabled: endPoint.options.disabled }" class="endpoint-row endpoint-information">
           <div class="endpoint-title" layout="row" layout-align="center center">
             <span flex>{{endPoint.options.name}}</span>
             <md-menu>
@@ -89,19 +89,34 @@
             </md-menu>
           </div>
           <img class="endpoint-icon" ng-src="{{endPoint.options.icon}}" />
-          <br/>
-          {{endPoint.results.length}} invocations
-          <br/>
-          {{endPoint.successes().length}} success
-        </div>
 
-        <ul ng-class="{ disabled: endPoint.options.disabled }" class="results" flex>
-          <li class="result" ng-repeat="entry in endPoint.results">
-            <span class="result-status result-status-{{entry.result.status}}">
-              <md-tooltip>{{entry.result.status}}</md-tooltip>
-            </span>
-          </li>
-        </ul>
+          <div layout="row" layout-align="space-around center" flex>
+            <div class="result-status-200">
+              {{endPoint.successes().length}}
+              <md-icon md-font-library="material-icons">check_circle</md-icon>
+            </div>
+            <div class="result-status">
+              {{endPoint.failures().length}}
+              <md-icon md-font-library="material-icons">cancel</md-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div layout="column" flex>
+        <div flex="initial" ng-repeat="endPoint in endPoints" ng-class="{ disabled: endPoint.options.disabled }" class="endpoint-row endpoint-results">
+          <!-- <div style="left: {{ 20 * (entry.date.getTime() - pingLoopStart.getTime()) / 1000}}px" ng-repeat="entry in endPoint.results"
+            class="result result-status result-status-{{entry.result.status}}">
+            <md-icon ng-if="entry.result.status===200" md-font-library="material-icons">check_circle</md-icon>
+            <md-icon ng-if="entry.result.status!==200" md-font-library="material-icons">cancel</md-icon>
+          </div> -->
+          <div ng-repeat="entry in endPoint.results"
+            class="result result-status result-status-{{entry.result.status}}">
+            <md-icon ng-if="entry.result && entry.result.status===200" md-font-library="material-icons">check_circle</md-icon>
+            <md-icon ng-if="entry.result && entry.result.status!==200" md-font-library="material-icons">cancel</md-icon>
+            <md-icon ng-if="!entry.result" md-font-library="material-icons">more_horiz</md-icon>
+            <md-tooltip>{{entry.result.status}}</md-tooltip>
+          </div>
+        </div>
       </div>
     </div>
   </div>

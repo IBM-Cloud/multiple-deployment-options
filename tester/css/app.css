@@ -111,7 +111,10 @@ h4 {
  */
 
 .endpoints {
-  overflow: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .endpoint-container {
@@ -119,49 +122,65 @@ h4 {
   min-height: 200px;
 }
 
+.endpoint-row {
+  min-height: 150px;
+  height: 150px;
+  padding: 10px;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+}
+
 .endpoint-information {
-  width: 200px;
+  margin-right: 10px;
 }
 
 .endpoint-title {
   font-size: 18px;
   font-weight: 500;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid #eef0ef;
   margin-bottom: 10px;
+  white-space: nowrap;
 }
 
 .endpoint-icon {
   max-width: 150px;
-  max-height: 150px;
 }
 
-.results {
-  display: inline;
+.endpoint-results-container {
+}
+
+.endpoint-results {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background-color: #fafafa;
 }
 
 .result {
+  /*position: absolute;
+  top: 50%;*/
   display: inline-flex;
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  font-size: 20px !important;
   margin-right: 10px;
-  margin-bottom: 10px;
 }
 
-.result-status {
-  border-radius: 5px;
-  padding: 5px;
-  background-color: red;
-  color: white;
+.result-status md-icon {
+  color: rgb(252, 81, 81) !important;
 }
 
-.result-status--666 {
-  padding: 8px;
-  border-radius: 8px;
-  background-color: black;
-  color: white;
+.result-status--666 md-icon {
+  color: black !important;
 }
 
-.result-status-200 {
-  background-color: green;
-  color: white;
+.result-status- md-icon {
+  color: #cdcdcd !important;
+}
+
+.result-status-200 md-icon {
+  color: rgb(86, 180, 67) !important;
 }
 
 .disabled {
