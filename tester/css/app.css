@@ -148,6 +148,7 @@ h4 {
 }
 
 .endpoint-information {
+  overflow: hidden;
   margin-right: 10px;
   width: 190px;
 }
