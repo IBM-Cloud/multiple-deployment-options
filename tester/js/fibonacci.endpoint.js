@@ -16,7 +16,11 @@
       }
 
       FibonacciEndpoint.prototype.successes = function() {
-        return this.results.filter(function(f) { return f.result.status === 200});
+        return this.results.filter(function(f) { return f.result && f.result.status === 200});
+      }
+
+      FibonacciEndpoint.prototype.failures = function() {
+        return this.results.filter(function(f) { return f.result && f.result.status !== 200});
       }
 
       FibonacciEndpoint.prototype.clear = function() {
@@ -29,7 +33,10 @@
 
       FibonacciEndpoint.prototype.crash = function(callback) {
         var self = this;
-
+        var entry = {
+          date: new Date(),
+        };
+        self.results.push(entry);
         $http({
           method: 'POST',
           url: this.options.crash,
@@ -38,18 +45,12 @@
         .then(function(response) {
           callback(null, response);
           response.status = -666;
-          self.results.push({
-            date: new Date(),
-            result: response
-          });
+          entry.result = response;
         })
         .catch(function(err) {
           callback(err);
           err.status = -666;
-          self.results.push({
-            date: new Date(),
-            result: err
-          });
+          entry.result = err;
         });
       }
 
@@ -64,7 +65,10 @@
 
       FibonacciEndpoint.prototype.ping = function(callback) {
         var self = this;
-
+        var entry = {
+          date: new Date(),
+        };
+        self.results.push(entry);
         $http({
           method: 'GET',
           url: this.options.iterate,
@@ -72,10 +76,7 @@
           })
           .then(function(response) {
             callback(null, response);
-            self.results.push({
-              date: new Date(),
-              result: response
-            });
+            entry.result = response;
             if (self.pingLoopEnabled) {
               setTimeout(function() {
                 self.ping(callback);
@@ -84,10 +85,7 @@
           })
           .catch(function(err) {
             callback(err);
-            self.results.push({
-              date: new Date(),
-              result: err
-            });
+            entry.result = err;
             if (self.pingLoopEnabled) {
               setTimeout(function() {
                 self.ping(callback);
