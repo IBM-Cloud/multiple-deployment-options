@@ -134,9 +134,11 @@
 
     $scope.crash = function() {
       $scope.endPoints.forEach(function(endPoint) {
-        endPoint.crash(function(err, response) {
-          console.log(endPoint.options.name, err, response);
-        });
+        if (!endPoint.options.disabled) {
+          endPoint.crash(function(err, response) {
+            console.log(endPoint.options.name, err, response);
+          });
+        }
       });
     };
 
