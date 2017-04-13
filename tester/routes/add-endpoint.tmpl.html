@@ -17,14 +17,21 @@
           Configure the location of your deployed endpoint. It must adhere to the specification of <a href="https://github.com/IBM-Bluemix/multiple-deployment-options">the GitHub project</a>.
         </p>
 
+        <md-input-container class="mdd-input-has-value">
+          <label class="md-required">Endpoint Type</label>
+        </md-input-container>
+
+        <div layout="row" layout-align="space-around center" class="icon-choice-container">
+          <img ng-repeat="icon in computeIcons" ng-click="endpoint.icon=icon" src="{{icon}}">
+        </div>
+
+        <div layout="row" layout-align="space-around center" class="icon-choice-container">
+          <input ng-repeat="icon in computeIcons" type="radio" ng-model="endpoint.icon" ng-value="icon" required>
+        </div>
+
         <md-input-container>
           <label>Name</label>
           <input type="text" ng-model="endpoint.name" required>
-        </md-input-container>
-
-        <md-input-container>
-          <label>Icon URL</label>
-          <input type="text" ng-model="endpoint.icon" required>
         </md-input-container>
 
         <md-input-container>

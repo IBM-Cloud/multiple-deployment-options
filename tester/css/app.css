@@ -169,10 +169,25 @@ h4 {
 }
 
 /**
+ * Endpoint form
+ */
+
+.icon-choice-container {
+  margin-top: 9px;
+  margin-right: 20px;
+  margin-bottom: 18px;
+}
+
+.icon-choice-container > img {
+  max-width: 150px;
+  outline: none;
+}
+
+/**
  * footer
  */
 
 .footer {
-  z-index: 1000;
+  z-index: 50;
   padding: 20px;
 }

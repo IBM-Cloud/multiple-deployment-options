@@ -153,6 +153,11 @@
         iterate: 'http://<host>/iteration/1000',
         crash: 'http://<host>/crash'
       };
+      $scope.computeIcons = [
+        '/images/cloudfoundry.png',
+        '/images/kubernetes.svg',
+        '/images/openwhisk.png'
+      ];
       $scope.isNew = endpoint === null;
       $scope.cancel = function() {
         $mdDialog.cancel();
