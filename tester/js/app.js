@@ -45,10 +45,12 @@
       .warnPalette('red');
   });
 
-  app.controller('MainController', ['$scope', '$rootScope', '$http', '$mdDialog', '$localStorage', 'FibonacciEndpoint',
-    function($scope, $rootScope, $http, $mdDialog, $localStorage, FibonacciEndpoint) {
+  app.controller('MainController',
+    ['$scope', '$rootScope', '$http', '$mdDialog', '$localStorage', '$interval', 'FibonacciEndpoint',
+    function($scope, $rootScope, $http, $mdDialog, $localStorage, $interval, FibonacciEndpoint) {
 
     $scope.pingLoopRunning = false;
+    $scope.pingIntervalInSeconds = 1;
 
     // default endpoints are empty
     $localStorage.$default({
@@ -115,30 +117,37 @@
     };
 
     $scope.startPingLoop = function() {
+      $scope.pingIntervalInSeconds = Math.max($scope.pingIntervalInSeconds || 1, 1);
+      console.log('Using interval of', $scope.pingIntervalInSeconds, 'seconds');
       $scope.pingLoopRunning = true;
+
+      // a first immediate ping
       $scope.endPoints.forEach(function(endPoint) {
-        if (endPoint.options.enabled) {
-          endPoint.startPing(function(err, response) {
+        endPoint.ping(function(err, response) {
+          console.log(endPoint.options.name, err, response);
+        });
+      });
+
+      // and a ping at a regular interval
+      $scope.pingLoop = $interval(function() {
+        $scope.endPoints.forEach(function(endPoint) {
+          endPoint.ping(function(err, response) {
             console.log(endPoint.options.name, err, response);
           });
-        }
-      });
+        });
+      }, $scope.pingIntervalInSeconds * 1000);
     };
 
     $scope.stopPingLoop = function() {
       $scope.pingLoopRunning = false;
-      $scope.endPoints.forEach(function(endPoint) {
-        endPoint.stopPing();
-      });
+      $interval.cancel($scope.pingLoop);
     };
 
     $scope.crash = function() {
       $scope.endPoints.forEach(function(endPoint) {
-        if (endPoint.options.enabled) {
-          endPoint.crash(function(err, response) {
-            console.log(endPoint.options.name, err, response);
-          });
-        }
+        endPoint.crash(function(err, response) {
+          console.log(endPoint.options.name, err, response);
+        });
       });
     };
 
@@ -152,7 +161,7 @@
       $scope.endpoint = endpoint || {
         name: null,
         icon: null,
-        iterate: 'http://<host>/iteration/1000',
+        iterate: 'http://<host>/iteration/500',
         crash: 'http://<host>/crash',
         enabled: true
       };

@@ -241,3 +241,20 @@ h4 {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.interval-container {
+  margin-right: 20px;
+}
+
+md-input-container.interval {
+  margin: 0;
+}
+
+md-input-container.interval input {
+  width: 50px;
+  text-align: right;
+}
+
+md-input-container.interval div.md-errors-spacer {
+  display: none;
+}

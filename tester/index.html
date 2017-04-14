@@ -114,11 +114,18 @@
     </div>
   </div>
 
-  <div class="footer" md-whiteframe="10" layout="row" layout-align="center center">
+  <div class="footer" md-whiteframe="10" layout="row" layout-xs="column" layout-align="center center">
     <div>
       <button class="md-button md-raised" ng-click="addEndpoint()">Add Endpoint...</button>
     </div>
     <div flex></div>
+    <div class="interval-container" layout="row" layout-align="center center">
+      <span>Ping every</span>
+      <md-input-container class="interval" md-no-float md-is-error="pingIntervalInSeconds<=0">
+        <input type="number" ng-model="pingIntervalInSeconds" min="1" required ng-disabled="pingLoopRunning">
+      </md-input-container>
+      <span>seconds</span>
+    </div>
     <div>
       <button ng-disabled="pingLoopRunning || endPoints.length === 0" class="md-button md-raised" ng-click="startPingLoop()">
         Start

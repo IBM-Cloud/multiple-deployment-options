@@ -6,7 +6,6 @@
       function FibonacciEndpoint($http, options) {
         this.options = options;
         this.$http = $http;
-        this.pingLoopEnabled = false;
 
         this.results = [];
       }
@@ -31,7 +30,11 @@
         this.options.enabled = !this.options.enabled;
       }
 
-      FibonacciEndpoint.prototype.crash = function(callback) {
+      FibonacciEndpoint.prototype.crash = function(callback, crashTimeout = 2000) {
+        if (!this.options.enabled) {
+          return;
+        }
+
         var self = this;
         var entry = {
           date: new Date(),
@@ -40,7 +43,7 @@
         $http({
           method: 'POST',
           url: this.options.crash,
-          timeout: 5000,
+          timeout: crashTimeout,
           })
         .then(function(response) {
           callback(null, response);
@@ -54,16 +57,11 @@
         });
       }
 
-      FibonacciEndpoint.prototype.stopPing = function(callback) {
-        this.pingLoopEnabled = false;
-      };
-
-      FibonacciEndpoint.prototype.startPing = function(callback) {
-        this.pingLoopEnabled = true;
-        this.ping(callback);
+      FibonacciEndpoint.prototype.ping = function(callback, pingTimeout = 2000) {
+        if (!this.options.enabled) {
+          return;
       }
 
-      FibonacciEndpoint.prototype.ping = function(callback) {
         var self = this;
         var entry = {
           date: new Date(),
@@ -72,25 +70,15 @@
         $http({
           method: 'GET',
           url: this.options.iterate,
-          timeout: 5000,
+          timeout: pingTimeout,
           })
           .then(function(response) {
             callback(null, response);
             entry.result = response;
-            if (self.pingLoopEnabled && self.options.enabled) {
-              setTimeout(function() {
-                self.ping(callback);
-              }, 1000);
-            }
           })
           .catch(function(err) {
             callback(err);
             entry.result = err;
-            if (self.pingLoopEnabled && self.options.enabled) {
-              setTimeout(function() {
-                self.ping(callback);
-              }, 1000);
-            }
           });
       };
 
