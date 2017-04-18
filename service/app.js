@@ -65,6 +65,7 @@ app.get('/', (req, res) => {
   res.send('OK');
 });
 
-app.listen(process.env.PORT || 8080, () => {
-  logger.info('App is listening on port 8080.');
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+  logger.info(`App is listening on port ${port}.`);
 });
