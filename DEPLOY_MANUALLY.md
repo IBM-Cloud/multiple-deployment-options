@@ -56,7 +56,7 @@ This call will exit the underlying node.js app, simulating an error of the API.
    bx cs cluster-create --name fibonacci-cluster
    ```
 
-   > Note: you can also use an existing cluster
+   > Note: you can also use an existing cluster.
 
 1. Retrieve the cluster configuration
 
