@@ -35,16 +35,16 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
-  jobs:
-  - name: OpenWhisk Deploy
-      type: deployer
-      target:
-        region_id: ${PROD_REGION_ID}
-        organization: ${PROD_ORG_NAME}
-        space: ${PROD_SPACE_NAME}
-        application: ${CF_APP_NAME}
-    script: |-
-      #!/bin/bash
-      ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
+#  jobs:
+#  - name: OpenWhisk Deploy
+#      type: deployer
+#      target:
+#        region_id: ${PROD_REGION_ID}
+#        organization: ${PROD_ORG_NAME}
+#        space: ${PROD_SPACE_NAME}
+#        application: ${CF_APP_NAME}
+#    script: |-
+#      #!/bin/bash
+#      ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
 
 
