@@ -32,7 +32,7 @@ The implementation of the Fibonacci sequence is done in **[service/lib/fibonacci
 
 ## Deploying multiple deployment options automatically in Bluemix
 
-[![Deploy to Bluemix](https://deployment-tracker.mybluemix.net/stats/ad94d1daf817a5fd818f977c0a7cf632/button.svg)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/multiple-deployment-options)
+[![Deploy to Bluemix](https://deployment-tracker.mybluemix.net/stats/ad94d1daf817a5fd818f977c0a7cf632/button.svg)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/multiple-deployment-options&branch=dev)
  TODO - More will be added here.
 
 ## Deploying the service manually in Bluemix
