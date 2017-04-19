@@ -24,7 +24,7 @@ services:
     service_id: githubpublic
     parameters:
       repo_name: "compute-options-toolchain"
-      repo_url: 'https://github.com/IBM-Bluemix/multiple-deployment-options/tree/dev'
+      repo_url: 'https://github.com/IBM-Bluemix/multiple-deployment-options'
       type: fork
       has_issues: false
   sample-build:
