@@ -11,7 +11,7 @@ template:
     - sample-repo
   info:
     git url: >-
-      [https://github.com/IBM-Bluemix/multiple-deployment-options](https://github.com/IBM-Bluemix/multiple-deployment-options)
+      [https://github.com/IBM-Bluemix/multiple-deployment-options/tree/dev](https://github.com/IBM-Bluemix/multiple-deployment-options/tree/dev)
     git branch: >-
       [dev](https://github.com/IBM-Bluemix/multiple-deployment-options/tree/dev)
 toolchain:
@@ -25,7 +25,7 @@ services:
     service_id: githubpublic
     parameters:
       repo_name: "compute-options-toolchain"
-      repo_url: 'https://github.com/IBM-Bluemix/multiple-deployment-options'
+      repo_url: 'https://github.com/IBM-Bluemix/multiple-deployment-options/tree/dev'
       type: fork
       has_issues: true
   sample-build:
