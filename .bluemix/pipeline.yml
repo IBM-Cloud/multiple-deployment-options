@@ -24,6 +24,15 @@ stages:
   - name: APP_URL
     value: undefined
     type: text
+  - name: BLUEMIX_USER
+    type: text
+  - name: BLUEMIX_PASSWORD
+    type: secure
+  - name: BLUEMIX_ACCOUNT
+    type: secure
+  - name: CLUSTER_NAME
+    type: text
+    value: Kate
   jobs:
   - name: CloudFoundry Deploy
     type: deployer
@@ -45,3 +54,18 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
+  - name: Kubernetes Deploy
+    type: deployer
+    target:
+      region_id: ${PROD_REGION_ID}
+      organization: ${PROD_ORG_NAME}
+      space: ${PROD_SPACE_NAME}
+      application: ${CF_APP_NAME}
+    script: |-
+      #!/bin/bash
+      ./.bluemix/pipeline-DEPLOY-Kubernetes.sh
+hooks:
+  - enabled: true
+    label: null
+    ssl_enabled: false
+    url: https://devops-api-integration.stage1.ng.bluemix.net/v1/messaging/webhook/publish
