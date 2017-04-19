@@ -25,7 +25,7 @@ stages:
     value: undefined
     type: text
   jobs:
-  - name: Cloud Foundry Deploy
+  - name: Blue-Green Deploy
     type: deployer
     target:
       region_id: ${PROD_REGION_ID}
@@ -35,6 +35,8 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
+
+
 #  jobs:
 #  - name: OpenWhisk Deploy
 #      type: deployer
@@ -46,5 +48,3 @@ stages:
 #    script: |-
 #      #!/bin/bash
 #      ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
-
-
