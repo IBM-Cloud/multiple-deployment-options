@@ -34,7 +34,8 @@ stages:
       application: ${CF_APP_NAME}
     script: |-
       #!/bin/bash
-      ./.bluemix/pipeline-DEPLOY-CF.sh
+      ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
+  jobs:
   - name: OpenWhisk Deploy
       type: deployer
       target:
