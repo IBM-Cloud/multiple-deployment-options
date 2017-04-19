@@ -6,6 +6,6 @@ cd service
 ################################################################
 
 # Push app
-. ./kubernetes-scripts/install_bx.sh
-  ./kubernetes-scripts/bx_login.sh
-  ./kubernetes-scripts/deploy.sh
+. ./install_bx.sh
+  ./bx_login.sh
+  ./deploy.sh
