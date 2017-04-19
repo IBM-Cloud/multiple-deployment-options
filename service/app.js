@@ -39,25 +39,31 @@ const fibonacci = require('./lib/fibonacci')();
 app.use(cors());
 app.disable('etag');
 
-app.get('/iteration/:number', (req, res) => {
-  logger.info(`GET /iteration/${req.params.number}`);
-  fibonacci.compute(req.params.number, (result) => {
-    logger.info(`Completed /iteration/${req.params.number} ${result.ms}ms`);
-    res.send(result);
-  });
+app.get('/fibonacci', (req, res) => {
+  if (req.query.iteration) {
+    logger.info(`GET iteration=${req.query.iteration}`);
+    fibonacci.compute(req.query.iteration, (result) => {
+      logger.info(`Completed iteration=${req.query.iteration} ${result.ms}ms`);
+      res.send(result);
+    });
+  } else if (req.query.duration) {
+    logger.info(`GET duration=${req.query.duration}`);
+    fibonacci.computeFor(req.query.duration, (result) => {
+      logger.info(`Completed duration=${req.query.duration} ${result.ms}ms`);
+      res.send(result);
+    });
+  } else {
+    res.status(500).send('Unknown operation');
+  }
 });
 
-app.get('/duration/:number', (req, res) => {
-  logger.info(`GET /duration/${req.params.number}`);
-  fibonacci.computeFor(req.params.number, (result) => {
-    logger.info(`Completed /duration/${req.params.number} ${result.ms}ms`);
-    res.send(result);
-  });
-});
-
-app.post('/crash', () => {
-  logger.info('GET /crash');
-  process.exit(1);
+app.post('/fibonacci', (req, res) => {
+  if (req.query.crash === 'true') {
+    logger.info('POST crash');
+    process.exit(1);
+  } else {
+    res.status(500).send('Unknown operation');
+  }
 });
 
 app.get('/', (req, res) => {

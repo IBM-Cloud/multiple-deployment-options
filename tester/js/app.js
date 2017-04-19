@@ -161,8 +161,8 @@
       $scope.endpoint = endpoint || {
         name: null,
         icon: null,
-        iterate: 'http://<host>/iteration/500',
-        crash: 'http://<host>/crash',
+        iterate: 'http://<host>/fibonacci?iteration=500',
+        crash: 'http://<host>/fibonacci?crash=true',
         enabled: true
       };
       $scope.computeIcons = [

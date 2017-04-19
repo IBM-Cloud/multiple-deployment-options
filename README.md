@@ -39,18 +39,18 @@ Follow [these instructions](./DEPLOY_MANUALLY.md).
 Once deployed, the service implements 3 API calls:
   * compute the Fibonacci number after *n* iterations,
   * let the computation run for *t* milliseconds,
-  * and simulate a crash of the service.   
+  * and simulate a crash of the service.
 
 Depending on which compute option you are using, use the following cURL calls:
 
 | Endpoint Type | Endpoint  | URL |
 | ---           |   ---     | --- |
-| Cloud Foundry | iteration | `curl -v http://fibonacci-service-<random-string>.mybluemix.net/iteration/1000` |
-|               | duration  | `curl -v http://fibonacci-service-<random-string>.mybluemix.net/duration/5000` |
-|               | crash     | `curl -v -X POST http://fibonacci-service-<random-string>.mybluemix.net/crash` |
-| Kubernetes    | iteration | `curl -v http://<cluster-ip>:30080/iteration/1000` |
-|               | duration  | `curl -v http://<cluster-ip>:30080/duration/5000` |
-|               | crash     | `curl -v -X POST http://<cluster-ip>:30080/crash` |
+| Cloud Foundry | iteration | `curl -v http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?iteration=1000` |
+|               | duration  | `curl -v http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?duration=5000` |
+|               | crash     | `curl -v -X POST http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?crash=true` |
+| Kubernetes    | iteration | `curl -v http://<cluster-ip>:30080/fibonacci?iteration=1000` |
+|               | duration  | `curl -v http://<cluster-ip>:30080/fibonacci?duration=5000` |
+|               | crash     | `curl -v -X POST http://<cluster-ip>:30080/fibonacci?crash=true` |
 | OpenWhisk     | iteration | `curl -v https://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?iteration=1000` |
 |               | duration  | `curl -v https://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?duration=5000` |
 |               | crash     | `curl -v -X POST https://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?crash=true` |

@@ -28,22 +28,22 @@
 
 ### Test the Cloud Foundry application
 
-To compute the Fibonacci number after *n* iterations use the *GET /iteration/:n* API such as:
+To compute the Fibonacci number after *n* iterations use the API such as:
 
    ```
-   curl -v http://fibonacci-service-<random-string>.mybluemix.net/iteration/1000
+   curl -v http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?iteration=1000
    ```
 
-To let the computation run for *t* milliseconds use the *GET /duration/:t* API such as:
+To let the computation run for *t* milliseconds use the API such as:
 
    ```
-   curl -v http://fibonacci-service-<random-string>.mybluemix.net/duration/5000
+   curl -v http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?duration/5000
    ```
 
-To simulate a crash of the service, use the *POST /crash* API such as:
+To simulate a crash of the service, use the API such as:
 
    ```
-   curl -v -X POST http://fibonacci-service-<random-string>.mybluemix.net/crash
+   curl -v -X POST http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?crash=true
    ```
 
 This call will exit the underlying node.js app, simulating an error of the API.
@@ -130,22 +130,22 @@ Retrieve the public IP address of your Kubernetes cluster. If you are using the 
    kubectl get nodes
    ```
 
-To compute the Fibonacci number after *n* iterations use the *GET /iteration/:n* API such as:
+To compute the Fibonacci number after *n* iterations use the API such as:
 
    ```
-   curl -v http://<cluster-ip>:30080/iteration/1000
+   curl -v http://<cluster-ip>:30080/fibonacci?iteration=1000
    ```
 
-To let the computation run for *t* milliseconds use the *GET /duration/:t* API such as:
+To let the computation run for *t* milliseconds use the API such as:
 
    ```
-   curl -v http://<cluster-ip>:30080/duration/5000
+   curl -v http://<cluster-ip>:30080/fibonacci?duration=5000
    ```
 
-To simulate a crash of the service, use the *POST /crash* API such as:
+To simulate a crash of the service, use the API such as:
 
    ```
-   curl -v -X POST http://<cluster-ip>:30080/crash
+   curl -v -X POST http://<cluster-ip>:30080/fibonacci?crash=true
    ```
 
 This call will exit the underlying node.js app running in the container, simulating an error of the API.
