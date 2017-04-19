@@ -22,7 +22,7 @@
         </md-input-container>
 
         <div layout="row" layout-align="space-around center" class="icon-choice-container">
-          <img ng-repeat="icon in computeIcons" ng-click="endpoint.icon=icon" src="{{icon}}">
+          <img ng-repeat="icon in computeIcons" ng-click="endpoint.icon=icon" ng-src="{{icon}}">
         </div>
 
         <div layout="row" layout-align="space-around center" class="icon-choice-container">
@@ -44,6 +44,10 @@
           <input type="text" ng-model="endpoint.crash" required>
         </md-input-container>
 
+        <md-input-container>
+          <label>Call Timeout (milliseconds)</label>
+          <input type="number" ng-model="endpoint.timeout" min="1" md-is-error="endpoint.timeout<=0" required>
+        </md-input-container>
       </div>
     </md-dialog-content>
 

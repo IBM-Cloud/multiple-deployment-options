@@ -163,7 +163,8 @@
         icon: null,
         iterate: 'http://<host>/fibonacci?iteration=500',
         crash: 'http://<host>/fibonacci?crash=true',
-        enabled: true
+        enabled: true,
+        timeout: 5000,
       };
       $scope.computeIcons = [
         '/images/cloudfoundry.png',
