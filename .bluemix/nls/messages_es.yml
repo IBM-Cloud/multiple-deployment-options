@@ -1,0 +1,12 @@
+---
+name: "Cadena de herramientas simple de Cloud Foundry"
+description: "Con esta cadena de herramientas, puede desarrollar y desplegar una aplicación Cloud Foundry. De forma predeterminada, la cadena de herramientas utiliza una aplicación de muestra Node.js \"Hello World\", o bien puede enlazar a su propio repositorio GitHub. Esta cadena de herramientas está preconfigurada para la entrega continua, el control de origen, el seguimiento de problemas y la edición en línea.\n\nEsta cadena de herramientas utiliza herramientas que forman parte del servicio de Continuous Delivery. Si aún no hay una instancia de dicho servicio en la organización, cuando pulse **Crear**, se añadirá automáticamente sin coste alguno para usted. Para obtener más información y los términos, consulte el [catálogo de Bluemix](/catalog/services/continuous-delivery/).\n\nPara comenzar, pulse **Crear**."
+$deploy.title: "Sample Deploy Stage"
+$deploy.description: "cadena de herramientas de ejemplo"
+$deploy.longDescription: "Delivery Pipeline automatiza el despliegue continuo."
+$deploy.appDescription: "El nombre de la aplicación Hello World"
+$deploy.appName: "Nombre de aplicación"
+$region: "Región"
+$organization: "Organización"
+$space: "Espacio"
+$prodStage: "Fase de producción"

@@ -1,0 +1,12 @@
+---
+name: "Simple Cloud Foundry toolchain~otc-ui420"
+description: "With this toolchain, you can develop and deploy a Cloud Foundry application. By default, the toolchain uses a sample Node.js \"Hello World\" app, or you can link to your own GitHub repository. This toolchain is preconfigured for continuous delivery, source control, issue tracking, and online editing.\n\nThis toolchain uses tools that are part of the Continuous Delivery service. If an instance of that service isn't already in your organization, when you click **Create**, it is automatically added at no cost to you. For more information and terms, see the [Bluemix catalog](/catalog/services/continuous-delivery/).\n\nTo get started, click **Create**.~otc-ui421"
+$deploy.title: "Sample Deploy Stage~otc-ui422"
+$deploy.description: "sample toolchain~otc-ui423"
+$deploy.longDescription: "The Delivery Pipeline automates continuous deployment.~otc-ui424"
+$deploy.appDescription: "The name of your Hello World app~otc-ui425"
+$deploy.appName: "App name~otc-ui426"
+$region: "Region~otc-ui427"
+$organization: "Organization~otc-ui428"
+$space: "Space~otc-ui429"
+$prodStage: "Production stage~otc-ui430"

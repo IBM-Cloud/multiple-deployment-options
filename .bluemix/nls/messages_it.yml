@@ -1,0 +1,12 @@
+---
+name: "Toolchain Cloud Foundry semplice"
+description: "Utilizzando questa toolchain, è possibile sviluppare e distribuire un'applicazione Cloud Foundry. Per impostazione predefinita, la toolchain utilizza un'app \"Hello World\" Node.js di esempio, oppure è possibile effettuare il collegamento al proprio repository GitHub. Questa toolchain è preconfigurata per la distribuzione continua, il controllo origine, la traccia dei problemi e la modifica online.\n\nQuesta toolchain utilizza strumenti del servizio Continuous Delivery. Se nell'organizzazione non è già presente un'istanza di tale servizio, questa sarà aggiunta automaticamente e senza alcun costo aggiuntivo quando si fa clic su **Crea**. Per ulteriori informazioni e per i termini, vedere [Catalogo Bluemix](/catalog/services/continuous-delivery/).\n\nPer iniziare, fare clic su **Crea**."
+$deploy.title: "Stage di distribuzione di esempio"
+$deploy.description: "toolchain di esempio"
+$deploy.longDescription: "Delivery Pipeline automatizza la distribuzione continua."
+$deploy.appDescription: "Il nome dell'app Hello World dell'utente"
+$deploy.appName: "Nome app"
+$region: "Regione"
+$organization: "Organizzazione"
+$space: "Spazio"
+$prodStage: "Stage di produzione"

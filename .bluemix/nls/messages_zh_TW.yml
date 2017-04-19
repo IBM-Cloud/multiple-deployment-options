@@ -1,0 +1,12 @@
+---
+name: "簡式 Cloud Foundry 工具鏈"
+description: "使用此工具鏈，您可以開發及部署 Cloud Foundry 應用程式。依預設，工具鏈會使用範例 Node.js \"Hello World\" 應用程式，或者您可以鏈結至自己的 GitHub 儲存庫。此工具鏈已預先配置為持續交付，以進行來源控制、問題追蹤以及線上編輯。\n\n此工具鏈使用 Continuous Delivery 服務的部分工具。當您按一下**建立**時如果組織中尚未具有該服務的實例，則將自動新增實例而不收取費用。如需相關資訊及術語，請參閱 [Bluemix catalog](/catalog/services/continuous-delivery/)。\n\n若要開始，請按一下**建立**。"
+$deploy.title: "範例服務部署暫置"
+$deploy.description: "範例工具鏈"
+$deploy.longDescription: "Delivery Pipeline 會自動執行連續部署。"
+$deploy.appDescription: "Hello World 應用程式的名稱"
+$deploy.appName: "應用程式名稱"
+$region: "區域"
+$organization: "組織"
+$space: "空間"
+$prodStage: "正式作業階段"

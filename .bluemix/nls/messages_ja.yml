@@ -1,0 +1,12 @@
+---
+name: "Simple Cloud Foundry ツールチェーン"
+description: "このツールチェーンを使用して、Cloud Foundry アプリケーションを開発およびデプロイすることができます。デフォルトで、このツールチェーンはサンプル Node.js の「Hello World」アプリを使用します。あるいは、ユーザー独自の GitHub リポジトリーにリンクすることもできます。このツールチェーンは、継続的デリバリー、ソース管理、問題のトラッキング、およびオンライン編集用に事前構成されています。\n\nこのツールチェーンは、Continuous Delivery サービスに含まれるツールを使用します。そのサービスのインスタンスがお客様の組織にまだない場合、「作成」をクリックすると、無料で自動的に追加されます。詳細および条件については、[Bluemix カタログ](/catalog/services/continuous-delivery/) を参照してください。\n\n開始するには、「作成」をクリックします。"
+$deploy.title: "サンプルのデプロイ・ステージ"
+$deploy.description: "サンプル・ツールチェーン"
+$deploy.longDescription: "Delivery Pipeline は、継続的デプロイメントを自動化します。"
+$deploy.appDescription: "Hello World アプリの名前"
+$deploy.appName: "アプリ名"
+$region: "地域"
+$organization: "組織"
+$space: "スペース"
+$prodStage: "実動ステージ"

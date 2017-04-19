@@ -1,0 +1,53 @@
+version: '2'
+messages:
+  $i18n: locales.yml
+template:
+  name: "Multiple Deployment Options"
+  description: "Deploy Fibonacci application in Multiple Deployment Options to test and compare the different compute options."
+  header: '![]()'
+  icon: icon.svg
+  required:
+    - sample-build
+    - sample-repo
+  info:
+    git url: >-
+      [https://github.com/Twanawebtech/simple-CF-toolchain](https://github.com/Twanawebtech/simple-CF-toolchain)
+    git branch: >-
+      [master](https://github.com/Twanawebtech/simple-CF-toolchain/tree/master)
+toolchain:
+  name: 'compute-options-toolchain-{{timestamp}}'
+  template:
+    getting_started:
+      $ref: "#/messages/template.gettingStarted"
+
+services:
+  sample-repo:
+    service_id: githubpublic
+    parameters:
+      repo_name: "compute-options-toolchain"
+      repo_url: 'https://github.com/Twanawebtech/simple-CF-toolchain'
+      type: fork
+      has_issues: true
+  sample-build:
+    service_id: pipeline
+    parameters:
+      services:
+        - sample-repo
+      name: '{{services.sample-repo.parameters.repo_name}}'
+      ui-pipeline: true
+      configuration:
+        content:
+          $text: pipeline.yml
+        env:
+          SAMPLE_REPO: sample-repo
+          CF_APP_NAME: '{{form.pipeline.parameters.prod-app-name}}'
+          PROD_SPACE_NAME: '{{form.pipeline.parameters.prod-space}}'
+          PROD_ORG_NAME: '{{form.pipeline.parameters.prod-organization}}'
+          PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
+        execute: true
+form:
+  pipeline:
+    parameters:
+      prod-app-name: '{{services.sample-repo.parameters.repo_name}}'
+    schema:
+      $ref: deploy.json

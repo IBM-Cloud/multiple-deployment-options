@@ -1,0 +1,12 @@
+---
+name: "Chaîne d'outils Cloud Foundry simple"
+description: "Cette chaîne d'outils vous permet de développer et de déployer une application Cloud Foundry. Par défaut, la chaîne d'outils utilise une application exemple Node.js \"Hello World\", mais vous pouvez vous lier à votre propre référentiel GitHub. Cette chaîne d'outils est préconfigurée pour la distribution continue, le contrôle des sources, le suivi des problèmes et l'édition en ligne.\n\nCette chaîne d'outils utilise des outils qui ne font pas partie du service Continuous Delivery. Si aucune instance de ce service n'existe dans votre organisation, elle est automatiquement ajoutée, sans aucun frais, lorsque vous cliquez sur **Créer**. Pour plus d'informations et pour obtenir les dispositions applicables, consultez le [catalogue Bluemix](/catalog/services/continuous-delivery/).\n\nPour commencer, cliquez sur **Créer**."
+$deploy.title: "Etape de déploiement exemple"
+$deploy.description: "Chaîne d'outils exemple"
+$deploy.longDescription: "Delivery Pipeline automatise le déploiement en continu."
+$deploy.appDescription: "Nom de votre appli Hello World"
+$deploy.appName: "Nom de l'application"
+$region: "Région"
+$organization: "Organisation"
+$space: "Espace"
+$prodStage: "Etape de production"

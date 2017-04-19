@@ -1,0 +1,12 @@
+---
+name: "단순 Cloud Foundry 도구 체인"
+description: "이 도구 체인을 사용하면 Cloud Foundry 애플리케이션을 개발하고 배치할 수 있습니다. 기본적으로 도구 체인은 샘플 Node.js \"Hello World\" 앱을 사용하거나 사용자가 사용자 자체 GitHub 저장소에 링크할 수 있습니다. 이 도구 체인은 연속 전달, 소스 제어, 문제 추적 및 온라인 편집을 위해 사전 구성되었습니다.\n\n이 도구 체인은 Continuous Delivery 서비스의 일부인 도구를 사용합니다. 해당 서비스의 인스턴스가 아직 조직에 없는 경우, **작성**을 클릭하면 자동으로 무료로 추가됩니다.자세한 정보 및 용어는 [Bluemix 카탈로그](/catalog/services/continuous-delivery/)를 참조하십시오.\n\n계속하려면 **작성**을 클릭하십시오."
+$deploy.title: "샘플 배치 단계"
+$deploy.description: "샘플 도구 체인"
+$deploy.longDescription: "Delivery Pipeline은 연속 배치를 자동화합니다."
+$deploy.appDescription: "Hello World 앱의 이름"
+$deploy.appName: "앱 이름"
+$region: "지역"
+$organization: "조직"
+$space: "영역"
+$prodStage: "프로덕션 단계"
