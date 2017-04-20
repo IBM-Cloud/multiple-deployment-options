@@ -18,12 +18,6 @@ stages:
   triggers:
   - type: stage
   properties:
-  - name: CF_APP_NAME
-    value: undefined
-    type: text
-  - name: APP_URL
-    value: undefined
-    type: text
   - name: BLUEMIX_USER
     type: text
   - name: BLUEMIX_PASSWORD
@@ -34,26 +28,26 @@ stages:
     type: text
     value: Kate
   jobs:
-#  - name: CloudFoundry Deploy
-#    type: deployer
-#    target:
-#      region_id: ${PROD_REGION_ID}
-#      organization: ${PROD_ORG_NAME}
-#      space: ${PROD_SPACE_NAME}
-#      application: ${CF_APP_NAME}
-#    script: |-
-#      #!/bin/bash
-#      ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
-#  - name: OpenWhisk Deploy
-#    type: deployer
-#    target:
-#      region_id: ${PROD_REGION_ID}
-#      organization: ${PROD_ORG_NAME}
-#      space: ${PROD_SPACE_NAME}
-#      application: ${CF_APP_NAME}
-#    script: |-
-#      #!/bin/bash
-#      ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
+  - name: CloudFoundry Deploy
+    type: deployer
+    target:
+      region_id: ${PROD_REGION_ID}
+      organization: ${PROD_ORG_NAME}
+      space: ${PROD_SPACE_NAME}
+      application: ${CF_APP_NAME}
+    script: |-
+      #!/bin/bash
+      ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
+  - name: OpenWhisk Deploy
+    type: deployer
+    target:
+      region_id: ${PROD_REGION_ID}
+      organization: ${PROD_ORG_NAME}
+      space: ${PROD_SPACE_NAME}
+      application: ${CF_APP_NAME}
+    script: |-
+      #!/bin/bash
+      ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
   - name: Kubernetes Deploy
     type: deployer
     target:
