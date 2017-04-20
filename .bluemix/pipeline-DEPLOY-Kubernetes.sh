@@ -95,7 +95,8 @@ kubectl delete --ignore-not-found=true   -f fibonacci-deployment.yml
 echo -e "Creating pods"
 kubectl create -f fibonacci-deployment.yml
 
-PORT=$(kubectl get services | grep frontend | sed 's/.*://g' | sed 's/\/.*//g')
+#PORT=$(kubectl get services | grep frontend | sed 's/.*://g' | sed 's/\/.*//g')
+PORT=30080
 
 echo ""
 echo "View Kubernetes fibonacci-deployment at http://$IP_ADDR:$PORT"
