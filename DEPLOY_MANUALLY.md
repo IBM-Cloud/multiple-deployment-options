@@ -124,10 +124,10 @@ This call will exit the underlying node.js app, simulating an error of the API.
 
 ### Test the Kubernetes service
 
-Retrieve the public IP address of your Kubernetes cluster. If you are using the free plan of the Kubernetes cluster in Bluemix, your node name is its public IP address:
+Retrieve the public IP address for your Kubernetes workers:
 
    ```
-   kubectl get nodes
+   bx cs workers fibonacci-cluster
    ```
 
 To compute the Fibonacci number after *n* iterations use the API such as:
