@@ -18,6 +18,12 @@ stages:
   triggers:
   - type: stage
   properties:
+  - name: CF_APP_NAME
+    value: undefined
+    type: text
+  - name: APP_URL
+    value: undefined
+    type: text
   - name: BLUEMIX_USER
     type: text
   - name: BLUEMIX_PASSWORD
