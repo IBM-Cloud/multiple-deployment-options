@@ -24,6 +24,8 @@ stages:
     value: ${BLUEMIX_API_KEY}
   - name: CLUSTER_NAME
     value: ${CLUSTER_NAME}
+  - name: IMAGE_NAME
+    value: ${IMAGE_NAME}
   jobs:
   - name: CloudFoundry Deploy
     type: deployer
