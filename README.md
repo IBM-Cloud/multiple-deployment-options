@@ -30,13 +30,49 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_number), *In mathematic
 
 The implementation of the Fibonacci sequence is done in **[service/lib/fibonacci.js](service/lib/fibonacci.js)**. The same implementation is used across all deployment options.
 
-## Deploying multiple deployment options automatically in Bluemix
+## Deploying the service automatically in Bluemix
 
-The toolchain is setup to automatically deploy the Cloud Foundry and OpenWhisk application.
-To get the Kubernetes deployed successfully there must be few additional steps to be taken.
+The toolchain is setup to automatically deploy the service to Cloud Foundry and OpenWhisk.
 
-[![Deploy To Bluemix](https://console.ng.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/multiple-deployment-options&branch=dev)
- TODO - More will be added here.
+Deploying to Kubernetes requires a few manual steps.
+
+TODO - add steps about building the Docker image and creating the Kubernetes cluster.
+
+1. Ensure your organization has enough quota for one web application using 256MB of memory, one Kubernetes cluster, and one OpenWhisk action.
+
+1. Click ***Create toolchain*** to start the Bluemix DevOps wizard:
+
+   [![Deploy To Bluemix](https://console.ng.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/multiple-deployment-options&branch=dev)
+
+1. Select the **GitHub** box.
+
+1. Decide whether you want to clone or fork the repository.
+
+1. If you decide to Clone, set a name for your GitHub repository.
+
+1. Select the **Delivery Pipeline** box.
+
+1. Select the region, organization and space where you want to deploy the web application.
+
+   :warning: Make sure the organization and the space have no space in their names.
+
+   :warning: Only the US South region is currently supported.
+
+1. Set the name of the Cloud Foundry application. You can keep the default. A random route will be created for the application.
+
+1. Optionally set the Bluemix API key. If you don't set the key, the Kubernetes service will NOT be deployed and you will need to use the manual instructions.
+
+   > You can obtain a Bluemix API key using `bx iam api-key-create for-toolchain`
+
+1. Optionally set the name of an existing Kubernetes cluster to use.
+
+1. Click **Create**.
+
+1. Select the Delivery Pipeline.
+
+1. Wait for the DEPLOY stage to complete.
+
+1. The services are ready. Review the [Service API](#Service_API) to call the services.
 
 ## Deploying the service manually in Bluemix
 
