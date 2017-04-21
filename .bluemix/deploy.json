@@ -22,7 +22,7 @@
       "type": "string"
     },
     "deploy-bluemix-api-key": {
-      "description": "An API key to access the Bluemix API",
+      "description": "An API key to access the Bluemix API. You can obtain one using 'bx iam api-key-create'",
       "type": "string"
     },
     "deploy-cluster-name": {
@@ -85,7 +85,7 @@
     {
       "type": "text",
       "readonly": false,
-      "title": "Bluemix API key",
+      "title": "Bluemix API key (you can obtain one using 'bx iam api-key-create')",
       "key": "deploy-bluemix-api-key"
     },
     {
