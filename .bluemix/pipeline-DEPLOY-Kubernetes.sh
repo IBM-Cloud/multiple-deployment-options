@@ -38,10 +38,9 @@ bx plugin list
 
 figlet 'Logging in Bluemix'
 
-echo "bx login -a $CF_TARGET_URL"
 bx login -a "$CF_TARGET_URL" --apikey "$BLUEMIX_API_KEY" -o "$CF_ORG" -s "$CF_SPACE"
 if [ $? -ne 0 ]; then
-  echo "Failed to authenticate to Bluemix"
+  echo 'Failed to authenticate to Bluemix'
   exit 1
 fi
 
@@ -49,41 +48,45 @@ fi
 echo "bx cs init"
 bx cs init
 if [ $? -ne 0 ]; then
-  echo "Failed to initialize to Bluemix Container Service"
+  echo 'Failed to initialize to Bluemix Container Service'
   exit 1
 fi
 
 ################################################################
 # Deploy
 ################################################################
-#!/bin/bash
-# echo "Fibonacci Application"
-# IP_ADDR=$(bx cs workers $CLUSTER_NAME | grep deployed | awk '{ print $2 }')
-# if [ -z $IP_ADDR ]; then
-#   echo "$CLUSTER_NAME not created or workers not ready"
-#   exit 1
-# fi
-#
-# echo -e "Configuring vars"
-# exp=$(bx cs cluster-config $CLUSTER_NAME | grep export)
-# if [ $? -ne 0 ]; then
-#   echo "Cluster $CLUSTER_NAME not created or not ready."
-#   exit 1
-# fi
-# eval "$exp"
-#
-# echo -e "Downloading fibonacci yml"
-# curl --silent "https://raw.githubusercontent.com/IBM-Bluemix/multiple-deployment-options/dev/service/fibonacci-deployment.yml" > fibonacci-deployment.yml
-# sed -i '130i\ \ type: NodePort' fibonacci-deployment.yml #For OSX: brew install gnu-sed; replace sed references with gsed
-#
-# echo -e "Deleting previous version of guestbook if it exists"
-# kubectl delete --ignore-not-found=true   -f fibonacci-deployment.yml
-#
-# echo -e "Creating pods"
-# kubectl create -f fibonacci-deployment.yml
-#
-# #PORT=$(kubectl get services | grep frontend | sed 's/.*://g' | sed 's/\/.*//g')
-# PORT=30080
-#
-# echo ""
-# echo "View Kubernetes fibonacci-deployment at http://$IP_ADDR:$PORT"
+figlet 'Fibonacci Deployment'
+
+if [ -z "$CLUSTER_NAME" ]; then
+  export CLUSTER_NAME=fibonacci-cluster
+  echo 'No existing cluster name specified. Creating a new one named '${CLUSTER_NAME}
+  bx cs cluster-create --name "$CLUSTER_NAME"
+fi
+
+echo -e 'Setting KUBECONFIG...'
+exp=$(bx cs cluster-config $CLUSTER_NAME | grep export)
+if [ $? -ne 0 ]; then
+  echo "Cluster $CLUSTER_NAME not created or not ready."
+  exit 1
+fi
+eval "$exp"
+
+# Generate a tmp deployment file where the image name has been replaced by the actual image to use
+ESCAPED_IMAGE_NAME=$(echo $IMAGE_NAME | sed 's/\//\\\//g')
+cat fibonacci-deployment.yml | sed 's/registry.ng.bluemix.net\/<namespace>\/fibonacci:latest/'$ESCAPED_IMAGE_NAME'/g' > tmp-fibonacci-deployment.yml
+
+echo -e 'Deleting previous version of Fibonacci service...'
+kubectl delete --ignore-not-found=true -f tmp-fibonacci-deployment.yml
+
+echo -e 'Deploying Fibonacci service...'
+kubectl create -f tmp-fibonacci-deployment.yml
+
+IP_ADDR=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $2 }')
+if [ -z $IP_ADDR ]; then
+  echo "$CLUSTER_NAME not created or workers not ready"
+  exit 1
+fi
+
+PORT=$(kubectl get services | grep fibonacci-service | sed 's/.*://g' | sed 's/\/.*//g')
+
+echo "Fibonacci service available at http://$IP_ADDR:$PORT"
