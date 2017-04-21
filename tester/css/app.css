@@ -61,6 +61,11 @@ button.md-button.md-icon-button, a.md-button.md-icon-button {
   padding: 0;
 }
 
+button.md-raised:not([disabled]):hover {
+  margin-top: 2px;
+  transition: all 0.25s ease;
+}
+
 .button-small {
   margin-left: 4px !important;
   margin-right: 4px !important;
@@ -72,6 +77,10 @@ button.md-button.md-icon-button, a.md-button.md-icon-button {
 
 .button-small md-icon {
   font-size: 20px !important;
+}
+
+.button-small md-icon:hover {
+  color: black !important;
 }
 
 a.md-icon-button md-icon {

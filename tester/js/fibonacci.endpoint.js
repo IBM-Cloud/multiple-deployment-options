@@ -30,7 +30,7 @@
         this.options.enabled = !this.options.enabled;
       }
 
-      FibonacciEndpoint.prototype.crash = function(callback, crashTimeout = 2000) {
+      FibonacciEndpoint.prototype.crash = function(callback) {
         if (!this.options.enabled) {
           return;
         }
@@ -43,7 +43,7 @@
         $http({
           method: 'POST',
           url: this.options.crash,
-          timeout: crashTimeout,
+          timeout: this.options.timeout || 5000,
           })
         .then(function(response) {
           callback(null, response);
@@ -57,7 +57,7 @@
         });
       }
 
-      FibonacciEndpoint.prototype.ping = function(callback, pingTimeout = 2000) {
+      FibonacciEndpoint.prototype.ping = function(callback) {
         if (!this.options.enabled) {
           return;
       }
@@ -70,7 +70,7 @@
         $http({
           method: 'GET',
           url: this.options.iterate,
-          timeout: pingTimeout,
+          timeout: this.options.timeout || 5000,
           })
           .then(function(response) {
             callback(null, response);
