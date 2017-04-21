@@ -28,6 +28,10 @@
     "deploy-cluster-name": {
       "description": "An existing Kubernetes cluster name",
       "type": "string"
+    },
+    "deploy-image-name": {
+      "description": "Name of the Fibonnaci service Docker image",
+      "type": "string"
     }
   },
   "required": [
@@ -89,6 +93,12 @@
       "readonly": false,
       "title": "Existing Kubernetes cluster name",
       "key": "deploy-cluster-name"
+    },
+    {
+      "type": "text",
+      "readonly": false,
+      "title": "Name of the Fibonnaci service Docker image",
+      "key": "deploy-image-name"
     }
   ]
 }
