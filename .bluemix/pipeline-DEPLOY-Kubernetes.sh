@@ -6,6 +6,11 @@ if [ -z "$BLUEMIX_API_KEY" ]; then
   exit 0
 fi
 
+if [ -z "$IMAGE_NAME" ]; then
+  echo 'No Docker image specified.'
+  exit 1
+fi
+
 ################################################################
 # Install dependencies
 ################################################################
@@ -72,6 +77,7 @@ fi
 eval "$exp"
 
 # Generate a tmp deployment file where the image name has been replaced by the actual image to use
+echo "Using Docker image $IMAGE_NAME"
 ESCAPED_IMAGE_NAME=$(echo $IMAGE_NAME | sed 's/\//\\\//g')
 cat fibonacci-deployment.yml | sed 's/registry.ng.bluemix.net\/<namespace>\/fibonacci:latest/'$ESCAPED_IMAGE_NAME'/g' > tmp-fibonacci-deployment.yml
 
