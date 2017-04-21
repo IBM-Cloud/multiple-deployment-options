@@ -26,7 +26,7 @@ chmod +x /tmp/Bluemix_CLI/bin/*
 
 export PATH="/tmp/Bluemix_CLI/bin:$PATH"
 
-figlet -f small 'Container Service Plugin'
+figlet -f small 'Container Service'
 bx plugin install container-service -r Bluemix
 
 figlet -f small 'kubectl'
@@ -39,7 +39,7 @@ bx plugin list
 figlet 'Logging in Bluemix'
 
 echo "bx login -a $CF_TARGET_URL"
-bx login -a "$CF_TARGET_URL" --api-key "$BLUEMIX_API_KEY" -o "$CF_ORG" -s "$CF_SPACE"
+bx login -a "$CF_TARGET_URL" --apikey "$BLUEMIX_API_KEY" -o "$CF_ORG" -s "$CF_SPACE"
 if [ $? -ne 0 ]; then
   echo "Failed to authenticate to Bluemix"
   exit 1
