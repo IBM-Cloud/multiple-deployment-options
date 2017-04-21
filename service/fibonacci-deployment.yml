@@ -12,7 +12,7 @@ spec:
       containers:
         - name: fibonacci-container
           #image: "fibonacci:latest"
-          image: "registry.ng.bluemix.net/twanatest/fibonacci:latest"
+          image: "registry.ng.bluemix.net/<namespace>/fibonacci:latest"
           imagePullPolicy: Always
 ---
 apiVersion: v1
