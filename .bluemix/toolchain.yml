@@ -1,41 +1,45 @@
----
-name: "Multiple Deployment Options"
-description: "Deploy a Fibonacci microservice to differnet compute options to compare them."
-required:
-  - repo
-  - deploy
+version: '2'
+template:
+  name: "Multiple Deployment Options"
+  description: "Deploy a Fibonacci microservice to differnet compute options to compare them."
+  required:
+    - build
+    - repo
+    - deploy
 
-# Github repos
-repo:
-  service_id: githubpublic
-  parameters:
-    repo_name: 'multiple-deployment-options'
-    repo_url: 'https://github.com/IBM-Bluemix/multiple-deployment-options'
-    type: fork
-    has_issues: false
+toolchain:
+  name: 'multiple-deployment-options-{{timestamp}}'
 
-# Pipelines
-build:
-  service_id: pipeline
-  parameters:
-    name: '{{repo.parameters.repo_name}}'
-    ui-pipeline: true
-    configuration:
-      content: $file(pipeline.yml)
-      env:
-        REPO: "repo"
-        CF_APP_NAME: '{{deploy.parameters.deploy-app-name}}'
-        SPACE_NAME: '{{deploy.parameters.deploy-space}}'
-        ORG_NAME: '{{deploy.parameters.deploy-organization}}'
-        REGION_ID: '{{deploy.parameters.deploy-region}}'
+services:
+  repo:
+    service_id: githubpublic
+    parameters:
+      repo_name: 'multiple-deployment-options'
+      repo_url: 'https://github.com/IBM-Bluemix/multiple-deployment-options'
+      type: fork
+      has_issues: false
+  build:
+    service_id: pipeline
+    parameters:
+      services:
+        - repo
+      name: '{{services.repo.parameters.repo_name}}'
+      ui-pipeline: true
+      configuration:
+        content:
+          $text: pipeline.yml
+        env:
+          REPO: repo
+          CF_APP_NAME: '{{form.pipeline.parameters.deploy-app-name}}'
+          SPACE_NAME: '{{form.pipeline.parameters.deploy-space}}'
+          ORG_NAME: '{{form.pipeline.parameters.deploy-organization}}'
+          REGION_ID: '{{form.pipeline.parameters.deploy-region}}'
         execute: true
-    services: ["repo"]
-  hidden: [form, description]
 
 #Deployment
-deploy:
-  schema:
-    $ref: deploy.json
-  service-category: pipeline
-  parameters:
-    deploy-app-name: "fibonacci-service-{{timestamp}}"
+form:
+  pipeline:
+    parameters:
+      deploy-app-name: "fibonacci-service-{{timestamp}}"
+    schema:
+      $ref: deploy.json
