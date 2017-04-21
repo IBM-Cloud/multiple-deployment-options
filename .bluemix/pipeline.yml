@@ -18,8 +18,6 @@ stages:
   triggers:
   - type: stage
   properties:
-  - name: CF_APP_NAME
-    value: ${CF_APP_NAME}
   - name: BLUEMIX_API_KEY
     value: ${BLUEMIX_API_KEY}
   - name: CLUSTER_NAME
