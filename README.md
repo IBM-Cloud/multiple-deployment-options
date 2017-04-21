@@ -31,10 +31,11 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_number), *In mathematic
 The implementation of the Fibonacci sequence is done in **[service/lib/fibonacci.js](service/lib/fibonacci.js)**. The same implementation is used across all deployment options.
 
 ## Deploying multiple deployment options automatically in Bluemix
-The toolchain is setup to automatically deploy the Cloud Foundry and OpenWhisk application.
-To get the Kubernetes deployed successfully there must be few additional steps to be taken. 
 
-[![Deploy to Bluemix](https://deployment-tracker.mybluemix.net/stats/ad94d1daf817a5fd818f977c0a7cf632/button.svg)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/multiple-deployment-options&branch=dev)
+The toolchain is setup to automatically deploy the Cloud Foundry and OpenWhisk application.
+To get the Kubernetes deployed successfully there must be few additional steps to be taken.
+
+[![Deploy To Bluemix](https://console.ng.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/multiple-deployment-options&branch=dev)
  TODO - More will be added here.
 
 ## Deploying the service manually in Bluemix
