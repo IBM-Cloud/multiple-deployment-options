@@ -1,110 +1,104 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "messages": {
-    "$i18n": "locales.yml"
-  },
-  "title": {
-    "$ref": "#/messages/deploy.title"
-  },
-  "description": {
-    "$ref": "#/messages/deploy.description"
-  },
-  "longDescription": {
-    "$ref": "#/messages/deploy.longDescription"
-  },
+  "title": "Multiple Deployment Options",
+  "description": "",
+  "longDescription": "The Delivery Pipeline automates the continuous deployment of the repository.",
   "type": "object",
   "properties": {
-    "prod-region": {
+    "deploy-region": {
       "description": "The bluemix region",
       "type": "string"
     },
-    "prod-organization": {
+    "deploy-organization": {
       "description": "The bluemix org",
       "type": "string"
     },
-    "prod-space": {
+    "deploy-space": {
       "description": "The bluemix space",
       "type": "string"
     },
-    "prod-app-name": {
-      "description": {
-        "$ref": "#/messages/deploy.appDescription"
-      },
-      "type": "string",
-      "pattern": "\\S"
+    "deploy-app-name": {
+      "description": "The name of the Cloud Foundry application",
+      "type": "string"
+    },
+    "deploy-bluemix-api-key": {
+      "description": "An API key to access the Bluemix API. You can obtain one using 'bx iam api-key-create'",
+      "type": "string"
+    },
+    "deploy-cluster-name": {
+      "description": "An existing Kubernetes cluster name",
+      "type": "string"
+    },
+    "deploy-image-name": {
+      "description": "Name of the Fibonnaci service Docker image",
+      "type": "string"
     }
   },
   "required": [
-    "prod-region",
-    "prod-organization",
-    "prod-space",
-    "prod-app-name"
+    "deploy-region",
+    "deploy-organization",
+    "deploy-space",
+    "deploy-app-name"
   ],
-  "form": [
-    {
+  "form": [{
       "type": "validator",
       "url": "/devops/setup/bm-helper/helper.html"
     },
     {
-      "type": "text",
-      "readonly": false,
-      "title": {
-        "$ref": "#/messages/deploy.appName"
-      },
-      "key": "prod-app-name"
-    },
-    {
       "type": "table",
-      "columnCount": 4,
-      "widths": [
-        "15%",
-        "28%",
-        "28%",
-        "28%"
-      ],
+      "columnCount": 3,
+      "widths": ["33%", "33%", "33%"],
       "items": [
         {
           "type": "label",
-          "title": ""
+          "title": "Region"
         },
         {
           "type": "label",
-          "title": {
-            "$ref": "#/messages/region"
-          }
+          "title": "Organization"
         },
         {
           "type": "label",
-          "title": {
-            "$ref": "#/messages/organization"
-          }
-        },
-        {
-          "type": "label",
-          "title": {
-            "$ref": "#/messages/space"
-          }
-        },
-        {
-          "type": "label",
-          "title": {
-            "$ref": "#/messages/prodStage"
-          }
+          "title": "Space"
         },
         {
           "type": "select",
-          "key": "prod-region"
+          "key": "deploy-region"
         },
         {
           "type": "select",
-          "key": "prod-organization"
+          "key": "deploy-organization"
         },
         {
           "type": "select",
-          "key": "prod-space",
+          "key": "deploy-space",
           "readonly": false
         }
       ]
+    },
+    {
+      "type": "text",
+      "readonly": false,
+      "title": "App name",
+      "key": "deploy-app-name"
+    },
+    {
+      "type": "text",
+      "readonly": false,
+      "title": "Bluemix API key (you can obtain one using 'bx iam api-key-create')",
+      "key": "deploy-bluemix-api-key"
+    },
+    {
+      "type": "text",
+      "readonly": false,
+      "title": "Existing Kubernetes cluster name",
+      "key": "deploy-cluster-name"
+    },
+    {
+      "type": "text",
+      "readonly": false,
+      "title": "Name of the Fibonnaci service Docker image",
+      "key": "deploy-image-name"
     }
   ]
 }
