@@ -42,7 +42,7 @@ services:
 form:
   pipeline:
     parameters:
-      deploy-app-name: 'fibonacci-service-{{timestamp}}'
+      deploy-app-name: 'fibonacci-service'
       deploy-bluemix-api-key: ''
       deploy-cluster-name: ''
       deploy-image-name: 'registry.ng.bluemix.net/<namespace>/fibonacci:latest'
