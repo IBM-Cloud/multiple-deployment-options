@@ -162,6 +162,15 @@ h4 {
   width: 190px;
 }
 
+.endpoint-information.ng-enter {
+  background-color: rgb(247, 203, 89);
+  transition: all 5s ease;
+}
+
+.endpoint-information.ng-enter-active {
+  background-color: inherit;
+}
+
 .endpoint-title {
   text-align: center;
   font-size: 14px;

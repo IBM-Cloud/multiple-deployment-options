@@ -68,7 +68,20 @@ app.post('/fibonacci', (req, res) => {
 
 app.get('/', (req, res) => {
   logger.info('GET /');
-  res.send('OK');
+
+  const name = process.env.VCAP_SERVICES ? 'One Instance' : 'One replica';
+  const icon = process.env.VCAP_SERVICES ? '/images/cloudfoundry.png' : '/images/kubernetes.svg';
+
+  const pingEndpoint = `${req.protocol}://${req.headers.host}/fibonacci?iteration=500`;
+  const crashEndpoint = `${req.protocol}://${req.headers.host}/fibonacci?crash=true`;
+
+  const addEnpoint = 'http://deployment-options-tester.mybluemix.net/?action=add' +
+    `&name=${encodeURIComponent(name)}` +
+    `&icon=${encodeURIComponent(icon)}` +
+    `&iterate=${encodeURIComponent(pingEndpoint)}` +
+    `&crash=${encodeURIComponent(crashEndpoint)}`;
+
+  res.send(`<html><body><a href="${addEnpoint}">Add this service to the web tester</a></body></html>`);
 });
 
 const port = process.env.PORT || 8080;
