@@ -1,52 +1,50 @@
 version: '2'
-messages:
-  $i18n: locales.yml
 template:
   name: "Multiple Deployment Options"
-  description: "Deploy Fibonacci application in Multiple Deployment Options to test and compare the different compute options."
-  header: '![]()'
-  icon: icon.svg
+  description: "Deploy a Fibonacci microservice to different compute options to compare them."
   required:
-    - sample-build
-    - sample-repo
-  info:
-    git url: >-
-      [https://github.com/IBM-Bluemix/multiple-deployment-options](https://github.com/IBM-Bluemix/multiple-deployment-options)
-    git branch: >-
-      [dev](https://github.com/IBM-Bluemix/multiple-deployment-options/tree/dev)
+    - build
+    - repo
+    - deploy
+
 toolchain:
-  name: 'compute-options-toolchain-{{timestamp}}'
-  template:
-    getting_started:
-      $ref: "#/messages/template.gettingStarted"
+  name: 'multiple-deployment-options-{{timestamp}}'
+
 services:
-  sample-repo:
+  repo:
     service_id: githubpublic
     parameters:
-      repo_name: "compute-options-toolchain"
+      repo_name: 'multiple-deployment-options'
       repo_url: 'https://github.com/IBM-Bluemix/multiple-deployment-options'
       type: fork
       has_issues: false
-  sample-build:
+  build:
     service_id: pipeline
     parameters:
       services:
-        - sample-repo
-      name: '{{services.sample-repo.parameters.repo_name}}'
+        - repo
+      name: '{{services.repo.parameters.repo_name}}'
       ui-pipeline: true
       configuration:
         content:
           $text: pipeline.yml
         env:
-          SAMPLE_REPO: sample-repo
-          CF_APP_NAME: '{{form.pipeline.parameters.prod-app-name}}'
-          PROD_SPACE_NAME: '{{form.pipeline.parameters.prod-space}}'
-          PROD_ORG_NAME: '{{form.pipeline.parameters.prod-organization}}'
-          PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
+          REPO: repo
+          CF_APP_NAME: '{{form.pipeline.parameters.deploy-app-name}}'
+          SPACE_NAME: '{{form.pipeline.parameters.deploy-space}}'
+          ORG_NAME: '{{form.pipeline.parameters.deploy-organization}}'
+          REGION_ID: '{{form.pipeline.parameters.deploy-region}}'
+          BLUEMIX_API_KEY: '{{form.pipeline.parameters.deploy-bluemix-api-key}}'
+          CLUSTER_NAME: '{{form.pipeline.parameters.deploy-cluster-name}}'
+          IMAGE_NAME: '{{form.pipeline.parameters.deploy-image-name}}'
         execute: true
+
 form:
   pipeline:
     parameters:
-      prod-app-name: '{{services.sample-repo.parameters.repo_name}}'
+      deploy-app-name: 'fibonacci-service-{{timestamp}}'
+      deploy-bluemix-api-key: ''
+      deploy-cluster-name: ''
+      deploy-image-name: 'registry.ng.bluemix.net/<namespace>/fibonacci:latest'
     schema:
       $ref: deploy.json
