@@ -20,6 +20,14 @@
     "deploy-app-name": {
       "description": "The name of the Cloud Foundry application",
       "type": "string"
+    },
+    "deploy-bluemix-api-key": {
+      "description": "An API key to access the Bluemix API",
+      "type": "string"
+    },
+    "deploy-cluster-name": {
+      "description": "An existing Kubernetes cluster name",
+      "type": "string"
     }
   },
   "required": [
@@ -69,6 +77,18 @@
       "readonly": false,
       "title": "App name",
       "key": "deploy-app-name"
+    },
+    {
+      "type": "text",
+      "readonly": false,
+      "title": "Bluemix API key",
+      "key": "deploy-bluemix-api-key"
+    },
+    {
+      "type": "text",
+      "readonly": false,
+      "title": "Existing Kubernetes cluster name",
+      "key": "deploy-cluster-name"
     }
   ]
 }

@@ -3,7 +3,7 @@ stages:
 - name: BUILD
   inputs:
   - type: git
-    branch: dev
+    branch: cleanup
     service: ${REPO}
   triggers:
   - type: commit
@@ -21,9 +21,9 @@ stages:
   - name: CF_APP_NAME
     value: ${CF_APP_NAME}
   - name: BLUEMIX_API_KEY
-    value: ""
+    value: ${BLUEMIX_API_KEY}
   - name: CLUSTER_NAME
-    value: ""
+    value: ${CLUSTER_NAME}
   jobs:
   - name: CloudFoundry Deploy
     type: deployer

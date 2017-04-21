@@ -34,12 +34,15 @@ services:
           SPACE_NAME: '{{form.pipeline.parameters.deploy-space}}'
           ORG_NAME: '{{form.pipeline.parameters.deploy-organization}}'
           REGION_ID: '{{form.pipeline.parameters.deploy-region}}'
+          BLUEMIX_API_KEY: '{{form.pipeline.parameters.deploy-bluemix-api-key}}'
+          CLUSTER_NAME: '{{form.pipeline.parameters.deploy-cluster-name}}'
         execute: true
 
-#Deployment
 form:
   pipeline:
     parameters:
-      deploy-app-name: "fibonacci-service-{{timestamp}}"
+      deploy-app-name: 'fibonacci-service-{{timestamp}}'
+      deploy-bluemix-api-key: ''
+      deploy-cluster-name: ''
     schema:
       $ref: deploy.json
