@@ -97,7 +97,7 @@
     {
       "type": "text",
       "readonly": false,
-      "title": "Name of the Fibonnaci service Docker image",
+      "title": "Name of the Fibonnaci service Docker image (Obtain docker namespace using 'bx cr namespace-list')",
       "key": "deploy-image-name"
     }
   ]
