@@ -46,6 +46,28 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
+- name: "DOCKER (not enabled)"
+  inputs:
+  - type: job
+    stage: BUILD
+    job: Build
+  triggers:
+  - type: stage
+    enabled: false
+  jobs:
+  - name: Build
+    type: builder
+    fail_stage: false
+    extension_id: ibm.devops.services.pipeline.container.builder
+    target:
+      region_id: ${REGION_ID}
+      organization: ${ORG_NAME}
+      space: ${CONTAINER_SPACE_NAME}
+    IMAGE_NAME: fibonacci
+    USE_CACHED_LAYERS: 'true'
+    COMMAND: |
+      #!/bin/bash
+      ./.bluemix/pipeline-BUILD-Docker.sh
 - name: KUBERNETES
   inputs:
   - type: job
@@ -71,24 +93,3 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-Kubernetes.sh
-- name: "DOCKER (not enabled)"
-  inputs:
-  - type: job
-    stage: BUILD
-    job: Build
-  triggers:
-  - type: stage
-    enabled: false
-  jobs:
-  - name: Build
-    type: builder
-    extension_id: ibm.devops.services.pipeline.container.builder
-    target:
-      region_id: ${REGION_ID}
-      organization: ${ORG_NAME}
-      space: ${SPACE_NAME}
-    IMAGE_NAME: fibonacci
-    USE_CACHED_LAYERS: 'true'
-    COMMAND: |
-      #!/bin/bash
-      ./.bluemix/pipeline-BUILD-Docker.sh

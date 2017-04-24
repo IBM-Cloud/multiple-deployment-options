@@ -32,6 +32,10 @@
     "deploy-image-name": {
       "description": "Name of the Fibonnaci service Docker image",
       "type": "string"
+    },
+    "deploy-container-space": {
+      "description": "Name of the space configured for IBM Container Service",
+      "type": "string"
     }
   },
   "required": [
@@ -43,6 +47,10 @@
   "form": [{
       "type": "validator",
       "url": "/devops/setup/bm-helper/helper.html"
+    },
+    {
+      "type": "label",
+      "title": "Cloud Foundry and OpenWhisk"
     },
     {
       "type": "table",
@@ -83,6 +91,10 @@
       "key": "deploy-app-name"
     },
     {
+      "type": "label",
+      "title": "Docker and Kubernetes"
+    },
+    {
       "type": "text",
       "readonly": false,
       "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
@@ -99,6 +111,15 @@
       "readonly": false,
       "title": "Name of the Fibonnaci service Docker image (Obtain the Docker namespace using 'bx cr namespace-list')",
       "key": "deploy-image-name"
+    },
+    {
+      "type": "label",
+      "title": "Space where IBM Container is setup",
+    },
+    {
+      "type": "select",
+      "key": "deploy-container-space",
+      "readonly": false,
     }
   ]
 }
