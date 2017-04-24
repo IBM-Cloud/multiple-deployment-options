@@ -1,16 +1,56 @@
 ---
 stages:
+
 - name: BUILD
   inputs:
   - type: git
-    branch: dev
+    branch: dockerbuild
     service: ${REPO}
   triggers:
   - type: commit
   jobs:
   - name: Build
     type: builder
-- name: DEPLOY
+
+- name: CLOUD FOUNDRY
+  inputs:
+  - type: job
+    stage: BUILD
+    job: Build
+  triggers:
+  - type: stage
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      region_id: ${REGION_ID}
+      organization: ${ORG_NAME}
+      space: ${SPACE_NAME}
+      application: ${CF_APP_NAME}
+    script: |-
+      #!/bin/bash
+      ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
+
+- name: OPENWHISK
+  inputs:
+  - type: job
+    stage: BUILD
+    job: Build
+  triggers:
+  - type: stage
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      region_id: ${REGION_ID}
+      organization: ${ORG_NAME}
+      space: ${SPACE_NAME}
+      application: ${CF_APP_NAME}
+    script: |-
+      #!/bin/bash
+      ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
+
+- name: KUBERNETES
   inputs:
   - type: job
     stage: BUILD
@@ -25,26 +65,6 @@ stages:
   - name: IMAGE_NAME
     value: ${IMAGE_NAME}
   jobs:
-  - name: CloudFoundry Deploy
-    type: deployer
-    target:
-      region_id: ${REGION_ID}
-      organization: ${ORG_NAME}
-      space: ${SPACE_NAME}
-      application: ${CF_APP_NAME}
-    script: |-
-      #!/bin/bash
-      ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
-  - name: OpenWhisk Deploy
-    type: deployer
-    target:
-      region_id: ${REGION_ID}
-      organization: ${ORG_NAME}
-      space: ${SPACE_NAME}
-      application: ${CF_APP_NAME}
-    script: |-
-      #!/bin/bash
-      ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
   - name: Kubernetes Deploy
     type: deployer
     target:
@@ -55,3 +75,22 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-Kubernetes.sh
+
+- name: DOCKER
+  inputs:
+  - type: job
+    stage: BUILD
+    job: Build
+  jobs:
+  - name: Build Image
+    type: builder
+    extension_id: ibm.devops.services.pipeline.container.builder
+    target:
+      region_id: ${REGION_ID}
+      organization: ${ORG_NAME}
+      space: ""
+    IMAGE_NAME: "fibonacci:latest"
+    USE_CACHED_LAYERS: 'true'
+    COMMAND: |-
+      #!/bin/bash
+      ./.bluemix/pipeline-BUILD-Docker.sh
