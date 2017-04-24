@@ -85,7 +85,7 @@
     {
       "type": "text",
       "readonly": false,
-      "title": "Bluemix API key (you can obtain one using 'bx iam api-key-create')",
+      "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
       "key": "deploy-bluemix-api-key"
     },
     {
@@ -97,7 +97,7 @@
     {
       "type": "text",
       "readonly": false,
-      "title": "Name of the Fibonnaci service Docker image (Obtain docker namespace using 'bx cr namespace-list')",
+      "title": "Name of the Fibonnaci service Docker image (Obtain the Docker namespace using 'bx cr namespace-list')",
       "key": "deploy-image-name"
     }
   ]
