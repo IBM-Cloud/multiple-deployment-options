@@ -47,9 +47,9 @@ TODO - add steps to build and push the docker image...
 
 1. Optionally set the Bluemix API key. If you don't set the key, the Kubernetes service will NOT be deployed and you will need to use the manual instructions.
 
-   > Obtain a Bluemix API key using `bx iam api-key-create for-toolchain`
+   > Create a Bluemix API key using `bx iam api-key-create for-toolchain my-new-key`
 
-1. Optionally set the name of an existing Kubernetes cluster to use.  
+1. Optionally set the name of an existing Kubernetes cluster if you have one, if you don NOT have an existing cluster then the ToolChain will create one by default.  
 
 1. Add your docker image namespace. 
    > Obtain the docker image namespace using `bx cr namespace-list`
