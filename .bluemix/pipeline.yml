@@ -1,6 +1,5 @@
 ---
 stages:
-
 - name: BUILD
   inputs:
   - type: git
@@ -11,8 +10,7 @@ stages:
   jobs:
   - name: Build
     type: builder
-
-- name: CLOUD FOUNDRY
+- name: "CLOUD FOUNDRY"
   inputs:
   - type: job
     stage: BUILD
@@ -30,7 +28,6 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
-
 - name: OPENWHISK
   inputs:
   - type: job
@@ -49,7 +46,6 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
-
 - name: KUBERNETES
   inputs:
   - type: job
@@ -75,22 +71,21 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-Kubernetes.sh
-
-- name: DOCKER
-  inputs:
-  - type: job
-    stage: BUILD
-    job: Build
-  jobs:
-  - name: Build Image
-    type: builder
-    extension_id: ibm.devops.services.pipeline.container.builder
-    target:
-      region_id: ${REGION_ID}
-      organization: ${ORG_NAME}
-      space: ""
-    IMAGE_NAME: "fibonacci:latest"
-    USE_CACHED_LAYERS: 'true'
-    COMMAND: |-
-      #!/bin/bash
-      ./.bluemix/pipeline-BUILD-Docker.sh
+# - name: DOCKER
+#   inputs:
+#   - type: job
+#     stage: BUILD
+#     job: Build
+#   jobs:
+#   - name: Build
+#     type: builder
+#     extension_id: ibm.devops.services.pipeline.container.builder
+#     target:
+#       region_id: ${REGION_ID}
+#       organization: ${ORG_NAME}
+#       space: ""
+#     IMAGE_NAME: "fibonacci:latest"
+#     USE_CACHED_LAYERS: 'true'
+#     COMMAND: |-
+#       #!/bin/bash
+#       ./.bluemix/pipeline-BUILD-Docker.sh
