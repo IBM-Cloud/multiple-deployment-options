@@ -71,7 +71,7 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-Kubernetes.sh
-- name: DOCKER (not enabled)
+- name: "DOCKER (not enabled)"
   inputs:
   - type: job
     stage: BUILD
@@ -83,7 +83,7 @@ stages:
     target:
       region_id: ${REGION_ID}
       organization: ${ORG_NAME}
-      space: ""
+      space: ${SPACE_NAME}
     IMAGE_NAME: fibonacci
     USE_CACHED_LAYERS: 'true'
     COMMAND: |
