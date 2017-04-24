@@ -25,26 +25,26 @@ stages:
   - name: IMAGE_NAME
     value: ${IMAGE_NAME}
   jobs:
-  - name: CloudFoundry Deploy
-    type: deployer
-    target:
-      region_id: ${REGION_ID}
-      organization: ${ORG_NAME}
-      space: ${SPACE_NAME}
-      application: ${CF_APP_NAME}
-    script: |-
-      #!/bin/bash
-      ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
-  - name: OpenWhisk Deploy
-    type: deployer
-    target:
-      region_id: ${REGION_ID}
-      organization: ${ORG_NAME}
-      space: ${SPACE_NAME}
-      application: ${CF_APP_NAME}
-    script: |-
-      #!/bin/bash
-      ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
+#  - name: CloudFoundry Deploy
+#    type: deployer
+#    target:
+#      region_id: ${REGION_ID}
+#      organization: ${ORG_NAME}
+#      space: ${SPACE_NAME}
+#      application: ${CF_APP_NAME}
+#    script: |-
+#      #!/bin/bash
+#      ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
+#  - name: OpenWhisk Deploy
+#    type: deployer
+#    target:
+#      region_id: ${REGION_ID}
+#      organization: ${ORG_NAME}
+#      space: ${SPACE_NAME}
+#      application: ${CF_APP_NAME}
+#    script: |-
+#      #!/bin/bash
+#      ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
   - name: Kubernetes Deploy
     type: deployer
     target:
