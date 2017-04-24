@@ -78,40 +78,42 @@ if [ -z $CLUSTER_STATE ]; then
   while [ $count -le 5 ]    # this is loop1
   do
     if [ "$CLUSTER_STATE" == "Ready" ]; then
+      echo "$CLUSTER_NAME Cluster is Ready..."
+      echo $count
         break
     fi #end if statement
-    
+
     count=`expr $count + 1`
   done
 fi
 
 
-
-echo -e 'Setting KUBECONFIG...'
-exp=$(bx cs cluster-config $CLUSTER_NAME | grep export)
-if [ $? -ne 0 ]; then
-  echo "Cluster $CLUSTER_NAME not created or not ready."
-  exit 1
-fi
-eval "$exp"
-
-# Generate a tmp deployment file where the image name has been replaced by the actual image to use
-echo "Using Docker image $IMAGE_NAME"
-ESCAPED_IMAGE_NAME=$(echo $IMAGE_NAME | sed 's/\//\\\//g')
-cat fibonacci-deployment.yml | sed 's/registry.ng.bluemix.net\/<namespace>\/fibonacci:latest/'$ESCAPED_IMAGE_NAME'/g' > tmp-fibonacci-deployment.yml
-
-echo -e 'Deleting previous version of Fibonacci service...'
-kubectl delete --ignore-not-found=true -f tmp-fibonacci-deployment.yml
-
-echo -e 'Deploying Fibonacci service...'
-kubectl create -f tmp-fibonacci-deployment.yml
-
-IP_ADDR=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $2 }')
-if [ -z $IP_ADDR ]; then
-  echo "$CLUSTER_NAME not created or workers not ready"
-  exit 1
-fi
-
-PORT=$(kubectl get services | grep fibonacci-service | sed 's/.*://g' | sed 's/\/.*//g')
-
-echo "Fibonacci service available at http://$IP_ADDR:$PORT"
+#
+#echo -e 'Setting KUBECONFIG...'
+#exp=$(bx cs cluster-config $CLUSTER_NAME | grep export)
+#if [ $? -ne 0 ]; then
+#  echo "Cluster $CLUSTER_NAME not created or not ready."
+#  exit 1
+#fi
+#eval "$exp"
+#
+## Generate a tmp deployment file where the image name has been replaced by the actual image to use
+#echo "Using Docker image $IMAGE_NAME"
+#ESCAPED_IMAGE_NAME=$(echo $IMAGE_NAME | sed 's/\//\\\//g')
+#cat fibonacci-deployment.yml | sed 's/registry.ng.bluemix.net\/<namespace>\/fibonacci:latest/'$ESCAPED_IMAGE_NAME'/g' > tmp-fibonacci-deployment.yml
+#
+#echo -e 'Deleting previous version of Fibonacci service...'
+#kubectl delete --ignore-not-found=true -f tmp-fibonacci-deployment.yml
+#
+#echo -e 'Deploying Fibonacci service...'
+#kubectl create -f tmp-fibonacci-deployment.yml
+#
+#IP_ADDR=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $2 }')
+#if [ -z $IP_ADDR ]; then
+#  echo "$CLUSTER_NAME not created or workers not ready"
+#  exit 1
+#fi
+#
+#PORT=$(kubectl get services | grep fibonacci-service | sed 's/.*://g' | sed 's/\/.*//g')
+#
+#echo "Fibonacci service available at http://$IP_ADDR:$PORT"
