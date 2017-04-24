@@ -78,7 +78,7 @@ stages:
     job: Build
   triggers:
   - type: stage
-    enabled: 'false'
+    enabled: false
   jobs:
   - name: Build
     type: builder
