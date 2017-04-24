@@ -35,18 +35,18 @@ The implementation of the Fibonacci sequence is done in **[service/lib/fibonacci
 The toolchain is setup to automatically deploy the service to Cloud Foundry and OpenWhisk.
 
 **Deploying to Kubernetes requires a few manual steps.**
-1. Assuming that latest version of the Bluemix CLI is installed and the CLI is configured to run Kubectl commands against clusters. [Click for instructions for installing and configuring the CLI to run Kubectl commands](https://console.ng.bluemix.net/docs/containers/cs_cli_install.html#cs_cli_install)
-1. Verify that you have the *container-registry* and the *container-service* plugins installed by running  `bluemix plugin list`   
+1. Assuming that latest version of the Bluemix CLI is installed and configured to run Kubectl commands. [Click for instructions on installing and configuring the CLI to run Kubectl commands](https://console.ng.bluemix.net/docs/containers/cs_cli_install.html#cs_cli_install)
+1. Verify that you have the *container-registry* and the *container-service* plugins installed by using  `bluemix plugin list`   
     
 1. Create a Kubernetes cluster in Bluemix
    ```
    bx cs cluster-create --name fibonacci-cluster
    ```
-    > Note: Note that it takes approximately 15 minutes for the cluster to be fully provisioned and ready to accept the sample pods.   
+    > Note: It takes approximately 15 minutes for the cluster to be fully provisioned and ready to accept the sample pods.   
     > You can also use an existing cluster if you have one already.
 
-1. Use `bx cs clusters` to see the defined clusters  
-1. Use `bx cs workers fibonacci-cluster` to see the provisioned workers.
+1. Use `bx cs clusters` to view defined clusters  
+1. Use `bx cs workers fibonacci-cluster` to view provisioned workers.
    > Note: The state of your cluster should be in a **Ready** state.
 
 TODO - add steps to build and push the docker image...
@@ -78,12 +78,12 @@ TODO - add steps to build and push the docker image...
 
 1. Optionally set the Bluemix API key. If you don't set the key, the Kubernetes service will NOT be deployed and you will need to use the manual instructions.
 
-   > You can obtain a Bluemix API key using `bx iam api-key-create for-toolchain`
+   > Obtain a Bluemix API key using `bx iam api-key-create for-toolchain`
 
 1. Optionally set the name of an existing Kubernetes cluster to use.  
 
 1. Add your docker image namespace. 
-   > You can obtain your docker image namespace using `bx cr namespace-list`
+   > Obtain the docker image namespace using `bx cr namespace-list`
 
 1. Click **Create**.
 
