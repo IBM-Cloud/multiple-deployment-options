@@ -61,7 +61,7 @@ stages:
   - name: IMAGE_NAME
     value: ${IMAGE_NAME}
   jobs:
-  - name: Kubernetes Deploy
+  - name: Deploy
     type: deployer
     target:
       region_id: ${REGION_ID}
@@ -71,21 +71,21 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-Kubernetes.sh
-# - name: DOCKER
-#   inputs:
-#   - type: job
-#     stage: BUILD
-#     job: Build
-#   jobs:
-#   - name: Build
-#     type: builder
-#     extension_id: ibm.devops.services.pipeline.container.builder
-#     target:
-#       region_id: ${REGION_ID}
-#       organization: ${ORG_NAME}
-#       space: ""
-#     IMAGE_NAME: "fibonacci:latest"
-#     USE_CACHED_LAYERS: 'true'
-#     COMMAND: |-
-#       #!/bin/bash
-#       ./.bluemix/pipeline-BUILD-Docker.sh
+- name: DOCKER (not enabled)
+  inputs:
+  - type: job
+    stage: BUILD
+    job: Build
+  jobs:
+  - name: Build
+    type: builder
+    extension_id: ibm.devops.services.pipeline.container.builder
+    target:
+      region_id: ${REGION_ID}
+      organization: ${ORG_NAME}
+      space: ""
+    IMAGE_NAME: fibonacci
+    USE_CACHED_LAYERS: 'true'
+    COMMAND: |
+      #!/bin/bash
+      ./.bluemix/pipeline-BUILD-Docker.sh
