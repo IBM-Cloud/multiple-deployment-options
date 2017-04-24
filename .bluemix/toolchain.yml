@@ -32,12 +32,14 @@ services:
           REPO: repo
           CF_APP_NAME: '{{form.pipeline.parameters.deploy-app-name}}'
           SPACE_NAME: '{{form.pipeline.parameters.deploy-space}}'
-          CONTAINER_SPACE_NAME: '{{form.pipeline.parameters.deploy-container-space}}'
           ORG_NAME: '{{form.pipeline.parameters.deploy-organization}}'
           REGION_ID: '{{form.pipeline.parameters.deploy-region}}'
           BLUEMIX_API_KEY: '{{form.pipeline.parameters.deploy-bluemix-api-key}}'
           CLUSTER_NAME: '{{form.pipeline.parameters.deploy-cluster-name}}'
           IMAGE_NAME: '{{form.pipeline.parameters.deploy-image-name}}'
+          CONTAINER_ORG_NAME: '{{form.pipeline.parameters.container-organization}}'
+          CONTAINER_REGION_ID: '{{form.pipeline.parameters.container-region}}'
+          CONTAINER_SPACE_NAME: '{{form.pipeline.parameters.container-space}}'
         execute: true
 
 form:

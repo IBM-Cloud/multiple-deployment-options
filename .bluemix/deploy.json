@@ -33,7 +33,15 @@
       "description": "Name of the Fibonnaci service Docker image",
       "type": "string"
     },
-    "deploy-container-space": {
+    "container-region": {
+      "description": "The bluemix region",
+      "type": "string"
+    },
+    "container-organization": {
+      "description": "The bluemix org",
+      "type": "string"
+    },
+    "container-space": {
       "description": "Name of the space configured for IBM Container Service",
       "type": "string"
     }
@@ -117,9 +125,36 @@
       "title": "Space where IBM Container is setup",
     },
     {
-      "type": "select",
-      "key": "deploy-container-space",
-      "readonly": false,
+      "type": "table",
+      "columnCount": 3,
+      "widths": ["33%", "33%", "33%"],
+      "items": [
+        {
+          "type": "label",
+          "title": "Region"
+        },
+        {
+          "type": "label",
+          "title": "Organization"
+        },
+        {
+          "type": "label",
+          "title": "Space"
+        },
+        {
+          "type": "select",
+          "key": "container-region"
+        },
+        {
+          "type": "select",
+          "key": "container-organization"
+        },
+        {
+          "type": "select",
+          "key": "container-space",
+          "readonly": false
+        }
+      ]
     }
   ]
 }
