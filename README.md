@@ -14,15 +14,15 @@ This project contains one simple micro-service that gets deployed:
 * [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli)
 * [Bluemix Container Registry plugin](https://console.ng.bluemix.net/docs/cli/plugins/registry/index.html)
 * [Bluemix Container Service plugin](https://console.ng.bluemix.net/docs/containers/cs_cli_devtools.html)
-* [Node.js](https://nodejs.org), version 6.9.1 (or higher)
-* [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/kubectl/install/) version 1.5.3 or later
-* [Docker CLI](https://docs.docker.com/engine/installation/) version 1.9. or later
+* [Node.js](https://nodejs.org), version 6.9.1 (or later)
+* [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/kubectl/install/) version 1.5.3 (or later)
+* [Docker CLI](https://docs.docker.com/engine/installation/) version 1.9 (or later)
 
 ## About the micro-service
 
 The micro-service used in this project computes Fibonacci numbers.
 
-From [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_number), *In mathematics, the Fibonacci numbers are the numbers in the following integer sequence, called the Fibonacci sequence, and characterized by the fact that every number after the first two is the sum of the two preceding ones:*
+From [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_number): *In mathematics, the Fibonacci numbers are the numbers in the following integer sequence, called the Fibonacci sequence, and characterized by the fact that every number after the first two is the sum of the two preceding ones:*
 
   ```
   0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...

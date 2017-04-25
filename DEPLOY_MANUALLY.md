@@ -18,35 +18,35 @@
    cd multiple-deployment-options/service
    ```
 
-1. Push the application
+2. Push the application
 
    ```
    cf push
    ```
 
-1. After a short while, the application is available at a random route.
+3. After a short while, the application is available at a random route. The route name can either be retrieved from the Cloud Foundry deployment log messages or using the command `cf routes`.
 
 ### Test the Cloud Foundry application
 
-To compute the Fibonacci number after *n* iterations use the API such as:
+To compute the Fibonacci number after *n* iterations, use the `iteration` parameter of the API:
 
    ```
    curl -v http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?iteration=1000
    ```
 
-To let the computation run for *t* milliseconds use the API such as:
+To let the computation run for *t* milliseconds, use the `duration` parameter:
 
    ```
-   curl -v http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?duration/5000
+   curl -v http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?duration=5000
    ```
 
-To simulate a crash of the service, use the API such as:
+To simulate a crash of the service, use the AP with the `crash` parameter:
 
    ```
    curl -v -X POST http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?crash=true
    ```
 
-This call will exit the underlying node.js app, simulating an error of the API.
+This last call will exit the node.js application, simulating an error of the API.
 
 ## Deploy the service as a container in Kubernetes
 
@@ -58,7 +58,7 @@ This call will exit the underlying node.js app, simulating an error of the API.
 
    > Note: you can also use an existing cluster
 
-1. Retrieve the cluster configuration
+2. Retrieve the cluster configuration
 
    ```
    bx cs cluster-config fibonacci-cluster
@@ -74,33 +74,33 @@ This call will exit the underlying node.js app, simulating an error of the API.
    export KUBECONFIG=/Users/john/.bluemix/plugins/container-service/clusters/fibonacci-cluster/kube-xxx-fibonacci-cluster.yml
    ```
 
-1. Copy and paste the `export KUBECONFIG=...` line into your shell.
+3. Copy and paste the `export KUBECONFIG=...` line into your shell.
 
-1. Confirm the configuration worked by retrieving the cluster nodes:
+4. Confirm the configuration worked by retrieving the cluster nodes:
 
    ```
    kubectl get nodes
    ```
 
-1. Log in your local Docker client to the Bluemix Container registry:
+5. Log in your local Docker client to the Bluemix Container registry:
 
    ```
    bx cr login
    ```
 
-1. Retrieve the name of the namespace you are going to use to push your Docker images:
+6. Retrieve the name of the namespace you are going to use to push your Docker images:
 
    ```
    bx cr namespace-list
    ```
 
-1. Change to the **service** directory.
+7. Change to the **service** directory.
 
    ```
    cd multiple-deployment-options/service
    ```
 
-1. Build the Docker image of the service
+8. Build the Docker image of the service
 
    ```
    docker build -t registry.ng.bluemix.net/<namespace>/fibonacci:latest .
@@ -108,19 +108,19 @@ This call will exit the underlying node.js app, simulating an error of the API.
 
    replacing *namespace* with your namespace name.
 
-1. Push the image to the registry
+9. Push the image to the registry
 
    ```
    docker push registry.ng.bluemix.net/<namespace>/fibonacci:latest
    ```
 
-1. Modify the fibonacci-deployment.yml to point to the image in the Bluemix Container Registry by replacing the *namespace* value.
+10. Modify the fibonacci-deployment.yml to point to the image in the Bluemix Container Registry by replacing the *namespace* value.
 
-1. Deploy the Fibonacci service in the cluster
+11. Deploy the Fibonacci service in the cluster
 
-   ```
-   kubectl create -f fibonacci-deployment.yml
-   ```
+    ```
+    kubectl create -f fibonacci-deployment.yml
+    ```
 
 ### Test the Kubernetes service
 
@@ -160,19 +160,19 @@ This call will exit the underlying node.js app running in the container, simulat
 
    This shows the packages, actions, triggers and rules currently deployed in your OpenWhisk namespace.
 
-1. Change to the **service** directory.
+2. Change to the **service** directory.
 
    ```
    cd multiple-deployment-options/service
    ```
 
-1. Install dependencies
+3. Install dependencies
 
    ```
    npm install
    ```
 
-1. Deploy the OpenWhisk action
+4. Deploy the OpenWhisk action
 
    ```
    node deploy.js --install
