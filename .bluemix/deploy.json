@@ -18,7 +18,7 @@
       "type": "string"
     },
     "deploy-bluemix-api-key": {
-      "description": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
+      "description": "Bluemix API key (Obtain one using 'bx iam api-key-create my-new-key')",
       "type": "string"
     },
     "deploy-cluster-name": {
@@ -166,8 +166,8 @@
     },
     {
       "type": "text",
-      "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
-      "description": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
+      "title": "Bluemix API key (Obtain one using 'bx iam api-key-create my-new-key')",
+      "description": "Bluemix API key (Obtain one using 'bx iam api-key-create my-new-key')",
       "key": "deploy-bluemix-api-key"
     },
     {

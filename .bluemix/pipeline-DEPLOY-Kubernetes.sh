@@ -73,6 +73,13 @@ if [ -z "$CLUSTER_NAME" ]; then
   bx cs cluster-create --name "$CLUSTER_NAME"
 fi
 
+# Checking if the cluster state Ready. If State is not ready then loop until it becomes ready.
+CLUSTER_STATE=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $2 }')
+if [ -z $CLUSTER_STATE ]; then
+  echo "$CLUSTER_NAME is not in a ready state, please allow 15 minutes for the cluster to be ready"
+fi
+
+
 echo -e 'Setting KUBECONFIG...'
 exp=$(bx cs cluster-config $CLUSTER_NAME | grep export)
 if [ $? -ne 0 ]; then
