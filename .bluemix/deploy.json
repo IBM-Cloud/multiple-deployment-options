@@ -178,8 +178,8 @@
     },
     {
       "type": "text",
-      "title": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
-      "description": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
+      "title": "Fibonnaci service Docker image (Obtain the Docker namespace using 'bx cr namespace-list')",
+      "description": "Fibonnaci service Docker image (Obtain the Docker namespace using 'bx cr namespace-list')",
       "key": "deploy-image-name"
     }
   ]
