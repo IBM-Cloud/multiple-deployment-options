@@ -18,15 +18,15 @@
       "type": "string"
     },
     "deploy-bluemix-api-key": {
-      "description": "An API key to access the Bluemix API. You can obtain one using 'bx iam api-key-create'",
+      "description": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
       "type": "string"
     },
     "deploy-cluster-name": {
-      "description": "An existing Kubernetes cluster name",
+      "description": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
       "type": "string"
     },
     "deploy-image-name": {
-      "description": "Name of the Fibonnaci service Docker image",
+      "description": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
       "type": "string"
     },
     "container-region": {
@@ -165,6 +165,13 @@
       ]
     },
     {
+      "type": "section",
+      "description": "Kubernetes",
+      "items": [
+        "deploy-bluemix-api-key", "deploy-cluster-name", "deploy-image-name"
+      ]
+    },
+    {
       "type": "table",
       "columnCount": 1,
       "widths": [ "100%" ],
@@ -175,7 +182,6 @@
         },
         {
           "type": "text",
-          "readonly": false,
           "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
           "key": "deploy-bluemix-api-key"
         },
@@ -185,7 +191,6 @@
         },
         {
           "type": "text",
-          "readonly": false,
           "title": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
           "key": "deploy-cluster-name"
         },
@@ -195,7 +200,6 @@
         },
         {
           "type": "text",
-          "readonly": false,
           "title": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
           "key": "deploy-image-name"
         }
