@@ -165,41 +165,22 @@
       ]
     },
     {
-      "type": "table",
-      "columnCount": 2,
-      "widths": [ "100%" ],
-      "items": [
-        {
-          "type": "label",
-          "title": "Bluemix API key",
-        },
-        {
-          "type": "text",
-          "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
-          "description": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
-          "key": "deploy-bluemix-api-key"
-        },
-        {
-          "type": "label",
-          "title": "Existing cluster name",
-        },
-        {
-          "type": "text",
-          "title": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
-          "description": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
-          "key": "deploy-cluster-name"
-        },
-        {
-          "type": "label",
-          "title": "Docker image name"
-        },
-        {
-          "type": "text",
-          "title": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
-          "description": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
-          "key": "deploy-image-name"
-        }
-      ]
+      "type": "text",
+      "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
+      "description": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
+      "key": "deploy-bluemix-api-key"
+    },
+    {
+      "type": "text",
+      "title": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
+      "description": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
+      "key": "deploy-cluster-name"
+    },
+    {
+      "type": "text",
+      "title": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
+      "description": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
+      "key": "deploy-image-name"
     }
   ]
 }
