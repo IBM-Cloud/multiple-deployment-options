@@ -6,6 +6,11 @@ if [ -z "$BLUEMIX_API_KEY" ]; then
   exit 0
 fi
 
+if [ -f "image.env" ]; then
+  echo 'Loading image name from image.env file.'
+  source image.env
+fi
+
 if [ -z "$IMAGE_NAME" ]; then
   echo 'No Docker image specified.'
   exit 1
