@@ -9,14 +9,14 @@ This project contains one simple micro-service that gets deployed:
 
 ## Requirements
 
-* IBM Bluemix account. [Sign up][bluemix_signup_url] for Bluemix, or use an existing account.
+* An IBM Bluemix account. Either [sign up][bluemix_signup_url], or use an existing account.
 * [Bluemix CLI](http://clis.ng.bluemix.net/)
 * [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli)
 * [Bluemix Container Registry plugin](https://console.ng.bluemix.net/docs/cli/plugins/registry/index.html)
 * [Bluemix Container Service plugin](https://console.ng.bluemix.net/docs/containers/cs_cli_devtools.html)
-* Node.js 6.9.1
-* Kubernetes CLI version 1.5.3 or later
-* Docker CLI version 1.9. or later
+* [Node.js](https://nodejs.org), version 6.9.1 (or higher)
+* [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/kubectl/install/) version 1.5.3 or later
+* [Docker CLI](https://docs.docker.com/engine/installation/) version 1.9. or later
 
 ## About the micro-service
 
@@ -37,14 +37,14 @@ Follow [these instructions](./DEPLOY_MANUALLY.md).
 ## Service API
 
 Once deployed, the service implements 3 API calls:
-  * compute the Fibonacci number after *n* iterations,
+* compute the Fibonacci number after *n* iterations,
   * let the computation run for *t* milliseconds,
   * and simulate a crash of the service.
 
 Depending on which compute option you are using, use the following cURL calls:
 
-| Endpoint Type | Endpoint  | URL |
-| ---           |   ---     | --- |
+| Endpoint Type | Endpoint  | URL                                      |
+| ------------- | --------- | ---------------------------------------- |
 | Cloud Foundry | iteration | `curl -v http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?iteration=1000` |
 |               | duration  | `curl -v http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?duration=5000` |
 |               | crash     | `curl -v -X POST http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?crash=true` |
@@ -59,34 +59,34 @@ Depending on which compute option you are using, use the following cURL calls:
 
 ### Cloud Foundry application
 
-| File | Description |
-| ---- | ----------- |
-| [app.js](service/app.js) | Main application, start the express web server and expose the service API|
-| [lib/fibonacci.js](service/lib/fibonacci.js) | The implementation of the Fibonacci sequence, shared by all deployment options|
-| [package.json](service/package.json) | List the packages required by the application |
-| [manifest.yml](service/manifest.yml) | Description of the application to be deployed |
-| [.cfignore](service/.cfignore) | List files to ignore when deploying the application to Cloud Foundry |
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [app.js](service/app.js)                 | Main application, start the express web server and expose the service API |
+| [lib/fibonacci.js](service/lib/fibonacci.js) | The implementation of the Fibonacci sequence, shared by all deployment options |
+| [package.json](service/package.json)     | List the packages required by the application |
+| [manifest.yml](service/manifest.yml)     | Description of the application to be deployed |
+| [.cfignore](service/.cfignore)           | List files to ignore when deploying the application to Cloud Foundry |
 
 ### Kubernetes deployment
 
-| File | Description |
-| ---- | ----------- |
-| [app.js](service/app.js) | Main application, start the express web server and expose the service API|
-| [lib/fibonacci.js](service/lib/fibonacci.js) | The implementation of the Fibonacci sequence, shared by all deployment options|
-| [package.json](service/package.json) | List the packages required by the application |
-| [Dockerfile](service/Dockerfile) | Description of the Docker image |
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [app.js](service/app.js)                 | Main application, start the express web server and expose the service API |
+| [lib/fibonacci.js](service/lib/fibonacci.js) | The implementation of the Fibonacci sequence, shared by all deployment options |
+| [package.json](service/package.json)     | List the packages required by the application |
+| [Dockerfile](service/Dockerfile)         | Description of the Docker image          |
 | [fibonacci-deployment.yml](service/fibonacci-deployment.yml) | Specification file for the deployment of the service in Kubernetes |
 
 ### OpenWhisk action
 
 The OpenWhisk action is deployed as a [zip action](https://console.ng.bluemix.net/docs/openwhisk/openwhisk_actions.html#openwhisk_create_action_js) where several files are packaged into a zip file and the zip file is passed to OpenWhisk as the implementation for the action. **[deploy.js](service/deploy.js)** takes care of packaging the zip file.
 
-| File | Description |
-| ---- | ----------- |
-| [handler.js](service/action/handler.js) | Implementation of the OpenWhisk action |
+| File                                     | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| [handler.js](service/action/handler.js)  | Implementation of the OpenWhisk action   |
 | [lib/fibonacci.js](service/lib/fibonacci.js) | The implementation of the Fibonacci sequence, shared by all deployment options |
 | [package.json](service/action/package.json) | Specify the action entry point (handler.js) |
-| [deploy.js](service/deploy.js) | Helper to deploy and undeploy the OpenWhisk action |
+| [deploy.js](service/deploy.js)           | Helper to deploy and undeploy the OpenWhisk action |
 
 ### Tester web app
 
