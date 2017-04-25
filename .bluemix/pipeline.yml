@@ -3,7 +3,7 @@ stages:
 - name: BUILD
   inputs:
   - type: git
-    branch: dockerbuild
+    branch: dev
     service: ${REPO}
   triggers:
   - type: commit
