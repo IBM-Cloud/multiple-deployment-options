@@ -56,7 +56,9 @@ This last call will exit the node.js application, simulating an error of the API
    bx cs cluster-create --name fibonacci-cluster
    ```
 
-   > Note: you can also use an existing cluster
+   This step can take a while, you can check the status of your cluster(s) by using the `bx cs clusters` command.
+
+   > Note that you can also use an existing cluster
 
 2. Retrieve the cluster configuration
 
