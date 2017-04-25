@@ -165,42 +165,38 @@
       ]
     },
     {
-      "type": "section",
-      "description": "Kubernetes",
-      "items": [
-        "deploy-bluemix-api-key", "deploy-cluster-name", "deploy-image-name"
-      ]
-    },
-    {
       "type": "table",
-      "columnCount": 1,
+      "columnCount": 2,
       "widths": [ "100%" ],
       "items": [
         {
           "type": "label",
-          "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
+          "title": "Bluemix API key",
         },
         {
           "type": "text",
           "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
+          "description": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
           "key": "deploy-bluemix-api-key"
         },
         {
           "type": "label",
-          "title": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
+          "title": "Existing cluster name",
         },
         {
           "type": "text",
           "title": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
+          "description": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
           "key": "deploy-cluster-name"
         },
         {
           "type": "label",
-          "title": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
+          "title": "Docker image name"
         },
         {
           "type": "text",
           "title": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
+          "description": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
           "key": "deploy-image-name"
         }
       ]
