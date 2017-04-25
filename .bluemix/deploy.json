@@ -59,6 +59,10 @@
         {
           "type": "label",
           "title": "Cloud Foundry and OpenWhisk"
+        },
+        {
+          "type": "label",
+          "title": "The toolchain will deploy the Fibonacci service as a Cloud Foundry application with a random route and as an OpenWhisk action. The action will be exposed as an HTTP endpoint too."
         }
       ]
     },
@@ -94,6 +98,7 @@
         }
       ]
     },
+
 
     {
       "type": "table",
@@ -152,6 +157,10 @@
         {
           "type": "label",
           "title": "Kubernetes"
+        },
+        {
+          "type": "label",
+          "title": "The toolchain can either create a new free cluster (if you don't have one yet) or you can specify the name of an existing cluster where to deploy the Fibonacci service. The Bluemix API key is used to access the IBM Container Service API and interact with the cluster."
         }
       ]
     },
@@ -161,16 +170,28 @@
       "widths": [ "100%" ],
       "items": [
         {
+          "type": "label",
+          "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
+        },
+        {
           "type": "text",
           "readonly": false,
           "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
           "key": "deploy-bluemix-api-key"
         },
         {
+          "type": "label",
+          "title": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
+        },
+        {
           "type": "text",
           "readonly": false,
           "title": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
           "key": "deploy-cluster-name"
+        },
+        {
+          "type": "label",
+          "title": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
         },
         {
           "type": "text",
