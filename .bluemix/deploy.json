@@ -62,7 +62,7 @@
         },
         {
           "type": "label",
-          "title": "The toolchain will deploy the Fibonacci service as a Cloud Foundry application with a random route and as an OpenWhisk action. The action will be exposed as an HTTP endpoint too."
+          "title": "The toolchain will deploy the Fibonacci service as a Cloud Foundry application with a random route and as an OpenWhisk action. The action will also be exposed as an HTTP endpoint."
         }
       ]
     },

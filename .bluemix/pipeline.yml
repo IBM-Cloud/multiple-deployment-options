@@ -46,7 +46,7 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-OpenWhisk.sh
-- name: "DOCKER (not enabled)"
+- name: "DOCKER"
   inputs:
   - type: job
     stage: BUILD
