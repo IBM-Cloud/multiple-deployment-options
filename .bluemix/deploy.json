@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Multiple Deployment Options",
   "description": "",
-  "longDescription": "The Delivery Pipeline automates the continuous deployment of the repository.",
+  "longDescription": "The Delivery Pipeline automates the continuous deployment of the Fibonacci services to Cloud Foundry, OpenWhisk and Kubernetes.",
   "type": "object",
   "properties": {
     "deploy-region": {
@@ -15,10 +15,6 @@
     },
     "deploy-space": {
       "description": "The bluemix space",
-      "type": "string"
-    },
-    "deploy-app-name": {
-      "description": "The name of the Cloud Foundry application",
       "type": "string"
     },
     "deploy-bluemix-api-key": {
@@ -49,8 +45,7 @@
   "required": [
     "deploy-region",
     "deploy-organization",
-    "deploy-space",
-    "deploy-app-name"
+    "deploy-space"
   ],
   "form": [{
       "type": "validator",
@@ -63,7 +58,7 @@
       "items": [
         {
           "type": "label",
-          "title": "Cloud Foundry and <b>OpenWhisk</b>"
+          "title": "Cloud Foundry and OpenWhisk"
         }
       ]
     },
@@ -74,7 +69,7 @@
       "items": [
         {
           "type": "label",
-          "title": "Region"
+          "title": "Region (only US South is supported)"
         },
         {
           "type": "label",
@@ -99,13 +94,6 @@
         }
       ]
     },
-    {
-      "type": "text",
-      "readonly": false,
-      "title": "App name",
-      "key": "deploy-app-name"
-    },
-
 
     {
       "type": "table",
@@ -118,7 +106,7 @@
         },
         {
           "type": "label",
-          "title": "To build the Fibonacci service Docker Image with the toolchain, please specify a space configured with quota for IBM Containers. If you have no space configured with IBM Containers quota, leave the default options. In that case, you will need to build and push the Docker image outside of this toolchain."
+          "title": "To build the Fibonacci service Docker image with the toolchain, specify a Bluemix space configured with quota for IBM Containers. If you have no space configured with IBM Containers quota, leave the default options. In that case, you will need to build and push the Docker image outside of this toolchain."
         }
       ]
     },
@@ -129,7 +117,7 @@
       "items": [
         {
           "type": "label",
-          "title": "Region"
+          "title": "Region (only US South is supported)"
         },
         {
           "type": "label",
@@ -168,22 +156,29 @@
       ]
     },
     {
-      "type": "text",
-      "readonly": false,
-      "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
-      "key": "deploy-bluemix-api-key"
-    },
-    {
-      "type": "text",
-      "readonly": false,
-      "title": "Existing Kubernetes cluster name",
-      "key": "deploy-cluster-name"
-    },
-    {
-      "type": "text",
-      "readonly": false,
-      "title": "Name of the Fibonnaci service Docker image (Obtain the Docker namespace using 'bx cr namespace-list')",
-      "key": "deploy-image-name"
+      "type": "table",
+      "columnCount": 1,
+      "widths": [ "100%" ],
+      "items": [
+        {
+          "type": "text",
+          "readonly": false,
+          "title": "Bluemix API key (Obtain one using 'bx iam api-key-create')",
+          "key": "deploy-bluemix-api-key"
+        },
+        {
+          "type": "text",
+          "readonly": false,
+          "title": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
+          "key": "deploy-cluster-name"
+        },
+        {
+          "type": "text",
+          "readonly": false,
+          "title": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
+          "key": "deploy-image-name"
+        }
+      ]
     }
   ]
 }
