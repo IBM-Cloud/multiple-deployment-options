@@ -1,27 +1,77 @@
-# Deploy the service with Toolchain in Bluemix
+# Deploy the service in Bluemix with the toolchain
 
-The toolchain is setup to deploy the service to the Cloud Foundry, OpenWhisk and Kubernetes. 
-Automatically deployment is setup to Cloud Foundry and OpenWhisk. The Kubernetes requires some additional manual steps.  
+This project comes with a partially automated toolchain capable of deploying the service to Cloud Foundry, OpenWhisk and Kubernetes. There is some information you need to get before creating the toolchain.
 
-**Kubernetes manual steps.**
-1. Assuming that latest version of the Bluemix CLI is installed and configured to run Kubectl commands. [Click for instructions on installing and configuring the CLI to run Kubectl commands](https://console.ng.bluemix.net/docs/containers/cs_cli_install.html#cs_cli_install)
-1. Verify that you have the *container-registry* and the *container-service* plugins installed by using  `bluemix plugin list`   
-    
+> Although this section uses a toolchain, it assumes you have successfully configured the Bluemix CLI and its plugins. Some steps require you to use the command line.
+
+> Only the US South region is currently supported.
+
+## Obtain a Bluemix API key
+
+A Bluemix API key is used in place of your Bluemix credentials. It allows to access the Bluemix API. The toolchain uses the API key to interact with the Container Service API.
+
+1. Generate a Bluemix API key
+
+   ```
+   bx iam api-key-create for-cli
+   ```
+
+   > You can also use an existing API key.
+
+1. Make note of the generated API key. It won't be shown again.
+
+## Get the namespace where you will push the Docker image
+
+1. Check the existing namespaces
+
+   ```
+   bx cr namespace-list
+   ```
+
+   > You can use any of the namespaces listed.
+
+1. If you want to create a new namespace, use
+
+   ```
+   bx cr namespace-add fibonacci
+   ```
+
+1. Make note of the namespace. You will need it later.
+
+## Build the Docker image
+
+### with the toolchain
+
+The toolchain is able to build the Docker image but only if you have used IBM Containers in the past - the [*single and scalable containers*](https://console.ng.bluemix.net/docs/containers/cs_classic.html#cs_classic) option before Kubernetes was made available. If you did, you should be familiar with the notion of namespace and quota.
+
+To build the Docker image in the toolchain, you will need to specify a Bluemix space that has quota assigned for IBM Containers. You can find which space has quotas for the IBM Containers by looking at your organization:
+
+  ![](./quotas.png)
+
+In the screenshot above, two spaces have Containers quota available. One will need to specified when creating the toolchain.
+
+### or manually, outside of the toolchain
+
+TODO Refer to DEPLOY_MANUALLY#Build Docker image steps
+
+## Optionally create a Kubernetes cluster
+
+If you don't create a Kubernetes cluster, the toolchain will create one free cluster for you.
+
+TODO Refer to DEPLOY_MANUALLY#Create cluster steps
+
 1. Create a Kubernetes cluster in Bluemix
    ```
    bx cs cluster-create --name fibonacci-cluster
    ```
-    > Note: It takes approximately 15 minutes for the cluster to be fully provisioned and ready to accept the sample pods.   
+    > Note: It takes approximately 15 minutes for the cluster to be fully provisioned and ready to accept the sample pods.
     > You can also use an existing cluster if you have one already.
 
-1. Use `bx cs clusters` to view defined clusters  
+1. Use `bx cs clusters` to view defined clusters
 1. Use `bx cs workers fibonacci-cluster` to view provisioned workers.
    > Note: The state of your cluster should be in a **Ready** state.
 
-TODO - add steps to build and push the docker image...
-
------
-
+## Create the toolchain
 
 1. Ensure your organization has enough quota for one web application using 256MB of memory, one Kubernetes cluster, and one OpenWhisk action.
 
@@ -37,22 +87,19 @@ TODO - add steps to build and push the docker image...
 
 1. Select the **Delivery Pipeline** box.
 
-1. Select the region, organization and space where you want to deploy the web application.
+1. Select the region, organization and space where you want to deploy the web application. A random route will be used for the application.
 
    :warning: Make sure the organization and the space have no space in their names.
 
    :warning: Only the US South region is currently supported.
 
-1. Set the name of the Cloud Foundry application. You can keep the default. A random route will be created for the application.
+1. Select the region, organization and space where quota for IBM Containers have been specified. If you never use the IBM Containers before, you may need to build the Docker image outside of the toolchain as explained earlier in this document.
 
-1. Optionally set the Bluemix API key. If you don't set the key, the Kubernetes service will NOT be deployed and you will need to use the manual instructions.
+1. Optionally set the Bluemix API key. If you don't set the key, the Fibonacci service will NOT be deployed to a Kubernetes cluster and you will need to use the manual instructions.
 
-   > Create a Bluemix API key using `bx iam api-key-create for-toolchain my-new-key`
+1. Optionally set the name of an existing Kubernetes cluster if you have one, if you do NOT have an existing cluster then the toolChain will create one by default.
 
-1. Optionally set the name of an existing Kubernetes cluster if you have one, if you don NOT have an existing cluster then the ToolChain will create one by default.  
-
-1. Add your docker image namespace. 
-   > Obtain the docker image namespace using `bx cr namespace-list`
+1. Replace the *<namespace>* value with the namespace where the Docker image has been or will be pushed.
 
 1. Click **Create**.
 
