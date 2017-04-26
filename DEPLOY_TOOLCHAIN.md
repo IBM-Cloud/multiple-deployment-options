@@ -52,24 +52,13 @@ In the screenshot above, two spaces have Containers quota available. One will ne
 
 ### or manually, outside of the toolchain
 
-TODO Refer to DEPLOY_MANUALLY#Build Docker image steps
+Go through the steps detailed in the [manual instructions to build the Docker image](DEPLOY_MANUALLY.md#build-the-docker-image).
 
 ## Optionally create a Kubernetes cluster
 
 If you don't create a Kubernetes cluster, the toolchain will create one free cluster for you.
 
-TODO Refer to DEPLOY_MANUALLY#Create cluster steps
-
-1. Create a Kubernetes cluster in Bluemix
-   ```
-   bx cs cluster-create --name fibonacci-cluster
-   ```
-    > Note: It takes approximately 15 minutes for the cluster to be fully provisioned and ready to accept the sample pods.
-    > You can also use an existing cluster if you have one already.
-
-1. Use `bx cs clusters` to view defined clusters
-1. Use `bx cs workers fibonacci-cluster` to view provisioned workers.
-   > Note: The state of your cluster should be in a **Ready** state.
+To create a cluster manually, refer to [these instructions](DEPLOY_MANUALLY.md#create-a-kubernetes-cluster).
 
 ## Create the toolchain
 

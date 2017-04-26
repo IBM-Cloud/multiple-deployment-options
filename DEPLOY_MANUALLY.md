@@ -96,9 +96,23 @@ This last call will exit the node.js application, simulating an error of the API
    bx cs cluster-create --name fibonacci-cluster
    ```
 
-   This step can take a while, you can check the status of your cluster(s) by using the `bx cs clusters` command.
-
    > Note that you can also use an existing cluster
+
+1. Wait for your cluster to be deployed. This step can take a while, you can check the status of your cluster(s) by using:
+
+   ```
+   bx cs clusters
+   ```
+
+   Your cluster should be in the state *normal*.
+
+1. Ensure that the cluster workers are ready too:
+
+   ```
+   bx cs workers fibonacci-cluster
+   ```
+
+   The workers should appear as *Ready*.
 
 ### Deploy the service
 
