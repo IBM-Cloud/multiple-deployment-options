@@ -71,19 +71,31 @@ if [ -z "$CLUSTER_NAME" ]; then
   export CLUSTER_NAME=fibonacci-cluster
   echo 'No existing cluster name specified. Creating a new one named '${CLUSTER_NAME}
   bx cs cluster-create --name "$CLUSTER_NAME"
-fi
+  echo 'Cluster Created '${CLUSTER_NAME}
+  echo 'Please wait for cluster state to be Ready, allow at least 15 minutes. Thanks'
 
-# Checking if the cluster state Ready. If State is not ready then loop until it becomes ready.
-CLUSTER_STATE=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $2 }')
-if [ -z $CLUSTER_STATE ]; then
-  echo "$CLUSTER_NAME is not in a ready state, please allow 15 minutes for the cluster to be ready"
+  # Checking if the cluster state Ready. If State is not ready then loop until it becomes ready.
+  CLUSTER_STATE=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $2 }')
+
+  SECONDS=0
+  # Run loop for 60 minutes and check if loop match
+  while [[ $SECONDS -lt 3600 ]]
+  do
+    if [ "$CLUSTER_STATE" == "Ready" ]
+    then
+      echo 'Cluster Ready...'
+      break 2
+    fi
+  done
 fi
 
 
 echo -e 'Setting KUBECONFIG...'
 exp=$(bx cs cluster-config $CLUSTER_NAME | grep export)
 if [ $? -ne 0 ]; then
-  echo "Cluster $CLUSTER_NAME not created or not ready."
+  echo "There is an issue with your existing cluster: $CLUSTER_NAME"
+  bx cs workers $CLUSTER_NAME
+  echo "Run the job again once the Cluster is at Ready state"
   exit 1
 fi
 eval "$exp"
