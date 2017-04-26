@@ -40,7 +40,7 @@ To let the computation run for *t* milliseconds, use the `duration` parameter:
    curl -v http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?duration=5000
    ```
 
-To simulate a crash of the service, use the AP with the `crash` parameter:
+To simulate a crash of the service, use the API with the `crash` parameter:
 
    ```
    curl -v -X POST http://fibonacci-service-<random-string>.mybluemix.net/fibonacci?crash=true

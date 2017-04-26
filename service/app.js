@@ -68,7 +68,11 @@ app.post('/fibonacci', (req, res) => {
 
 app.get('/', (req, res) => {
   logger.info('GET /');
-  res.send('OK');
+  const name = process.env.VCAP_SERVICES ? 'One Instance' : 'One Replica';
+  const icon = process.env.VCAP_SERVICES ? '/images/cloudfoundry.png' : '/images/kubernetes.svg';
+  const pingEndpoint = `${req.protocol}://${req.headers.host}/fibonacci?iteration=500`;
+  const crashEndpoint = `${req.protocol}://${req.headers.host}/fibonacci?crash=true`;
+  res.send(fibonacci.addEnpointHtml(name, icon, pingEndpoint, crashEndpoint));
 });
 
 const port = process.env.PORT || 8080;

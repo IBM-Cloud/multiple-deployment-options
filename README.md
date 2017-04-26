@@ -30,6 +30,11 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_number): *In mathematic
 
 The implementation of the Fibonacci sequence is done in **[service/lib/fibonacci.js](service/lib/fibonacci.js)**. The same implementation is used across all deployment options.
 
+## Deploy the service with Toolchain in Bluemix
+
+Follow [these instructions](./DEPLOY_TOOLCHAIN.md).
+
+
 ## Deploying the service manually in Bluemix
 
 Follow [these instructions](./DEPLOY_MANUALLY.md).

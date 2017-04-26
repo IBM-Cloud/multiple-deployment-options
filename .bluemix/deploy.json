@@ -1,0 +1,186 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Multiple Deployment Options",
+  "description": "",
+  "longDescription": "The Delivery Pipeline automates the continuous deployment of the Fibonacci services to Cloud Foundry, OpenWhisk and Kubernetes.",
+  "type": "object",
+  "properties": {
+    "deploy-region": {
+      "description": "The bluemix region",
+      "type": "string"
+    },
+    "deploy-organization": {
+      "description": "The bluemix org",
+      "type": "string"
+    },
+    "deploy-space": {
+      "description": "The bluemix space",
+      "type": "string"
+    },
+    "deploy-bluemix-api-key": {
+      "description": "Bluemix API key (Obtain one using 'bx iam api-key-create my-new-key')",
+      "type": "string"
+    },
+    "deploy-cluster-name": {
+      "description": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
+      "type": "string"
+    },
+    "deploy-image-name": {
+      "description": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
+      "type": "string"
+    },
+    "container-region": {
+      "description": "The bluemix region",
+      "type": "string"
+    },
+    "container-organization": {
+      "description": "The bluemix org",
+      "type": "string"
+    },
+    "container-space": {
+      "description": "Name of the space configured for IBM Container Service",
+      "type": "string"
+    }
+  },
+  "required": [
+    "deploy-region",
+    "deploy-organization",
+    "deploy-space"
+  ],
+  "form": [{
+      "type": "validator",
+      "url": "/devops/setup/bm-helper/helper.html"
+    },
+    {
+      "type": "table",
+      "columnCount": 1,
+      "widths": [ "100%" ],
+      "items": [
+        {
+          "type": "label",
+          "title": "Cloud Foundry and OpenWhisk"
+        },
+        {
+          "type": "label",
+          "title": "The toolchain will deploy the Fibonacci service as a Cloud Foundry application with a random route and as an OpenWhisk action. The action will also be exposed as an HTTP endpoint. Specify the space where the application and the action will be deployed."
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "columnCount": 3,
+      "widths": ["33%", "33%", "33%"],
+      "items": [
+        {
+          "type": "label",
+          "title": "Region (only US South is supported)"
+        },
+        {
+          "type": "label",
+          "title": "Organization"
+        },
+        {
+          "type": "label",
+          "title": "Space"
+        },
+        {
+          "type": "select",
+          "key": "deploy-region"
+        },
+        {
+          "type": "select",
+          "key": "deploy-organization"
+        },
+        {
+          "type": "select",
+          "key": "deploy-space",
+          "readonly": false
+        }
+      ]
+    },
+
+
+    {
+      "type": "table",
+      "columnCount": 1,
+      "widths": [ "100%" ],
+      "items": [
+        {
+          "type": "label",
+          "title": "Docker Image Build"
+        },
+        {
+          "type": "label",
+          "title": "To build the Fibonacci service Docker image with the toolchain, specify a Bluemix space configured with quota for IBM Containers. If you have no space configured with IBM Containers quota, leave the default options. In that case, you will need to build and push the Docker image outside of this toolchain."
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "columnCount": 3,
+      "widths": ["33%", "33%", "33%"],
+      "items": [
+        {
+          "type": "label",
+          "title": "Region (only US South is supported)"
+        },
+        {
+          "type": "label",
+          "title": "Organization"
+        },
+        {
+          "type": "label",
+          "title": "Space"
+        },
+        {
+          "type": "select",
+          "key": "container-region"
+        },
+        {
+          "type": "select",
+          "key": "container-organization"
+        },
+        {
+          "type": "select",
+          "key": "container-space",
+          "readonly": false
+        }
+      ]
+    },
+
+
+    {
+      "type": "table",
+      "columnCount": 1,
+      "widths": [ "100%" ],
+      "items": [
+        {
+          "type": "label",
+          "title": "Kubernetes"
+        },
+        {
+          "type": "label",
+          "title": "The toolchain can either create a new free cluster (if you don't have one yet) or you can specify the name of an existing cluster where to deploy the Fibonacci service. The Bluemix API key is used to access the IBM Container Service API and interact with the cluster."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "title": "Bluemix API key (Obtain one using 'bx iam api-key-create my-new-key')",
+      "description": "Bluemix API key (Obtain one using 'bx iam api-key-create my-new-key')",
+      "key": "deploy-bluemix-api-key"
+    },
+    {
+      "type": "text",
+      "title": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
+      "description": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
+      "key": "deploy-cluster-name"
+    },
+    {
+      "type": "text",
+      "title": "Fibonnaci service Docker image (Obtain the Docker namespace using 'bx cr namespace-list')",
+      "description": "Fibonnaci service Docker image (Obtain the Docker namespace using 'bx cr namespace-list')",
+      "key": "deploy-image-name"
+    }
+  ]
+}

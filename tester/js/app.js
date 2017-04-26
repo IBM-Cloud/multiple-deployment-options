@@ -33,10 +33,16 @@
 
   // angular app initialization
   var app = angular.module('app', [
+    'ngAnimate',
     'ngMaterial',
     'ngLoadingSpinner',
     'ngStorage',
   ]);
+
+  // parse the query field into $location
+  app.config(function($locationProvider) {
+    $locationProvider.html5Mode(true);
+  });
 
   app.config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
@@ -46,8 +52,8 @@
   });
 
   app.controller('MainController',
-    ['$scope', '$rootScope', '$http', '$mdDialog', '$localStorage', '$interval', 'FibonacciEndpoint',
-    function($scope, $rootScope, $http, $mdDialog, $localStorage, $interval, FibonacciEndpoint) {
+    ['$scope', '$rootScope', '$location', '$http', '$mdDialog', '$localStorage', '$interval', '$timeout', 'FibonacciEndpoint',
+    function($scope, $rootScope, $location, $http, $mdDialog, $localStorage, $interval, $timeout, FibonacciEndpoint) {
 
     $scope.pingLoopRunning = false;
     $scope.pingIntervalInSeconds = 1;
@@ -68,6 +74,31 @@
     }
 
     loadEnpoints();
+
+    // if an endpoint definition is specified on the query
+    var searchParams = $location.search();
+    if (searchParams.action === 'add') {
+      // capture the parameters
+      var options = {
+        name: searchParams.name,
+        icon: searchParams.icon,
+        iterate: searchParams.iterate,
+        crash: searchParams.crash,
+        enabled: true,
+        timeout: 5000,
+      };
+
+      // clear the search
+      $location.search({});
+
+      // schedule the add, leaving time to the UI to load
+      $timeout(function() {
+        console.log('Registering new endpoint', options);
+        var newEndpoint = new FibonacciEndpoint($http, options);
+        $scope.endPoints.push(newEndpoint);
+        saveEndpoints();
+      }, 500);
+    }
 
     $scope.addEndpoint = function(ev) {
       $mdDialog.show({

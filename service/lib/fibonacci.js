@@ -87,6 +87,19 @@ function Fibonacci() {
   self.computeFor = (duration, callback) => {
     iterate(null, duration, callback);
   };
+
+  // Generate an html document suitable for registering
+  // a Fibonacci service endpoint with the web tester
+  self.addEnpointHtml = (name, icon, pingEndpoint, crashEndpoint) => {
+    const addEnpoint = 'http://deployment-options-tester.mybluemix.net/?action=add' +
+      `&name=${encodeURIComponent(name)}` +
+      `&icon=${encodeURIComponent(icon)}` +
+      `&iterate=${encodeURIComponent(pingEndpoint)}` +
+      `&crash=${encodeURIComponent(crashEndpoint)}`;
+
+    const body = `<html><body><a href="${addEnpoint}">Add this service to the web tester</a></body></html>`;
+    return body;
+  };
 }
 
 module.exports = () => new Fibonacci();

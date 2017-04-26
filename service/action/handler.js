@@ -52,9 +52,16 @@ function main(args) {
         });
       });
     });
+  } else {
+    // return a simple text to register this endpoint in the tester
+    const name = 'An Action';
+    const icon = '/images/openwhisk.png';
+    const pingEndpoint = `${process.env.__OW_API_HOST}/api/v1/web/${process.env.__OW_NAMESPACE}/default/fibonacci?iteration=500`;
+    const crashEndpoint = `${process.env.__OW_API_HOST}/api/v1/web/${process.env.__OW_NAMESPACE}/default/fibonacci?crash=true`;
+    return {
+      body: fibonacci.addEnpointHtml(name, icon, pingEndpoint, crashEndpoint)
+    };
   }
-
-  return { ignored: true };
 }
 
 exports.main = main;
