@@ -48,9 +48,9 @@ To build the Docker image in the toolchain, you will need to specify a Bluemix s
 
   ![](./quotas.png)
 
-In the screenshot above, two spaces have Containers quota available. One will need to specified when creating the toolchain.
+In the screenshot above, two spaces have Containers quota available. One will need to be selected when creating the toolchain.
 
-### or manually, outside of the toolchain
+### or manually, before creating the toolchain
 
 Go through the steps detailed in the [manual instructions to build the Docker image](DEPLOY_MANUALLY.md#build-the-docker-image).
 

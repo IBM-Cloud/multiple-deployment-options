@@ -74,18 +74,19 @@ if [ -z "$CLUSTER_NAME" ]; then
   echo 'Cluster Created '${CLUSTER_NAME}
   echo 'Please wait for cluster state to be Ready, allow at least 15 minutes. Thanks'
 
-  # Checking if the cluster state Ready. If State is not ready then loop until it becomes ready.
-  CLUSTER_STATE=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $2 }')
-
   SECONDS=0
   # Run loop for 60 minutes and check if loop match
   while [[ $SECONDS -lt 3600 ]]
   do
+    # Checking if the cluster state Ready. If State is not ready then loop until it becomes ready.
+    CLUSTER_STATE=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $2 }')
+
     if [ "$CLUSTER_STATE" == "Ready" ]
     then
       echo 'Cluster Ready...'
       break 2
     fi
+    sleep 30
   done
 fi
 
