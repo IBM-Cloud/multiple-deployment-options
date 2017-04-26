@@ -50,45 +50,17 @@ This last call will exit the node.js application, simulating an error of the API
 
 ## Deploy the service as a container in Kubernetes
 
-1. Create a Kubernetes cluster in Bluemix
+### Build the Docker image
 
-   ```
-   bx cs cluster-create --name fibonacci-cluster
-   ```
+1. Start your Docker engine on your local computer
 
-   This step can take a while, you can check the status of your cluster(s) by using the `bx cs clusters` command.
-
-   > Note that you can also use an existing cluster
-
-2. Retrieve the cluster configuration
-
-   ```
-   bx cs cluster-config fibonacci-cluster
-   ```
-
-   Output will look like:
-
-   ```
-   Downloading cluster config for fibonacci-cluster
-   OK
-   The configuration for fibonacci-cluster was downloaded successfully. Export environment variables to start using Kubernetes.
-
-   export KUBECONFIG=/Users/john/.bluemix/plugins/container-service/clusters/fibonacci-cluster/kube-xxx-fibonacci-cluster.yml
-   ```
-
-3. Copy and paste the `export KUBECONFIG=...` line into your shell.
-
-4. Confirm the configuration worked by retrieving the cluster nodes:
-
-   ```
-   kubectl get nodes
-   ```
-
-5. Log in your local Docker client to the Bluemix Container registry:
+5. Log the local Docker client in to IBM Bluemix Container Registry:
 
    ```
    bx cr login
    ```
+
+   > This will configure your local Docker client with the right credentials to be able to push images to the Bluemix Container Registry.
 
 6. Retrieve the name of the namespace you are going to use to push your Docker images:
 
@@ -116,7 +88,45 @@ This last call will exit the node.js application, simulating an error of the API
    docker push registry.ng.bluemix.net/<namespace>/fibonacci:latest
    ```
 
-10. Modify the fibonacci-deployment.yml to point to the image in the Bluemix Container Registry by replacing the *namespace* value.
+### Create a Kubernetes cluster
+
+1. Create a Kubernetes cluster in Bluemix
+
+   ```
+   bx cs cluster-create --name fibonacci-cluster
+   ```
+
+   This step can take a while, you can check the status of your cluster(s) by using the `bx cs clusters` command.
+
+   > Note that you can also use an existing cluster
+
+### Deploy the service
+
+2. Retrieve the cluster configuration
+
+   ```
+   bx cs cluster-config fibonacci-cluster
+   ```
+
+   Output will look like:
+
+   ```
+   Downloading cluster config for fibonacci-cluster
+   OK
+   The configuration for fibonacci-cluster was downloaded successfully. Export environment variables to start using Kubernetes.
+
+   export KUBECONFIG=/Users/john/.bluemix/plugins/container-service/clusters/fibonacci-cluster/kube-xxx-fibonacci-cluster.yml
+   ```
+
+3. Copy and paste the `export KUBECONFIG=...` line into your shell.
+
+4. Confirm the configuration worked by retrieving the cluster nodes:
+
+   ```
+   kubectl get nodes
+   ```
+
+10. Modify the fibonacci-deployment.yml under the *service* directory to point to the image in the Bluemix Container Registry by replacing the *namespace* value.
 
 11. Deploy the Fibonacci service in the cluster
 
