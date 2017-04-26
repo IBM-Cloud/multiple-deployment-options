@@ -66,7 +66,7 @@ To create a cluster manually, refer to [these instructions](DEPLOY_MANUALLY.md#c
 
 1. Click ***Create toolchain*** to start the Bluemix DevOps wizard:
 
-   [![Deploy To Bluemix](https://console.ng.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/multiple-deployment-options&branch=dev)
+   [![Deploy To Bluemix](https://console.ng.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/multiple-deployment-options&branch=master)
 
 1. Select the **GitHub** box.
 
