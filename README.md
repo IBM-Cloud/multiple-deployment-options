@@ -1,16 +1,17 @@
 # One micro-service, multiple deployment options
 
 This project contains one simple micro-service that gets deployed:
-* as a Cloud Foundry application,
-* as a container in a Kubernetes cluster,
-* and as an OpenWhisk action.
+
+* as a [Cloud Foundry](https://www.cloudfoundry.org/) application,
+* as a container in a [Kubernetes cluster](https://kubernetes.io/),
+* and as an [OpenWhisk](http://openwhisk.org/) action.
 
   <img src="architecture.png" width="600" />
 
 ## Requirements
 
 * An IBM Bluemix account. Either [sign up][bluemix_signup_url], or use an existing account.
-* [Bluemix CLI](http://clis.ng.bluemix.net/)
+* [Bluemix CLI](https://clis.ng.bluemix.net/ui/home.html)
 * [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli)
 * [Bluemix Container Registry plugin](https://console.ng.bluemix.net/docs/cli/plugins/registry/index.html)
 * [Bluemix Container Service plugin](https://console.ng.bluemix.net/docs/containers/cs_cli_devtools.html)

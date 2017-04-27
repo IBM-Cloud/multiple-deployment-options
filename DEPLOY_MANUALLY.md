@@ -51,7 +51,9 @@ This last call will exit the node.js application, simulating an error of the API
 
 ### Build the Docker image
 
-1. Start your Docker engine on your local computer
+1. Start the Docker engine on your local computer
+
+> See the [Docker installation instructions](https://docs.docker.com/engine/installation/) if you don't yet have the Docker engine installed locally or need help in starting it.
 
 1. Log the local Docker client in to IBM Bluemix Container Registry:
 
@@ -75,11 +77,13 @@ This last call will exit the node.js application, simulating an error of the API
 
 1. Build the Docker image of the service
 
+  > In the following steps, make sure to replace `<namespace>` with your namespace name.
+
    ```
    docker build -t registry.ng.bluemix.net/<namespace>/fibonacci:latest .
    ```
 
-   replacing *namespace* with your namespace name.
+
 
 1. Push the image to the registry
 
@@ -158,19 +162,19 @@ Retrieve the public IP address for your Kubernetes workers:
 To compute the Fibonacci number after *n* iterations use the API such as:
 
    ```
-   curl -v http://<cluster-ip>:30080/fibonacci?iteration=1000
+   curl -v http://<cluster-public-ip>:30080/fibonacci?iteration=1000
    ```
 
 To let the computation run for *t* milliseconds use the API such as:
 
    ```
-   curl -v http://<cluster-ip>:30080/fibonacci?duration=5000
+   curl -v http://<cluster-public-ip>:30080/fibonacci?duration=5000
    ```
 
 To simulate a crash of the service, use the API such as:
 
    ```
-   curl -v -X POST http://<cluster-ip>:30080/fibonacci?crash=true
+   curl -v -X POST http://<cluster-public-ip>:30080/fibonacci?crash=true
    ```
 
 This call will exit the underlying node.js app running in the container, simulating an error of the API.
@@ -183,7 +187,7 @@ This call will exit the underlying node.js app running in the container, simulat
    wsk list
    ```
 
-   This shows the packages, actions, triggers and rules currently deployed in your OpenWhisk namespace.
+   This command will show the packages, actions, triggers and rules currently deployed in your OpenWhisk namespace.
 
 1. Change to the **service** directory.
 
@@ -191,7 +195,7 @@ This call will exit the underlying node.js app running in the container, simulat
    cd multiple-deployment-options/service
    ```
 
-1. Install dependencies
+1. Install the required dependencies
 
    ```
    npm install
