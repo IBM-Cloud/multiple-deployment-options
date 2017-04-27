@@ -90,4 +90,4 @@ Go through the steps detailed in the [manual instructions to build the Docker im
 
 1. Wait for the DEPLOY stage to complete.
 
-1. The services are ready. Review the [Service API](#Service_API) to call the services.
+1. The services are ready. Review the [Service API](README.md#Service_API) to call the services.
