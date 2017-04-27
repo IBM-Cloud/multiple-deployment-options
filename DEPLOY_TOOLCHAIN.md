@@ -6,7 +6,7 @@ This project comes with a partially automated toolchain capable of deploying the
 
 > Only the US South region is currently supported.
 
-## Obtain a Bluemix API key
+## 1. Obtain a Bluemix API key
 
 A Bluemix API key is used in place of your Bluemix credentials. It allows to access the Bluemix API. The toolchain uses the API key to interact with the Container Service API.
 
@@ -20,7 +20,7 @@ A Bluemix API key is used in place of your Bluemix credentials. It allows to acc
 
 1. Make note of the generated API key. It won't be shown again.
 
-## Get the namespace where you will push the Docker image
+## 2. Get the namespace where you will push the Docker image
 
 1. Check the existing namespaces
 
@@ -38,9 +38,9 @@ A Bluemix API key is used in place of your Bluemix credentials. It allows to acc
 
 1. Make note of the namespace. You will need it later.
 
-## Build the Docker image
+## 3. Build the Docker image
 
-### with the toolchain
+### If you have used IBM Containers in the past, you can have the toolchain build the Docker image for you
 
 The toolchain is able to build the Docker image but only if you have used IBM Containers in the past - the [*single and scalable containers*](https://console.ng.bluemix.net/docs/containers/cs_classic.html#cs_classic) option before Kubernetes was made available. If you did, you should be familiar with the notion of namespace and quota.
 
@@ -50,17 +50,17 @@ To build the Docker image in the toolchain, you will need to specify a Bluemix s
 
 In the screenshot above, two spaces have Containers quota available. One will need to be selected when creating the toolchain.
 
-### or manually, before creating the toolchain
+### but if this is your first time using IBM Container with Kubernetes, you need to build the Docker image manually
 
 Go through the steps detailed in the [manual instructions to build the Docker image](DEPLOY_MANUALLY.md#build-the-docker-image).
 
-## Optionally create a Kubernetes cluster
+## 4. Optionally create a Kubernetes cluster
 
 If you don't create a Kubernetes cluster, the toolchain will create one free cluster for you.
 
 To create a cluster manually, refer to [these instructions](DEPLOY_MANUALLY.md#create-a-kubernetes-cluster).
 
-## Create the toolchain
+## 5. Create the toolchain
 
 1. Ensure your organization has enough quota for one web application using 256MB of memory, one Kubernetes cluster, and one OpenWhisk action.
 
