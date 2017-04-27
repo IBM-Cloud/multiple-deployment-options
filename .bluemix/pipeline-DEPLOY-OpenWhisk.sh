@@ -47,3 +47,5 @@ figlet -f small 'Uninstall'
 node deploy.js --apihost $OPENWHISK_API_HOST --auth $OPENWHISK_AUTH --uninstall
 figlet -f small 'Install'
 node deploy.js --apihost $OPENWHISK_API_HOST --auth $OPENWHISK_AUTH --install
+
+echo "Fibonacci service available at https://$OPENWHISK_API_HOST/api/v1/web/${CF_ORG}_${CF_SPACE}/default/fibonacci"
