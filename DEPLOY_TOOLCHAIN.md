@@ -54,13 +54,7 @@ In the screenshot above, two spaces have Containers quota available. One will ne
 
 Go through the steps detailed in the [manual instructions to build the Docker image](DEPLOY_MANUALLY.md#build-the-docker-image).
 
-## 4. Optionally create a Kubernetes cluster
-
-If you don't create a Kubernetes cluster, the toolchain will create one free cluster for you.
-
-To create a cluster manually, refer to [these instructions](DEPLOY_MANUALLY.md#create-a-kubernetes-cluster).
-
-## 5. Create the toolchain
+## 4. Create the toolchain
 
 1. Ensure your organization has enough quota for one web application using 256MB of memory, one Kubernetes cluster, and one OpenWhisk action.
 
