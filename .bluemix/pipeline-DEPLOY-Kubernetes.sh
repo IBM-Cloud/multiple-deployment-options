@@ -67,6 +67,7 @@ fi
 ################################################################
 figlet 'Fibonacci Deployment'
 
+# When no cluster exists then Toolchain will create a cluster for first time.
 if [ -z "$CLUSTER_NAME" ]; then
   export CLUSTER_NAME=fibonacci-cluster
   echo 'No existing cluster name specified. Creating a new one named '${CLUSTER_NAME}
@@ -79,9 +80,35 @@ if [ -z "$CLUSTER_NAME" ]; then
   while [[ $SECONDS -lt 19200 ]]
   do
     # Checking if the cluster state Ready. If State is not ready then loop until it becomes ready.
-    CLUSTER_STATE=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $2 }')
+    CLUSTER_STATE=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $6 }')
+    #echo 'Current State: ' $CLUSTER_STATE
 
     if [ "$CLUSTER_STATE" == "Ready" ]
+    then
+      echo 'Cluster Deploying...'
+      break 2
+    fi
+
+    #echo 'Secs: '$SECONDS
+    sleep 30
+  done
+fi
+
+
+# When existing cluster is used - check the state of the cluster. If the state is not ready then put the toolchain into a loop to wait until it comes ready
+CLUSTER_S=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $6 }')
+if [ "$CLUSTER_S" != "Ready" ]
+then
+  echo 'Cluster not ready, please wait until the cluster state become ready....'
+
+  SECONDS=0
+  # Run loop for 240 minutes(4 hours) and check if loop match
+  while [[ $SECONDS -lt 19200 ]]
+  do
+    # Checking if the cluster state Ready. If State is not ready then loop until it becomes ready.
+    CLUSTER_ST=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $6 }')
+
+    if [ "$CLUSTER_ST" == "Ready" ]
     then
       echo 'Cluster Ready...'
       break 2
@@ -91,14 +118,14 @@ if [ -z "$CLUSTER_NAME" ]; then
     if [ $SECONDS == 120 ]
     then
       echo 'Cluster in process mode, please be patient.'
-      echo $CLUSTER_STATE
+      echo $CLUSTER_ST
     fi
 
     sleep 30
   done
 fi
 
-
+# Setting up config files
 echo -e 'Setting KUBECONFIG...'
 exp=$(bx cs cluster-config $CLUSTER_NAME | grep export)
 if [ $? -ne 0 ]; then
