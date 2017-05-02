@@ -6,7 +6,15 @@ This project contains one simple micro-service that gets deployed:
 * as a container in a [Kubernetes cluster](https://kubernetes.io/),
 * and as an [OpenWhisk](http://openwhisk.org/) action.
 
-  <img src="architecture.png" width="600" />
+   <center>
+      <img src="architecture.png" width="600" />
+   </center>
+
+Watch this Youtube video that walks you through the deployment of the service and test the behavior of the deployment options when the service crashes:
+
+   <center>
+      <a href="https://youtu.be/Bdl9s2LxUZo"><img src="youtube.png" width="600" /></a>
+   </center>
 
 ## Requirements
 

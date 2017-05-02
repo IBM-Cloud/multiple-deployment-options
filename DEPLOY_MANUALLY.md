@@ -21,7 +21,7 @@
 1. Push the application
 
    ```
-   cf push
+   bx cf push
    ```
 
 1. After a short while, the application is available on a random route. The route name can either be retrieved from the Cloud Foundry deployment log messages or with using the command `cf routes`.
@@ -68,6 +68,8 @@ This last call will exit the node.js application, simulating an error of the API
    ```
    bx cr namespace-list
    ```
+
+   > If you don't have a namespace, you can create one with `bx cr namespace-create fibonacci` as example.
 
 1. Change to the **service** directory.
 
