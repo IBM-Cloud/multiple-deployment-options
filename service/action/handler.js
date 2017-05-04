@@ -30,26 +30,24 @@ function main(args) {
     process.exit(1);
   } else if (args.iteration) {
     return new Promise((resolve) => {
-      fibonacci.compute(args.iteration, (result) => {
-        resolve({
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
-          },
-          body: new Buffer(JSON.stringify(result)).toString('base64')
-        });
+      const result = fibonacci.compute(args.iteration).do();
+      resolve({
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        },
+        body: new Buffer(JSON.stringify(result)).toString('base64')
       });
     });
   } else if (args.duration) {
     return new Promise((resolve) => {
-      fibonacci.computeFor(args.duration, (result) => {
-        resolve({
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
-          },
-          body: new Buffer(JSON.stringify(result)).toString('base64')
-        });
+      const result = fibonacci.computeFor(args.duration).do();
+      resolve({
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        },
+        body: new Buffer(JSON.stringify(result)).toString('base64')
       });
     });
   } else {

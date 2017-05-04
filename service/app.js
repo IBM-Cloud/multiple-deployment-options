@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+if (process.env.VCAP_SERVICES) {
+  console.log('Enabling Bluemix autoscaling agent');
+  require('bluemix-autoscaling-agent');
+}
+
 const winston = require('winston');
 const express = require('express');
 const cors = require('cors');
@@ -42,16 +47,24 @@ app.disable('etag');
 app.get('/fibonacci', (req, res) => {
   if (req.query.iteration) {
     logger.info(`GET iteration=${req.query.iteration}`);
-    fibonacci.compute(req.query.iteration, (result) => {
-      logger.info(`Completed iteration=${req.query.iteration} ${result.ms}ms`);
-      res.send(result);
+    const aborter = fibonacci.compute(req.query.iteration);
+    req.on('close', () => {
+      aborter.cancel();
+      logger.info(`Aborted iteration=${req.query.iteration}`);
     });
+    const result = aborter.do();
+    logger.info(`Completed iteration=${req.query.iteration} ${result.ms}ms`);
+    res.send(result);
   } else if (req.query.duration) {
     logger.info(`GET duration=${req.query.duration}`);
-    fibonacci.computeFor(req.query.duration, (result) => {
-      logger.info(`Completed duration=${req.query.duration} ${result.ms}ms`);
-      res.send(result);
+    const aborter = fibonacci.computeFor(req.query.duration);
+    req.on('close', () => {
+      aborter.cancel();
+      logger.info(`Aborted iteration=${req.query.duration}`);
     });
+    const result = aborter.do();
+    logger.info(`Completed duration=${req.query.duration} ${result.ms}ms`);
+    res.send(result);
   } else {
     res.status(500).send('Unknown operation');
   }
