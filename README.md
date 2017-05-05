@@ -52,8 +52,8 @@ Follow [these instructions](./DEPLOY_MANUALLY.md).
 
 Once deployed, the service implements 3 API calls:
 * compute the Fibonacci number after *n* iterations,
-  * let the computation run for *t* milliseconds,
-  * and simulate a crash of the service.
+* let the computation run for *t* milliseconds,
+* and simulate a crash of the service.
 
 Depending on which compute option you are using, use the following cURL calls:
 
