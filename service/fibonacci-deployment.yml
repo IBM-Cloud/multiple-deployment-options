@@ -14,6 +14,11 @@ spec:
           #image: "fibonacci:latest"
           image: "registry.ng.bluemix.net/<namespace>/fibonacci:latest"
           imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: "100m"
+            limits:
+              cpu: "250m"
 ---
 apiVersion: v1
 kind: Service
