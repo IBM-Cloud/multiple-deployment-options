@@ -6,6 +6,11 @@ if [ -z "$BLUEMIX_API_KEY" ]; then
   exit 0
 fi
 
+if [ -z "$CLUSTER_NAME" ]; then
+  echo 'No existing cluster name specified in the pipeline. Skipping Kubernetes deployment.'
+  exit 0
+fi
+
 if [ -f "image.env" ]; then
   echo 'Loading image name from image.env file.'
   source image.env
@@ -67,62 +72,12 @@ fi
 ################################################################
 figlet 'Fibonacci Deployment'
 
-# When no cluster exists then Toolchain will create a cluster for first time.
-if [ -z "$CLUSTER_NAME" ]; then
-  export CLUSTER_NAME=fibonacci-cluster
-  echo 'No existing cluster name specified. Creating a new one named '${CLUSTER_NAME}
-  bx cs cluster-create --name "$CLUSTER_NAME"
-  echo 'Cluster Created '${CLUSTER_NAME}
-  echo 'Please wait for cluster state to be Ready, allow at least 15 minutes. Thanks'
-
-  SECONDS=0
-  # Run loop for 240 minutes(4 hours) and check if loop match
-  while [[ $SECONDS -lt 19200 ]]
-  do
-    # Checking if the cluster state Ready. If State is not ready then loop until it becomes ready.
-    CLUSTER_STATE=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $6 }')
-    #echo 'Current State: ' $CLUSTER_STATE
-
-    if [ "$CLUSTER_STATE" == "Ready" ]
-    then
-      echo 'Cluster Deploying...'
-      break 2
-    fi
-
-    #echo 'Secs: '$SECONDS
-    sleep 30
-  done
-fi
-
-
-# When existing cluster is used - check the state of the cluster. If the state is not ready then put the toolchain into a loop to wait until it comes ready
-CLUSTER_S=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $6 }')
-if [ "$CLUSTER_S" != "Ready" ]
+# The cluster must be ready for us to continue
+CLUSTER_STATE=$(bx cs workers $CLUSTER_NAME | grep -m1 Ready | awk '{ print $6 }')
+if [ "$CLUSTER_STATE" != "Ready" ]
 then
-  echo 'Cluster not ready, please wait until the cluster state become ready....'
-
-  SECONDS=0
-  # Run loop for 240 minutes(4 hours) and check if loop match
-  while [[ $SECONDS -lt 19200 ]]
-  do
-    # Checking if the cluster state Ready. If State is not ready then loop until it becomes ready.
-    CLUSTER_ST=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $6 }')
-
-    if [ "$CLUSTER_ST" == "Ready" ]
-    then
-      echo 'Cluster Ready...'
-      break 2
-    fi
-
-    # Print message after 2 minutes
-    if [ $SECONDS == 120 ]
-    then
-      echo 'Cluster in process mode, please be patient.'
-      echo $CLUSTER_ST
-    fi
-
-    sleep 30
-  done
+  echo "Cluster is not in a Ready state (current state is $CLUSTER_STATE). Re-run this stage once the cluster is Ready."
+  exit 1
 fi
 
 # Setting up config files
@@ -147,7 +102,7 @@ kubectl delete --ignore-not-found=true -f tmp-fibonacci-deployment.yml
 echo -e 'Deploying Fibonacci service...'
 kubectl create -f tmp-fibonacci-deployment.yml
 
-IP_ADDR=$(bx cs workers $CLUSTER_NAME | grep Ready | awk '{ print $2 }')
+IP_ADDR=$(bx cs workers $CLUSTER_NAME | grep -m1 Ready | awk '{ print $2 }')
 if [ -z $IP_ADDR ]; then
   echo "$CLUSTER_NAME not created or workers not ready"
   exit 1
