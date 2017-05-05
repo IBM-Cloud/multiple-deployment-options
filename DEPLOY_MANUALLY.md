@@ -54,7 +54,7 @@ This last call will exit the node.js application, simulating an error of the API
 
 1. Start the Docker engine on your local computer
 
-  > See the [Docker installation instructions](https://docs.docker.com/engine/installation/) if you don't yet have the Docker engine installed locally or need help in starting it.
+   > See the [Docker installation instructions](https://docs.docker.com/engine/installation/) if you don't yet have the Docker engine installed locally or need help in starting it.
 
 1. Log the local Docker client in to IBM Bluemix Container Registry:
 
