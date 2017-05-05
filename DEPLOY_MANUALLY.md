@@ -80,7 +80,7 @@ This last call will exit the node.js application, simulating an error of the API
 
 1. Build the Docker image of the service
 
-  > In the following steps, make sure to replace `<namespace>` with your namespace name.
+   > In the following steps, make sure to replace `<namespace>` with your namespace name.
 
    ```
    docker build -t registry.ng.bluemix.net/<namespace>/fibonacci:latest .
