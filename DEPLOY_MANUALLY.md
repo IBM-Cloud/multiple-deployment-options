@@ -18,13 +18,14 @@
    cd multiple-deployment-options/service
    ```
 
-1. Push the application
+2. Push the application
 
    ```
    bx cf push
    ```
 
-1. After a short while, the application is available on a random route. The route name can either be retrieved from the Cloud Foundry deployment log messages or with using the command `cf routes`.
+3. After a short while, the application is available on a random route. The route name can either be retrieved from the Cloud Foundry deployment log messages or with using the command `cf routes`.
+
 ### Test the Cloud Foundry application
 
 To compute the Fibonacci number after *n* iterations, use the `iteration` parameter of the API:
@@ -53,17 +54,17 @@ This last call will exit the node.js application, simulating an error of the API
 
 1. Start the Docker engine on your local computer
 
-> See the [Docker installation instructions](https://docs.docker.com/engine/installation/) if you don't yet have the Docker engine installed locally or need help in starting it.
+   See the [Docker installation instructions](https://docs.docker.com/engine/installation/) if you don't yet have the Docker engine installed locally or need help in starting it.
 
-1. Log the local Docker client in to IBM Bluemix Container Registry:
+2. Log the local Docker client in to IBM Bluemix Container Registry:
 
    ```
    bx cr login
    ```
 
-   > This will configure your local Docker client with the right credentials to be able to push images to the Bluemix Container Registry.
+   This will configure your local Docker client with the right credentials to be able to push images to the Bluemix Container Registry.
 
-1. Retrieve the name of the namespace you are going to use to push your Docker images:
+3. Retrieve the name of the namespace you are going to use to push your Docker images:
 
    ```
    bx cr namespace-list
@@ -71,23 +72,21 @@ This last call will exit the node.js application, simulating an error of the API
 
    > If you don't have a namespace, you can create one with `bx cr namespace-create fibonacci` as example.
 
-1. Change to the **service** directory.
+4. Change to the **service** directory.
 
    ```
    cd multiple-deployment-options/service
    ```
 
-1. Build the Docker image of the service
+5. Build the Docker image of the service
 
-  > In the following steps, make sure to replace `<namespace>` with your namespace name.
+   In the following steps, make sure to replace `<namespace>` with your namespace name.
 
    ```
    docker build -t registry.ng.bluemix.net/<namespace>/fibonacci:latest .
    ```
 
-
-
-1. Push the image to the registry
+6. Push the image to the registry
 
    ```
    docker push registry.ng.bluemix.net/<namespace>/fibonacci:latest
@@ -103,7 +102,7 @@ This last call will exit the node.js application, simulating an error of the API
 
    > Note that you can also use an existing cluster
 
-1. Wait for your cluster to be deployed. This step can take a while, you can check the status of your cluster(s) by using:
+2. Wait for your cluster to be deployed. This step can take a while, you can check the status of your cluster(s) by using:
 
    ```
    bx cs clusters
@@ -111,7 +110,7 @@ This last call will exit the node.js application, simulating an error of the API
 
    Your cluster should be in the state *normal*.
 
-1. Ensure that the cluster workers are ready too:
+3. Ensure that the cluster workers are ready too:
 
    ```
    bx cs workers fibonacci-cluster
@@ -137,17 +136,17 @@ This last call will exit the node.js application, simulating an error of the API
    export KUBECONFIG=/Users/john/.bluemix/plugins/container-service/clusters/fibonacci-cluster/kube-xxx-fibonacci-cluster.yml
    ```
 
-1. Copy and paste the `export KUBECONFIG=...` line into your shell.
+2. Copy and paste the `export KUBECONFIG=...` line into your shell.
 
-1. Confirm the configuration worked by retrieving the cluster nodes:
+3. Confirm the configuration worked by retrieving the cluster nodes:
 
    ```
    kubectl get nodes
    ```
 
-1. Modify the fibonacci-deployment.yml under the *service* directory to point to the image in the Bluemix Container Registry by replacing the *namespace* value.
+4. Modify the fibonacci-deployment.yml under the *service* directory to point to the image in the Bluemix Container Registry by replacing the *namespace* value.
 
-1. Deploy the Fibonacci service in the cluster
+5. Deploy the Fibonacci service in the cluster
 
     ```
     kubectl create -f fibonacci-deployment.yml
@@ -191,19 +190,19 @@ This call will exit the underlying node.js app running in the container, simulat
 
    This command will show the packages, actions, triggers and rules currently deployed in your OpenWhisk namespace.
 
-1. Change to the **service** directory.
+2. Change to the **service** directory.
 
    ```
    cd multiple-deployment-options/service
    ```
 
-1. Install the required dependencies
+3. Install the required dependencies
 
    ```
    npm install
    ```
 
-1. Deploy the OpenWhisk action
+4. Deploy the OpenWhisk action
 
    ```
    node deploy.js --install
