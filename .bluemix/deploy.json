@@ -22,7 +22,7 @@
       "type": "string"
     },
     "deploy-cluster-name": {
-      "description": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
+      "description": "Existing Kubernetes cluster name (if empty, the toolchain will not deploy the service to Kubernetes)",
       "type": "string"
     },
     "deploy-image-name": {
@@ -160,7 +160,7 @@
         },
         {
           "type": "label",
-          "title": "The toolchain can either create a new free cluster (if you don't have one yet) or you can specify the name of an existing cluster where to deploy the Fibonacci service. The Bluemix API key is used to access the IBM Container Service API and interact with the cluster."
+          "title": "Specify the name of an existing cluster where to deploy the Fibonacci service. The Bluemix API key is used to access the IBM Container Service API and interact with the cluster."
         }
       ]
     },
@@ -172,8 +172,8 @@
     },
     {
       "type": "text",
-      "title": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
-      "description": "Existing Kubernetes cluster name (Leave empty to create a free cluster)",
+      "title": "Existing Kubernetes cluster name (if empty, the toolchain will not deploy the service to Kubernetes)",
+      "description": "Existing Kubernetes cluster name (if empty, the toolchain will not deploy the service to Kubernetes)",
       "key": "deploy-cluster-name"
     },
     {
