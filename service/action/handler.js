@@ -30,7 +30,7 @@ function main(args) {
     process.exit(1);
   } else if (args.iteration) {
     return new Promise((resolve) => {
-      const result = fibonacci.compute(args.iteration).do();
+      const result = fibonacci.compute({ iteration: args.iteration }).do();
       resolve({
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -41,7 +41,7 @@ function main(args) {
     });
   } else if (args.duration) {
     return new Promise((resolve) => {
-      const result = fibonacci.computeFor(args.duration).do();
+      const result = fibonacci.compute({ duration: args.duration }).do();
       resolve({
         headers: {
           'Access-Control-Allow-Origin': '*',

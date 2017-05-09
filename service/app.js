@@ -47,24 +47,34 @@ app.disable('etag');
 app.get('/fibonacci', (req, res) => {
   if (req.query.iteration) {
     logger.info(`GET iteration=${req.query.iteration}`);
-    const aborter = fibonacci.compute(req.query.iteration);
+    const aborter = fibonacci.compute({
+      iteration: req.query.iteration,
+      parallel: req.query.parallel,
+      callback: (result) => {
+        logger.info(`Completed iteration=${req.query.iteration} ${result.ms}ms`);
+        res.send(result);
+      }
+    });
     req.on('close', () => {
       aborter.cancel();
       logger.info(`Aborted iteration=${req.query.iteration}`);
     });
-    const result = aborter.do();
-    logger.info(`Completed iteration=${req.query.iteration} ${result.ms}ms`);
-    res.send(result);
+    aborter.do();
   } else if (req.query.duration) {
     logger.info(`GET duration=${req.query.duration}`);
-    const aborter = fibonacci.computeFor(req.query.duration);
+    const aborter = fibonacci.compute({
+      duration: req.query.duration,
+      parallel: req.query.parallel,
+      callback: (result) => {
+        logger.info(`Completed duration=${req.query.duration} ${result.ms}ms`);
+        res.send(result);
+      }
+    });
     req.on('close', () => {
       aborter.cancel();
       logger.info(`Aborted iteration=${req.query.duration}`);
     });
-    const result = aborter.do();
-    logger.info(`Completed duration=${req.query.duration} ${result.ms}ms`);
-    res.send(result);
+    aborter.do();
   } else {
     res.status(500).send('Unknown operation');
   }
