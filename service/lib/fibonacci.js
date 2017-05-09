@@ -52,7 +52,9 @@ function Fibonacci() {
       if (context.canceled ||
           (context.timeLimit && context.result.ms >= context.timeLimit) ||
           (context.limit && context.loop.eq(context.limit))) {
-        context.callback(context.result);
+        if (context.callback) {
+          context.callback(context.result);
+        }
         return context.result;
       }
 
@@ -65,7 +67,9 @@ function Fibonacci() {
           iterations: context.loop.toString(),
           intended: context.limit ? context.limit : null
         };
-        context.callback(result);
+        if (context.callback) {
+          context.callback(result);
+        }
         return result;
       }
 
