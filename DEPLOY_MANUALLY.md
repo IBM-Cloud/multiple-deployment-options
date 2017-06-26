@@ -180,6 +180,44 @@ To simulate a crash of the service, use the API such as:
 
 This call will exit the underlying node.js app running in the container, simulating an error of the API.
 
+### Deploying with Istio
+
+The service can be deployed with [Istio](https://istio.io/), an open platform to connect, manage, and secure microservices.
+
+1. [Install Istio](https://istio.io/docs/tasks/installing-istio.html) into your cluster
+
+1. Modify the fibonacci-deployment-with-istio.yml under the *service* directory to point to the image in the Bluemix Container Registry by replacing the *namespace* value.
+
+1. Deploy the Fibonacci service with Istio
+
+   ```
+   kubectl apply -f <(istioctl kube-inject -f fibonacci-deployment-with-istio.yml)
+   ```
+
+   > Note the alternative deployment file modified to use istio ingress
+
+1. Forward the Istio Grafana dashboard port
+
+   ```
+   kubectl port-forward $(kubectl get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}') 3000:3000
+   ```
+
+1. View the dashboard at http://localhost:3000/dashboard/db/istio-dashboard
+
+1. Find the Istio gateway ingress URL
+
+  ```
+  echo http://$(kubectl get po -l istio=ingress -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc istio-ingress -o 'jsonpath={.spec.ports[0].nodePort}')
+  ```
+
+1. Use this URL as prefix for the Fibonacci service, such as:
+
+   ```
+   curl -v <GATEWAY_URL>/fibonacci?iteration=1000
+   ```
+
+1. View the hits in the Grafana dashboard
+
 ## Deploy the service as an OpenWhisk action
 
 1. Ensure your OpenWhisk command line interface is property configured with:
