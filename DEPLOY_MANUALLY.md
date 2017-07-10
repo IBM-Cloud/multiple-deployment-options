@@ -70,7 +70,7 @@ This last call will exit the node.js application, simulating an error of the API
    bx cr namespace-list
    ```
 
-   > If you don't have a namespace, you can create one with `bx cr namespace-create fibonacci` as example.
+   > If you don't have a namespace, you can create one with `bx cr namespace-add fibonacci` as example.
 
 1. Change to the **service** directory.
 
