@@ -33,7 +33,6 @@ function main(args) {
       const result = fibonacci.compute({ iteration: args.iteration }).do();
       resolve({
         headers: {
-          'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json'
         },
         body: new Buffer(JSON.stringify(result)).toString('base64')
@@ -44,7 +43,6 @@ function main(args) {
       const result = fibonacci.compute({ duration: args.duration }).do();
       resolve({
         headers: {
-          'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json'
         },
         body: new Buffer(JSON.stringify(result)).toString('base64')
