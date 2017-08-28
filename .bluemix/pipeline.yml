@@ -76,10 +76,6 @@ stages:
   triggers:
   - type: stage
   properties:
-  - name: BLUEMIX_API_KEY
-    value: ${BLUEMIX_API_KEY}
-  - name: CLUSTER_NAME
-    value: ${CLUSTER_NAME}
   - name: IMAGE_NAME
     value: ${IMAGE_NAME}
   jobs:
@@ -89,7 +85,8 @@ stages:
       region_id: ${REGION_ID}
       organization: ${ORG_NAME}
       space: ${SPACE_NAME}
-      application: ${CF_APP_NAME}
+      api_key: ${BLUEMIX_API_KEY}
+      kubernetes_cluster: ${CLUSTER_NAME}
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-Kubernetes.sh

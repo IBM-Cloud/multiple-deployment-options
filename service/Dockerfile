@@ -1,4 +1,4 @@
-FROM node:6.9.1
+FROM node:6.9.1-alpine
 
 COPY lib/ lib/
 COPY app.js .
