@@ -25,27 +25,15 @@ npm install --progress false --loglevel error 1>/dev/null
 ################################################################
 figlet 'OpenWhisk'
 
-echo 'Retrieving OpenWhisk authorization key...'
-
-# Retrieve the OpenWhisk authorization key
-CF_ACCESS_TOKEN=`cat ~/.cf/config.json | jq -r .AccessToken | awk '{print $2}'`
-
-# Docker image should be set by the pipeline, use a default if not set
-if [ -z "$OPENWHISK_API_HOST" ]; then
-  echo 'OPENWHISK_API_HOST was not set in the pipeline. Using default value.'
-  export OPENWHISK_API_HOST=openwhisk.ng.bluemix.net
-fi
-OPENWHISK_KEYS=`curl -XPOST -k -d "{ \"accessToken\" : \"$CF_ACCESS_TOKEN\", \"refreshToken\" : \"$CF_ACCESS_TOKEN\" }" \
-  -H 'Content-Type:application/json' https://$OPENWHISK_API_HOST/bluemix/v2/authenticate`
-
-SPACE_KEY=`echo $OPENWHISK_KEYS | jq -r '.namespaces[] | select(.name == "'$CF_ORG'_'$CF_SPACE'") | .key'`
-SPACE_UUID=`echo $OPENWHISK_KEYS | jq -r '.namespaces[] | select(.name == "'$CF_ORG'_'$CF_SPACE'") | .uuid'`
-OPENWHISK_AUTH=$SPACE_UUID:$SPACE_KEY
+bx login -a "$CF_TARGET_URL" --apikey "$BLUEMIX_API_KEY" -o "$CF_ORG" -s "$CF_SPACE"
+bx plugin install Cloud-Functions -r Bluemix
+bx wsk list
 
 # Deploy the actions
 figlet -f small 'Uninstall'
-node deploy.js --apihost $OPENWHISK_API_HOST --auth $OPENWHISK_AUTH --uninstall
+node deploy.js --uninstall
 figlet -f small 'Install'
-node deploy.js --apihost $OPENWHISK_API_HOST --auth $OPENWHISK_AUTH --install
+node deploy.js --install
 
+OPENWHISK_API_HOST=$(bx wsk property get --apihost | awk '{print $4}')
 echo "Fibonacci service available at https://$OPENWHISK_API_HOST/api/v1/web/${CF_ORG}_${CF_SPACE}/default/fibonacci"

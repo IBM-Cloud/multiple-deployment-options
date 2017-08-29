@@ -35,6 +35,9 @@ stages:
     job: Build
   triggers:
   - type: stage
+  properties:
+  - name: BLUEMIX_API_KEY
+    value: ${BLUEMIX_API_KEY}
   jobs:
   - name: Deploy
     type: deployer
