@@ -15,7 +15,7 @@ services:
     service_id: githubpublic
     parameters:
       repo_name: 'multiple-deployment-options'
-      repo_url: 'https://github.com/IBM-Bluemix/multiple-deployment-options'
+      repo_url: 'https://github.com/IBM-Cloud/multiple-deployment-options'
       type: fork
       has_issues: false
   build:
@@ -34,7 +34,7 @@ services:
           SPACE_NAME: '{{form.pipeline.parameters.deploy-space}}'
           ORG_NAME: '{{form.pipeline.parameters.deploy-organization}}'
           REGION_ID: '{{form.pipeline.parameters.deploy-region}}'
-          BLUEMIX_API_KEY: '{{form.pipeline.parameters.deploy-bluemix-api-key}}'
+          BLUEMIX_API_KEY: '{{form.pipeline.parameters.ibmcloud-api-key}}'
           CLUSTER_NAME: '{{form.pipeline.parameters.deploy-cluster-name}}'
           IMAGE_NAME: '{{form.pipeline.parameters.deploy-image-name}}'
           CONTAINER_ORG_NAME: '{{form.pipeline.parameters.container-organization}}'
@@ -47,7 +47,7 @@ form:
     parameters:
       deploy-region: 'ibm:yp:us-south'
       container-region: 'ibm:yp:us-south'
-      deploy-bluemix-api-key: ''
+      ibmcloud-api-key: ''
       deploy-cluster-name: ''
       deploy-image-name: 'registry.ng.bluemix.net/<namespace>/fibonacci:latest'
     schema:

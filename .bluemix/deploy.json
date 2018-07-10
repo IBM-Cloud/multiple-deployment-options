@@ -17,7 +17,7 @@
       "description": "The bluemix space",
       "type": "string"
     },
-    "deploy-bluemix-api-key": {
+    "ibmcloud-api-key": {
       "description": "Bluemix API key (Obtain one using 'bx iam api-key-create my-new-key')",
       "type": "string"
     },
@@ -168,7 +168,7 @@
       "type": "text",
       "title": "Bluemix API key (Obtain one using 'bx iam api-key-create my-new-key')",
       "description": "Bluemix API key (Obtain one using 'bx iam api-key-create my-new-key')",
-      "key": "deploy-bluemix-api-key"
+      "key": "ibmcloud-api-key"
     },
     {
       "type": "text",
