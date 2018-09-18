@@ -32,7 +32,7 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_number): *In mathematic
 
 The implementation of the Fibonacci sequence is done in **[service/lib/fibonacci.js](service/lib/fibonacci.js)**. The same implementation is used across all deployment options.
 
-## Deploy the service in IBM Cloud with the toolchain
+## Deploy the services in IBM Cloud with the toolchain
 
 1. Identify an IBM Cloud region, Cloud Foundry organization and space where to deploy the services.
 
@@ -45,26 +45,17 @@ And then
 [![Deploy To IBM Cloud](https://console.ng.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.ng.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Bluemix/multiple-deployment-options&branch=refresh)
 
 1. Select the **GitHub** box.
-
-1. Decide whether you want to clone or fork the repository.
-
-1. If you decide to Clone, set a name for your GitHub repository.
-
+   1. Decide whether you want to clone or fork the repository.
+   1. If you decide to Clone, set a name for your GitHub repository.
 1. Select the **Delivery Pipeline** box.
-
-1. Specify the IBM Cloud API key to use or create one
-
-1. Select the region, organization and space where you want to deploy the web application. A random route will be used for the application.
-
+   1. Specify the IBM Cloud API key to use or create one
+   1. Select the region, organization and space where you want to deploy the web application. A random route will be used for the application.
    :warning: Make sure the organization and the space have no space in their names.
-
-1. Select the Kubernetes cluster where to deploy the service, together with the Docker registry name where to store the Docker image
-
+   1. Select the Kubernetes cluster where to deploy the service, together with the Docker registry name where to store the Docker image
 1. Click **Create**.
-
 1. Select the Delivery Pipeline.
-
-1. Wait until all stages complete. Open the _Deploy_ log for the CLOUD FOUNDRY, CLOUD FUNCTIONS and KUBERNETES stages. Each log has a link at the end pointing to the location where the services have been deployed. Click on the link to add the service to the visual tester.
+1. Wait until all stages complete.
+1. Open the _Deploy_ log for the CLOUD FOUNDRY, CLOUD FUNCTIONS and KUBERNETES stages. Each log has a link at the end pointing to the location where the services have been deployed. Click on the links to add the service to the visual tester.
 
 1. The services are ready. Review the [Service API](README.md#Service_API) to call the services.
 
