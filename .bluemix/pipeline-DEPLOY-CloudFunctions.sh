@@ -26,5 +26,5 @@ node deploy.js --uninstall
 echo "Install"
 node deploy.js --install
 
-OPENWHISK_API_HOST=$(bx wsk property get --apihost | awk '{print $4}')
-echo "Fibonacci service available at https://$OPENWHISK_API_HOST/api/v1/web/${CF_ORG}_${CF_SPACE}/default/fibonacci"
+OPENWHISK_API_HOST=$(bx cloud-functions property get --apihost | awk '{print $4}')
+echo "Fibonacci service available at https://${OPENWHISK_API_HOST}/api/v1/web/${CF_ORG}_${CF_SPACE}/default/fibonacci"
