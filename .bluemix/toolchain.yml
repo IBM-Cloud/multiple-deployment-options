@@ -48,6 +48,6 @@ form:
   pipeline:
     parameters:
       image-name: 'fibonacci'
-      branch-name: 'refresh'
+      branch-name: 'master'
     schema:
       $ref: deploy.json
