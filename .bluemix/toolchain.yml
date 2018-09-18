@@ -18,37 +18,37 @@ services:
       repo_url: 'https://github.com/IBM-Cloud/multiple-deployment-options'
       type: fork
       has_issues: false
+      enable_traceability: false
   build:
     service_id: pipeline
     parameters:
       services:
         - repo
-      name: '{{services.repo.parameters.repo_name}}'
+      name: '{{services.repo.parameters.repo_name}} ({{form.pipeline.parameters.branch-name}})'
       ui-pipeline: true
       configuration:
         content:
           $text: pipeline.yml
         env:
-          REPO: repo
+          GIT_REPO: repo
+          GIT_BRANCH: '{{form.pipeline.parameters.branch-name}}'
+          API_KEY: '{{form.pipeline.parameters.api-key}}'
+          REGION_ID: '{{form.pipeline.parameters.target-region}}'
+
           CF_APP_NAME: 'fibonacci-service'
-          SPACE_NAME: '{{form.pipeline.parameters.deploy-space}}'
-          ORG_NAME: '{{form.pipeline.parameters.deploy-organization}}'
-          REGION_ID: '{{form.pipeline.parameters.deploy-region}}'
-          BLUEMIX_API_KEY: '{{form.pipeline.parameters.ibmcloud-api-key}}'
-          CLUSTER_NAME: '{{form.pipeline.parameters.deploy-cluster-name}}'
-          IMAGE_NAME: '{{form.pipeline.parameters.deploy-image-name}}'
-          CONTAINER_ORG_NAME: '{{form.pipeline.parameters.container-organization}}'
-          CONTAINER_REGION_ID: '{{form.pipeline.parameters.container-region}}'
-          CONTAINER_SPACE_NAME: '{{form.pipeline.parameters.container-space}}'
-        execute: true
+          SPACE_NAME: '{{form.pipeline.parameters.target-space}}'
+          ORG_NAME: '{{form.pipeline.parameters.target-organization}}'
+
+          CLUSTER_NAME: '{{form.pipeline.parameters.target-cluster-name}}'
+          REGISTRY_NAMESPACE: '{{form.pipeline.parameters.registry-namespace}}'
+          IMAGE_NAME: '{{form.pipeline.parameters.image-name}}'
+        execute: false
 
 form:
   pipeline:
     parameters:
-      deploy-region: 'ibm:yp:us-south'
-      container-region: 'ibm:yp:us-south'
-      ibmcloud-api-key: ''
-      deploy-cluster-name: ''
-      deploy-image-name: 'registry.ng.bluemix.net/<namespace>/fibonacci:latest'
+      target-region: 'ibm:yp:us-south'
+      image-name: 'fibonacci'
+      branch-name: 'refresh'
     schema:
       $ref: deploy.json
