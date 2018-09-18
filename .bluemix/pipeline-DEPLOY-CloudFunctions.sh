@@ -25,8 +25,8 @@ npm install --progress false --loglevel error 1>/dev/null
 ################################################################
 figlet 'OpenWhisk'
 
-bx login -a "$CF_TARGET_URL" --apikey "$BLUEMIX_API_KEY" -o "$CF_ORG" -s "$CF_SPACE"
-bx plugin install Cloud-Functions -r Bluemix
+# bx login -a "$CF_TARGET_URL" --apikey "$IBMCLOUD_API_KEY" -o "$CF_ORG" -s "$CF_SPACE"
+# bx plugin install Cloud-Functions -r Bluemix
 bx wsk list
 
 # Deploy the actions
