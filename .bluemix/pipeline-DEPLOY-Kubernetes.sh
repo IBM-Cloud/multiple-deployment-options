@@ -1,12 +1,7 @@
 #!/bin/bash
 cd service
 
-if [ -f "image.env" ]; then
-  echo 'Loading image name from image.env file.'
-  source image.env
-fi
-
-if [ -z "$IMAGE_NAME" ]; then
+if [ -z "$IMAGE_URL" ]; then
   echo 'No Docker image specified.'
   exit 1
 fi
@@ -26,26 +21,26 @@ figlet 'Fibonacci Deployment'
 
 # The cluster must be ready for us to continue
 CLUSTER_STATE=$(bx cs workers $PIPELINE_KUBERNETES_CLUSTER_NAME | grep -m1 Ready | awk '{ print $6 }')
-if [ "$CLUSTER_STATE" != "Ready" ]
-then
-  echo "Cluster is not in a Ready state (current state is $CLUSTER_STATE). Re-run this stage once the cluster is Ready."
+if (bx cs workers fredl-dal10-cluster --json | grep -iq "\"status\": \"Ready\""); then
+  echo "Cluster is ready"
+else
+  echo "Could not find a worker node in a Ready state in the cluster."
   exit 1
 fi
 
-# Generate a tmp deployment file where the image name has been replaced by the actual image to use
-echo "Using Docker image $IMAGE_NAME"
-ESCAPED_IMAGE_NAME=$(echo $IMAGE_NAME | sed 's/\//\\\//g')
-cat fibonacci-deployment.yml | sed 's/registry.ng.bluemix.net\/<namespace>\/fibonacci:latest/'$ESCAPED_IMAGE_NAME'/g' > tmp-fibonacci-deployment.yml
+echo "Deleting previous version of Fibonacci service..."
+kubectl delete -f fibonacci-deployment.yml
 
-echo -e 'Deleting previous version of Fibonacci service...'
-kubectl delete --ignore-not-found=true -f tmp-fibonacci-deployment.yml
+echo "Deploying Fibonacci service..."
+cat fibonacci-deployment.yml | \
+  IMAGE_URL=$IMAGE_URL \
+  envsubst | \
+  kubectl apply -f fibonacci-deployment.yml
 
-echo -e 'Deploying Fibonacci service...'
-kubectl create -f tmp-fibonacci-deployment.yml
 
-IP_ADDR=$(bx cs workers $PIPELINE_KUBERNETES_CLUSTER_NAME | grep -m1 Ready | awk '{ print $2 }')
+IP_ADDR=$(bx cs workers $PIPELINE_KUBERNETES_CLUSTER_NAME --json | jq -r '[.[] | select(.status=="Ready")][0].publicIP')
 if [ -z $IP_ADDR ]; then
-  echo "$PIPELINE_KUBERNETES_CLUSTER_NAME not created or workers not ready"
+  echo "Could not find a worker in a Ready state with a public IP"
   exit 1
 fi
 
