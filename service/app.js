@@ -15,7 +15,7 @@
  */
 
 if (process.env.VCAP_SERVICES) {
-  console.log('Enabling Bluemix autoscaling agent');
+  console.log('Enabling IBM Cloud autoscaling agent');
   require('bluemix-autoscaling-agent');
 }
 

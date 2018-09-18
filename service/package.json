@@ -22,7 +22,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IBM-Bluemix/multiple-deployment-options/"
+    "url": "https://github.com/IBM-Cloud/multiple-deployment-options/"
   },
   "engines": {
     "node": ">=6.9.1"
