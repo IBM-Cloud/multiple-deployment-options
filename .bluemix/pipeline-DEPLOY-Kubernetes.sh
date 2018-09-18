@@ -12,18 +12,8 @@ fi
 echo "TARGET_NAMESPACE=$TARGET_NAMESPACE"
 
 ################################################################
-# Install dependencies
-################################################################
-echo 'Installing dependencies...'
-sudo apt-get -qq update 1>/dev/null
-sudo apt-get -qq install jq 1>/dev/null
-sudo apt-get -qq install figlet 1>/dev/null
-
-################################################################
 # Deploy
 ################################################################
-figlet 'Fibonacci Deployment'
-
 # The cluster must be ready for us to continue
 CLUSTER_STATE=$(bx cs workers $PIPELINE_KUBERNETES_CLUSTER_NAME | grep -m1 Ready | awk '{ print $6 }')
 if (bx cs workers $PIPELINE_KUBERNETES_CLUSTER_NAME --json | grep -iq "\"status\": \"Ready\""); then
