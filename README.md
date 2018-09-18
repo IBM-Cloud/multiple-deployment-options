@@ -4,7 +4,7 @@ This project contains one simple micro-service that gets deployed:
 
 * as a [Cloud Foundry](https://www.cloudfoundry.org/) application,
 * as a container in a [Kubernetes cluster](https://kubernetes.io/),
-* and as an [OpenWhisk](http://openwhisk.org/) action.
+* and as a [Cloud Functions](http://openwhisk.org/) action.
 
    <center>
       <img src="architecture.png" width="600" />
@@ -18,14 +18,7 @@ Watch this Youtube video that walks you through the deployment of the service an
 
 ## Requirements
 
-* An IBM Bluemix account. Either [sign up][bluemix_signup_url], or use an existing account.
-* [Bluemix CLI](https://clis.ng.bluemix.net/ui/home.html)
-* [OpenWhisk CLI](https://console.ng.bluemix.net/openwhisk/learn/cli)
-* [Bluemix Container Registry plugin](https://console.ng.bluemix.net/docs/cli/plugins/registry/index.html)
-* [Bluemix Container Service plugin](https://console.ng.bluemix.net/docs/containers/cs_cli_devtools.html)
-* [Node.js](https://nodejs.org), version 6.9.1 (or later)
-* [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/kubectl/install/) version 1.5.3 (or later)
-* [Docker CLI](https://docs.docker.com/engine/installation/) version 1.9 (or later)
+* An IBM Cloud account. Either [sign up][bluemix_signup_url], or use an existing account.
 
 ## About the micro-service
 
@@ -39,14 +32,32 @@ From [Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_number): *In mathematic
 
 The implementation of the Fibonacci sequence is done in **[service/lib/fibonacci.js](service/lib/fibonacci.js)**. The same implementation is used across all deployment options.
 
-## Deploy the service in Bluemix with the toolchain
+## Deploy the services in IBM Cloud with the toolchain
 
-Follow [these instructions](./DEPLOY_TOOLCHAIN.md).
+1. Identify an IBM Cloud region, Cloud Foundry organization and space where to deploy the services.
 
+1. Create a **standard** Kubernetes cluster
 
-## Deploying the service manually in Bluemix
+1. Create a registry namespace
 
-Follow [these instructions](./DEPLOY_MANUALLY.md).
+And then
+
+[![Deploy To IBM Cloud](https://console.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Cloud/multiple-deployment-options&branch=master)
+
+1. Select the **GitHub** box.
+   1. Decide whether you want to clone or fork the repository.
+   1. If you decide to Clone, set a name for your GitHub repository.
+1. Select the **Delivery Pipeline** box.
+   1. Specify the IBM Cloud API key to use or create one
+   1. Select the region, organization and space where you want to deploy the web application. A random route will be used for the application.
+   :warning: Make sure the organization and the space have no space in their names.
+   1. Select the Kubernetes cluster where to deploy the service, together with the Docker registry name where to store the Docker image
+1. Click **Create**.
+1. Select the Delivery Pipeline.
+1. Wait until all stages complete.
+1. Open the _Deploy_ log for the CLOUD FOUNDRY, CLOUD FUNCTIONS and KUBERNETES stages. Each log has a link at the end pointing to the location where the services have been deployed. Click on the links to add the service to the visual tester.
+
+1. The services are ready. Review the [Service API](README.md#Service_API) to call the services.
 
 ## Service API
 
@@ -65,7 +76,7 @@ Depending on which compute option you are using, use the following cURL calls:
 | Kubernetes    | iteration | `curl -v http://<cluster-ip>:30080/fibonacci?iteration=1000` |
 |               | duration  | `curl -v http://<cluster-ip>:30080/fibonacci?duration=5000` |
 |               | crash     | `curl -v -X POST http://<cluster-ip>:30080/fibonacci?crash=true` |
-| OpenWhisk     | iteration | `curl -v https://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?iteration=1000` |
+| Cloud Functions     | iteration | `curl -v https://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?iteration=1000` |
 |               | duration  | `curl -v https://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?duration=5000` |
 |               | crash     | `curl -v -X POST https://openwhisk.ng.bluemix.net/api/v1/web/<namespace>/default/fibonacci?crash=true` |
 
@@ -91,20 +102,20 @@ Depending on which compute option you are using, use the following cURL calls:
 | [Dockerfile](service/Dockerfile)         | Description of the Docker image          |
 | [fibonacci-deployment.yml](service/fibonacci-deployment.yml) | Specification file for the deployment of the service in Kubernetes |
 
-### OpenWhisk action
+### Cloud Functions action
 
-The OpenWhisk action is deployed as a [zip action](https://console.ng.bluemix.net/docs/openwhisk/openwhisk_actions.html#openwhisk_create_action_js) where several files are packaged into a zip file and the zip file is passed to OpenWhisk as the implementation for the action. **[deploy.js](service/deploy.js)** takes care of packaging the zip file.
+The Cloud Functions action is deployed as a [zip action](https://console.ng.bluemix.net/docs/openwhisk/openwhisk_actions.html#openwhisk_create_action_js) where several files are packaged into a zip file and the zip file is passed to Cloud Functions as the implementation for the action. **[deploy.js](service/deploy.js)** takes care of packaging the zip file.
 
 | File                                     | Description                              |
 | ---------------------------------------- | ---------------------------------------- |
-| [handler.js](service/action/handler.js)  | Implementation of the OpenWhisk action   |
+| [handler.js](service/action/handler.js)  | Implementation of the Cloud Functions action   |
 | [lib/fibonacci.js](service/lib/fibonacci.js) | The implementation of the Fibonacci sequence, shared by all deployment options |
 | [package.json](service/action/package.json) | Specify the action entry point (handler.js) |
-| [deploy.js](service/deploy.js)           | Helper to deploy and undeploy the OpenWhisk action |
+| [deploy.js](service/deploy.js)           | Helper to deploy and undeploy the Cloud Functions action |
 
 ### Tester web app
 
-Under the `tester` directory is a simple web application to register and test the deployed micro-services. It can be pushed to Bluemix with `cf push` or simply executed locally with `python -m SimpleHTTPServer 28080` as example.
+Under the `tester` directory is a simple web application to register and test the deployed micro-services. It can be pushed to IBM Cloud with `cf push` or simply executed locally with `python -m SimpleHTTPServer 28080` as example.
 
 ## Contribute
 
@@ -116,7 +127,7 @@ Please create a pull request with your desired changes.
 
   Use
   ```
-  cf logs fibonacci-service
+  ibmcloud cf logs fibonacci-service
   ```
   to look at the live logs for the web application.
 
@@ -128,11 +139,11 @@ Please create a pull request with your desired changes.
   ```
   and look at the status of the resources in the console.
 
-### OpenWhisk
+### Cloud Functions
 
   Use
   ```
-  wsk activation poll
+  ibmcloud cloud-functions activation poll
   ```
   and perform an invocation of the action.
 

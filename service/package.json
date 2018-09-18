@@ -6,23 +6,23 @@
   },
   "dependencies": {
     "bluemix-autoscaling-agent": "*",
-    "bn.js": "4.11.6",
-    "cors": "2.8.3",
-    "express": "4.15.2",
-    "winston": "2.3.1"
+    "bn.js": "4.11.8",
+    "cors": "2.8.4",
+    "express": "4.16.3",
+    "winston": "3.1.0"
   },
   "devDependencies": {
-    "async": "2.3.0",
-    "dotenv": "4.0.0",
+    "async": "2.6.1",
+    "dotenv": "6.0.0",
     "node-zip": "1.1.1",
-    "openwhisk": "3.4.1",
-    "yargs": "7.0.2"
+    "openwhisk": "3.17.0",
+    "yargs": "12.0.2"
   },
   "author": "IBM",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/IBM-Bluemix/multiple-deployment-options/"
+    "url": "https://github.com/IBM-Cloud/multiple-deployment-options/"
   },
   "engines": {
     "node": ">=6.9.1"

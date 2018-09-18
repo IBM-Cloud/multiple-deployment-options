@@ -11,8 +11,7 @@ spec:
     spec:
       containers:
         - name: fibonacci-container
-          #image: "fibonacci:latest"
-          image: "registry.ng.bluemix.net/<namespace>/fibonacci:latest"
+          image: $IMAGE_URL:latest
           imagePullPolicy: Always
           resources:
             requests:
