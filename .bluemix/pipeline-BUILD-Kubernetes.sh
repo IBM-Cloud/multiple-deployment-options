@@ -1,6 +1,4 @@
 #!/bin/bash
-cd service
-
 echo -e "Build environment variables:"
 echo "REGISTRY_URL=${REGISTRY_URL}"
 echo "REGISTRY_NAMESPACE=${REGISTRY_NAMESPACE}"
@@ -8,7 +6,7 @@ echo "BUILD_NUMBER=${BUILD_NUMBER}"
 echo "ARCHIVE_DIR=${ARCHIVE_DIR}"
 
 IMAGE_URL=$REGISTRY_URL/$REGISTRY_NAMESPACE/$IMAGE_NAME
-bx cr build -t $IMAGE_URL:latest .
+(cd service && bx cr build -t $IMAGE_URL:latest .)
 
 mkdir -p $ARCHIVE_DIR
 echo "REGISTRY_URL=${REGISTRY_URL}" >> $ARCHIVE_DIR/build.properties
