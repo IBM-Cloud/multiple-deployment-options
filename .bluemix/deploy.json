@@ -18,7 +18,7 @@
       "type": "string"
     },
     "api-key": {
-      "description": "Bluemix API key (Obtain one using 'bx iam api-key-create my-new-key')",
+      "description": "IBM Cloud API key (Obtain one using 'ibmcloud iam api-key-create my-new-key')",
       "type": "string"
     },
     "target-cluster-name": {
