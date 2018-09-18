@@ -23,7 +23,7 @@ const winston = require('winston');
 const express = require('express');
 const cors = require('cors');
 
-const logger = new (winston.Logger)({
+const logger = winston.createLogger({
   transports: [
     new (winston.transports.Console)({
       timestamp: () => new Date(),
