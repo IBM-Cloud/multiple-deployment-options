@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Multiple Deployment Options",
   "description": "",
-  "longDescription": "The Delivery Pipeline automates the continuous deployment of the Fibonacci services to Cloud Foundry, OpenWhisk and Kubernetes.",
+  "longDescription": "The Delivery Pipeline automates the continuous deployment of the Fibonacci services to Cloud Foundry, Cloud Functions and Kubernetes.",
   "type": "object",
   "properties": {
     "target-region": {
@@ -23,10 +23,11 @@
     },
     "target-cluster-name": {
       "description": "Existing Kubernetes cluster name (if empty, the toolchain will not deploy the service to Kubernetes)",
-      "type": "string"
+      "type": "string",
+      "pattern": "\\S"
     },
     "image-name": {
-      "description": "Fibonnaci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
+      "description": "Fibonacci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
       "type": "string"
     },
     "registry-namespace": {
@@ -111,6 +112,10 @@
         {
           "type": "label",
           "title": "Kubernetes"
+        },
+        {
+          "type": "label",
+          "title": "Enter the name of an existing Kubernetes cluster within the selected region."
         }
       ]
     },

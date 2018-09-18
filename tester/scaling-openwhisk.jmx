@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="3.2" jmeter="3.2 r1790748">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Load Generator for OpenWhisk" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Load Generator for Cloud Functions" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
@@ -35,7 +35,7 @@
             <stringProp name="Argument.name">namespace</stringProp>
             <stringProp name="Argument.value">ORG_SPACE</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
-            <stringProp name="Argument.desc">OpenWhisk namespace, made of &lt;org&gt;_&lt;space&gt;</stringProp>
+            <stringProp name="Argument.desc">Cloud Functions namespace, made of &lt;org&gt;_&lt;space&gt;</stringProp>
           </elementProp>
         </collectionProp>
       </Arguments>

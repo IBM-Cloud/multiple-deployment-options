@@ -14,7 +14,7 @@ nvm install 6.9.1 1>/dev/null
 npm install --progress false --loglevel error 1>/dev/null
 
 ################################################################
-# OpenWhisk artifacts
+# Cloud Functions artifacts
 ################################################################
 bx login -a "$CF_TARGET_URL" --apikey "$PIPELINE_BLUEMIX_API_KEY" -o "$CF_ORG" -s "$CF_SPACE"
 bx plugin install Cloud-Functions -r Bluemix -f
@@ -26,5 +26,5 @@ node deploy.js --uninstall
 echo "Install"
 node deploy.js --install
 
-OPENWHISK_API_HOST=$(bx cloud-functions property get --apihost | awk '{print $4}')
-echo "Fibonacci service available at https://${OPENWHISK_API_HOST}/api/v1/web/${CF_ORG}_${CF_SPACE}/default/fibonacci"
+CFX_API_HOST=$(bx cloud-functions property get --apihost | awk '{print $4}')
+echo "Fibonacci service available at https://${CFX_API_HOST}/api/v1/web/${CF_ORG}_${CF_SPACE}/default/fibonacci"
