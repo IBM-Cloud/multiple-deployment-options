@@ -7,7 +7,8 @@
   "properties": {
     "target-region": {
       "description": "The IBM Cloud region",
-      "type": "string"
+      "type": "string",
+      "disabled": false
     },
     "target-organization": {
       "description": "The IBM Cloud org",
@@ -19,7 +20,8 @@
     },
     "api-key": {
       "description": "IBM Cloud API key (Obtain one using 'ibmcloud iam api-key-create my-new-key')",
-      "type": "string"
+      "type": "string",
+      "pattern": "\\S"
     },
     "target-cluster-name": {
       "description": "Existing Kubernetes cluster name (if empty, the toolchain will not deploy the service to Kubernetes)",
@@ -28,11 +30,14 @@
     },
     "image-name": {
       "description": "Fibonacci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
-      "type": "string"
+      "type": "string",
+      "pattern": "\\S"
     },
     "registry-namespace": {
       "description": "Image Registry Namespace",
-      "type": "string"
+      "type": "string",
+      "enum": [],
+      "pattern": "^[a-z0-9][a-z0-9_-]{3,29}$"
     }
   },
   "required": [
@@ -128,7 +133,7 @@
     {
       "key": "registry-namespace",
       "readonly": false,
-      "type": "text",
+      "type": "select",
       "title": "Image Registry Namespace",
       "description": "The image registry namespace (4 chars at least,  letters/digits/underscores). New namespace will be automatically created, you can also create a new namespace with 'ibmcloud cr namespace-add'.",
     },
