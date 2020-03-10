@@ -16,15 +16,19 @@ npm install --progress false --loglevel error 1>/dev/null
 ################################################################
 # Cloud Functions artifacts
 ################################################################
-bx login -a "$CF_TARGET_URL" --apikey "$PIPELINE_BLUEMIX_API_KEY" -o "$CF_ORG" -s "$CF_SPACE"
-bx plugin install Cloud-Functions -r Bluemix -f
-bx cloud-functions list
+ibmcloud login -a "$CF_TARGET_URL" --apikey "$PIPELINE_BLUEMIX_API_KEY" -o "$CF_ORG" -s "$CF_SPACE"
+ibmcloud plugin install Cloud-Functions -r 'IBM Cloud' -f
+if ! ibmcloud fn namespace get fibonacci; then
+  ibmcloud fn namespace create fibonacci
+fi
+NAMESPACE_ID=$(ibmcloud fn namespace get darkvision --properties | grep ID | awk '{print $2}')
+ibmcloud fn property set --namespace $NAMESPACE_ID
+FUNCTIONS_HOST=$(ibmcloud fn property get --apihost | awk -F '\t' '{print $3}')
 
 # Deploy the actions
 echo "Uninstall"
-node deploy.js --uninstall
+node deploy.js --apihost $FUNCTIONS_HOST --auth $PIPELINE_BLUEMIX_API_KEY --namespace $NAMESPACE_ID --uninstall
 echo "Install"
-node deploy.js --install
+node deploy.js--apihost $FUNCTIONS_HOST --auth $PIPELINE_BLUEMIX_API_KEY --namespace $NAMESPACE_ID --install
 
-CFX_API_HOST=$(bx cloud-functions property get --apihost | awk '{print $4}')
-echo "Fibonacci service available at https://${CFX_API_HOST}/api/v1/web/${CF_ORG}_${CF_SPACE}/default/fibonacci"
+echo "Fibonacci service available at https://${FUNCTIONS_HOST}/api/v1/web/${NAMESPACE_ID}/default/fibonacci"
