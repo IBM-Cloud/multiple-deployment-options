@@ -20,6 +20,7 @@
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
+const itm = require('@ibm-functions/iam-token-manager');
 const openwhisk = require('openwhisk');
 const async = require('async');
 
@@ -29,12 +30,17 @@ const argv = require('yargs')
   .command('update', 'Update action code')
   .option('apihost', {
     alias: 'a',
-    describe: 'OpenWhisk API host',
+    describe: 'Cloud Functions API host',
     type: 'string'
   })
   .option('auth', {
     alias: 'u',
-    describe: 'OpenWhisk authorization key',
+    describe: 'Cloud Functions authorization key',
+    type: 'string'
+  })
+  .option('namespace', {
+    alias: 'n',
+    describe: 'Cloud Functions namespace ID',
     type: 'string'
   })
   .count('verbose')
@@ -60,23 +66,30 @@ if (!argv.install &&
 const wskCliPropsPath = path.join(os.homedir(), '.wskprops');
 if (fs.existsSync(wskCliPropsPath)) {
   require('dotenv').config({ path: wskCliPropsPath });
-  WARN('Initialized OpenWhisk host and key from', wskCliPropsPath);
+  WARN('Initialized Cloud Functions host and key from', wskCliPropsPath);
 }
 
 if (argv.apihost) {
-  WARN('OpenWhisk host is set on command line.');
+  WARN('Cloud Functions host is set on command line.');
 }
 
 if (argv.auth) {
-  WARN('OpenWhisk authorization key is set on command line.');
+  WARN('Cloud Functions authorization key is set on command line.');
+}
+
+if (argv.namespace) {
+  WARN('Cloud Functions namespace ID is set on the command line.');
 }
 
 // load wskprops if any
+const authHandler = new itm({
+  iamApikey: argv.auth || process.env.AUTH
+});
 const openwhiskOptions = {
   apihost: argv.apihost || process.env.APIHOST,
-  api_key: argv.auth || process.env.AUTH
+  auth_handler: authHandler,
+  namespace: argv.namespace || process.env.NAMESPACE_ID,
 };
-
 const openwhiskClient = openwhisk(openwhiskOptions);
 
 if (argv.install) {
@@ -122,7 +135,7 @@ function makeActionTask(ow, isCreate) {
       actionName: 'fibonacci',
       action: {
         exec: {
-          kind: 'nodejs:6',
+          kind: 'nodejs:10',
           code: actionCode,
           binary: true
         },
