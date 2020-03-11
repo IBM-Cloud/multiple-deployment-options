@@ -43,7 +43,7 @@ services:
           CLUSTER_NAME: '{{form.pipeline.parameters.target-cluster-name}}'
           REGISTRY_NAMESPACE: '{{form.pipeline.parameters.registry-namespace}}'
           IMAGE_NAME: '{{form.pipeline.parameters.image-name}}'
-          RESOURCE_GROUP: ''{{form.pipeline.parameters.target-resource-group}}''
+          RESOURCE_GROUP: '{{form.pipeline.parameters.target-resource-group}}'
         execute: false
 
 form:
