@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+sudo apt-get update
+sudo apt-get install python
+
 cd service
 
 ################################################################
@@ -18,8 +21,6 @@ npm install --progress false --loglevel error 1>/dev/null
 ################################################################
 # Cloud Functions artifacts
 ################################################################
-ibmcloud login -a "$CF_TARGET_URL" --apikey "$PIPELINE_BLUEMIX_API_KEY" -o "$CF_ORG" -s "$CF_SPACE"
-ibmcloud plugin install Cloud-Functions -r 'IBM Cloud' -f
 if ! ibmcloud fn namespace get fibonacci; then
   ibmcloud fn namespace create fibonacci
 fi
