@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 echo -e "Build environment variables:"
 echo "REGISTRY_URL=${REGISTRY_URL}"
 echo "REGISTRY_NAMESPACE=${REGISTRY_NAMESPACE}"

@@ -8,25 +8,62 @@
     "target-region": {
       "description": "The IBM Cloud region",
       "type": "string",
-      "disabled": false
+      "disabled": false,
+      "validator": {
+        "v-type": "k8s-region",
+        "params": ["api-key"]
+      }
     },
     "target-organization": {
       "description": "The IBM Cloud org",
-      "type": "string"
+      "type": "string",
+      "validator": {
+        "v-type": "cf-org",
+        "params": ["target-region"]
+      }
     },
     "target-space": {
       "description": "The IBM Cloud space",
-      "type": "string"
+      "type": "string",
+      "validator": {
+        "v-type": "cf-space",
+        "params": ["target-organization"]
+      }
     },
     "api-key": {
       "description": "IBM Cloud API key (Obtain one using 'ibmcloud iam api-key-create my-new-key')",
       "type": "string",
-      "pattern": "\\S"
+      "pattern": "\\S",
+      "validator": {
+        "v-type": "api-key"
+      }
+    },
+    "target-cluster-region": {
+      "description": "Cluster Region",
+      "type": "string",
+      "disabled": false,
+      "validator": {
+        "v-type": "k8s-region",
+        "params": ["api-key"]
+      }
+    },
+    "target-resource-group": {
+      "description": "Resource Group",
+      "type": "string",
+      "pattern": "\\S",
+      "validator": {
+        "v-type": "resource-group",
+        "params": ["api-key"]
+      }
     },
     "target-cluster-name": {
       "description": "Existing Kubernetes cluster name (if empty, the toolchain will not deploy the service to Kubernetes)",
       "type": "string",
-      "pattern": "\\S"
+      "pattern": "\\S",
+      "validator": {
+        "v-type": "k8s-cluster-name",
+        "params": ["target-cluster-region", "target-resource-group"]
+      }
     },
     "image-name": {
       "description": "Fibonacci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
@@ -37,7 +74,11 @@
       "description": "Image Registry Namespace",
       "type": "string",
       "enum": [],
-      "pattern": "^[a-z0-9][a-z0-9_-]{3,29}$"
+      "pattern": "^[a-z0-9][a-z0-9_-]{3,29}$",
+      "validator": {
+        "v-type": "k8s-registry-namespace",
+        "params": ["target-cluster-region"]
+      }
     }
   },
   "required": [
@@ -45,13 +86,15 @@
     "target-organization",
     "target-space",
     "api-key",
+    "target-resource-group",
+    "target-cluster-region",
     "target-cluster-name",
     "image-name",
     "registry-namespace"
   ],
   "form": [{
       "type": "validator",
-      "url": "/devops/setup/bm-helper/helper.html"
+      "url": "/devops/validator/validator-v1.html"
     },
     {
       "type": "password",
@@ -59,6 +102,7 @@
       "title": "IBM Cloud API Key",
       "key": "api-key"
     },
+
     {
       "type": "table",
       "columnCount": 1,
@@ -66,16 +110,14 @@
       "items": [
         {
           "type": "label",
-          "title": "Cloud Foundry and Cloud Functions"
+          "title": "Cloud Foundry"
         },
         {
           "type": "label",
-          "title": "The toolchain will deploy the Fibonacci service as a Cloud Foundry application with a random route and as a Cloud Functions action. The action will also be exposed as an HTTP endpoint. Specify the space where the application and the action will be deployed."
+          "title": "The toolchain will deploy the Fibonacci service as a Cloud Foundry application with a random route. Specify the space where the application will be deployed."
         }
       ]
     },
-
-
     {
       "type": "table",
       "columnCount": 3,
@@ -116,27 +158,57 @@
       "items": [
         {
           "type": "label",
-          "title": "Kubernetes"
+          "title": "Kubernetes and Cloud Functions"
         },
         {
           "type": "label",
-          "title": "Enter the name of an existing Kubernetes cluster within the selected region."
+          "title": "The toolchain will deploy the Fibonacci service to a cluster and as a Cloud Functions action. The action will also be exposed as an HTTP endpoint. Specify the resource group where the cluster can be found and where the action will be created."
         }
       ]
     },
+
     {
-      "key": "target-cluster-name",
+      "type": "text",
       "readonly": false,
-      "type": "select",
-      "title": "Cluster Name"
+      "title": "Resource Group",
+      "key": "target-resource-group"
     },
+
+    {
+      "type": "table",
+      "columnCount": 2,
+      "widths": [ "50%", "50%" ],
+      "items": [
+        {
+          "type": "label",
+          "title": "Cluster Region"
+        },
+        {
+          "type": "label",
+          "title": "Cluster"
+        },
+        {
+          "key": "target-cluster-region",
+          "type": "select",
+          "title": "Cluster Region"
+        },
+        {
+          "key": "target-cluster-name",
+          "readonly": false,
+          "type": "select",
+          "title": "Cluster Name"
+        }
+      ]
+    },
+
     {
       "key": "registry-namespace",
       "readonly": false,
       "type": "select",
       "title": "Image Registry Namespace",
-      "description": "The image registry namespace (4 chars at least,  letters/digits/underscores). New namespace will be automatically created, you can also create a new namespace with 'ibmcloud cr namespace-add'.",
+      "description": "The image registry namespace (4 chars at least,  letters/digits/underscores). New namespace will be automatically created, you can also create a new namespace with 'ibmcloud cr namespace-add'."
     },
+
     {
       "key": "image-name",
       "readonly": false,

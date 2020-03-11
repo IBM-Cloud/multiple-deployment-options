@@ -39,9 +39,11 @@ services:
           SPACE_NAME: '{{form.pipeline.parameters.target-space}}'
           ORG_NAME: '{{form.pipeline.parameters.target-organization}}'
 
+          CLUSTER_REGION: '{{form.pipeline.parameters.target-cluster-region}}'
           CLUSTER_NAME: '{{form.pipeline.parameters.target-cluster-name}}'
           REGISTRY_NAMESPACE: '{{form.pipeline.parameters.registry-namespace}}'
           IMAGE_NAME: '{{form.pipeline.parameters.image-name}}'
+          RESOURCE_GROUP: '{{form.pipeline.parameters.target-resource-group}}'
         execute: false
 
 form:

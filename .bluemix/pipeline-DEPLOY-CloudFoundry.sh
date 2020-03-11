@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 cd service
 
 # Push app

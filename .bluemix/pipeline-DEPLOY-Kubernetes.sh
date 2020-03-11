@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 cd service
 
 if [ -z "$IMAGE_URL" ]; then
@@ -24,7 +26,7 @@ else
 fi
 
 echo "Deleting previous version of Fibonacci service..."
-kubectl delete --namespace $TARGET_NAMESPACE -f fibonacci-deployment.yml
+kubectl delete --namespace $TARGET_NAMESPACE -f fibonacci-deployment.yml || true
 
 echo "Deploying Fibonacci service..."
 cat fibonacci-deployment.yml | \

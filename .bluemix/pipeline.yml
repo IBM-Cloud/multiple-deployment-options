@@ -13,13 +13,59 @@ stages:
     build_type: cr
     # artifact_dir: output
     target:
-      region_id: ${REGION_ID}
+      region_id: ${CLUSTER_REGION}
       api_key: ${API_KEY}
     namespace: ${REGISTRY_NAMESPACE}
     image_name: ${IMAGE_NAME}
+    resource_group: ${RESOURCE_GROUP}
     script: |
       #!/bin/bash
       ./.bluemix/pipeline-BUILD-Kubernetes.sh
+- name: "CLOUD FUNCTIONS"
+  inputs:
+  - type: job
+    stage: BUILD
+    job: Build
+  triggers:
+  - type: stage
+  properties:
+  - name: CF_ORG
+    value: ${ORG_NAME}
+  - name: CF_SPACE
+    value: ${SPACE_NAME}
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      region_id: ${REGION_ID}
+      api_key: ${API_KEY}
+      kubernetes_cluster: ${CLUSTER_NAME}
+      resource_group: ${RESOURCE_GROUP}
+    script: |-
+      #!/bin/bash
+      ./.bluemix/pipeline-DEPLOY-CloudFunctions.sh
+- name: KUBERNETES
+  inputs:
+  - type: job
+    stage: BUILD
+    job: Build
+  triggers:
+  - type: stage
+  properties:
+  - name: buildprops
+    value: build.properties
+    type: file
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      region_id: ${CLUSTER_REGION}
+      api_key: ${API_KEY}
+      kubernetes_cluster: ${CLUSTER_NAME}
+      resource_group: ${RESOURCE_GROUP}
+    script: |-
+      #!/bin/bash
+      ./.bluemix/pipeline-DEPLOY-Kubernetes.sh
 - name: "CLOUD FOUNDRY"
   inputs:
   - type: job
@@ -39,45 +85,3 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
-- name: "CLOUD FUNCTIONS"
-  inputs:
-  - type: job
-    stage: BUILD
-    job: Build
-  triggers:
-  - type: stage
-  jobs:
-  - name: Deploy
-    type: deployer
-    target:
-      region_id: ${REGION_ID}
-      organization: ${ORG_NAME}
-      space: ${SPACE_NAME}
-      application: ${CF_APP_NAME}
-      api_key: ${API_KEY}
-    script: |-
-      #!/bin/bash
-      ./.bluemix/pipeline-DEPLOY-CloudFunctions.sh
-- name: KUBERNETES
-  inputs:
-  - type: job
-    stage: BUILD
-    job: Build
-  triggers:
-  - type: stage
-  properties:
-  - name: buildprops
-    value: build.properties
-    type: file
-  jobs:
-  - name: Deploy
-    type: deployer
-    target:
-      region_id: ${REGION_ID}
-      organization: ${ORG_NAME}
-      space: ${SPACE_NAME}
-      api_key: ${API_KEY}
-      kubernetes_cluster: ${CLUSTER_NAME}
-    script: |-
-      #!/bin/bash
-      ./.bluemix/pipeline-DEPLOY-Kubernetes.sh
