@@ -42,7 +42,7 @@ The implementation of the Fibonacci sequence is done in **[service/lib/fibonacci
 
 And then
 
-[![Deploy To IBM Cloud](https://console.bluemix.net/devops/graphics/create_toolchain_button.png)](https://console.bluemix.net/devops/setup/deploy/?repository=https://github.com/IBM-Cloud/multiple-deployment-options&branch=master)
+[![Deploy To IBM Cloud](https://cloud.ibm.com/devops/graphics/create_toolchain_button.png)](https://cloud.ibm.com/devops/setup/deploy?repository=https://github.com/IBM-Cloud/multiple-deployment-options&branch=master)
 
 1. Select the **GitHub** box.
    1. Decide whether you want to clone or fork the repository.
