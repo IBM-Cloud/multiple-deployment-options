@@ -17,6 +17,7 @@ stages:
       api_key: ${API_KEY}
     namespace: ${REGISTRY_NAMESPACE}
     image_name: ${IMAGE_NAME}
+    resource_group: ${RESOURCE_GROUP}
     script: |
       #!/bin/bash
       ./.bluemix/pipeline-BUILD-Kubernetes.sh
@@ -51,10 +52,9 @@ stages:
     type: deployer
     target:
       region_id: ${REGION_ID}
-      organization: ${ORG_NAME}
-      space: ${SPACE_NAME}
-      application: ${CF_APP_NAME}
       api_key: ${API_KEY}
+      kubernetes_cluster: ${CLUSTER_NAME}
+      resource_group: ${RESOURCE_GROUP}
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-CloudFunctions.sh
