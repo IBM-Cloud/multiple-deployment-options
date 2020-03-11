@@ -21,25 +21,6 @@ stages:
     script: |
       #!/bin/bash
       ./.bluemix/pipeline-BUILD-Kubernetes.sh
-- name: "CLOUD FOUNDRY"
-  inputs:
-  - type: job
-    stage: BUILD
-    job: Build
-  triggers:
-  - type: stage
-  jobs:
-  - name: Deploy
-    type: deployer
-    target:
-      region_id: ${REGION_ID}
-      organization: ${ORG_NAME}
-      space: ${SPACE_NAME}
-      application: ${CF_APP_NAME}
-      api_key: ${API_KEY}
-    script: |-
-      #!/bin/bash
-      ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
 - name: "CLOUD FUNCTIONS"
   inputs:
   - type: job
@@ -47,6 +28,11 @@ stages:
     job: Build
   triggers:
   - type: stage
+  properties:
+  - name: CF_ORG:
+    value: ${ORG_NAME}
+  - name: CF_SPACE:
+    value: ${SPACE_NAME}
   jobs:
   - name: Deploy
     type: deployer
@@ -80,3 +66,22 @@ stages:
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-Kubernetes.sh
+- name: "CLOUD FOUNDRY"
+  inputs:
+  - type: job
+    stage: BUILD
+    job: Build
+  triggers:
+  - type: stage
+  jobs:
+  - name: Deploy
+    type: deployer
+    target:
+      region_id: ${REGION_ID}
+      organization: ${ORG_NAME}
+      space: ${SPACE_NAME}
+      application: ${CF_APP_NAME}
+      api_key: ${API_KEY}
+    script: |-
+      #!/bin/bash
+      ./.bluemix/pipeline-DEPLOY-CloudFoundry.sh
