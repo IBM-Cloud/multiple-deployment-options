@@ -177,7 +177,7 @@
     {
       "type": "table",
       "columnCount": 2,
-      "widths": [ "33%", "33%" ],
+      "widths": [ "50%", "50%" ],
       "items": [
         {
           "type": "label",
