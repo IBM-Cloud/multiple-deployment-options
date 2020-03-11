@@ -38,6 +38,15 @@
         "v-type": "api-key"
       }
     },
+    "target-cluster-region": {
+      "description": "Cluster Region",
+      "type": "string",
+      "disabled": false,
+      "validator": {
+        "v-type": "k8s-region",
+        "params": ["api-key"]
+      }
+    },
     "target-cluster-name": {
       "description": "Existing Kubernetes cluster name (if empty, the toolchain will not deploy the service to Kubernetes)",
       "type": "string",
@@ -60,6 +69,7 @@
     "target-organization",
     "target-space",
     "api-key",
+    "target-cluster-region",
     "target-cluster-name",
     "image-name",
     "registry-namespace"
@@ -126,31 +136,40 @@
 
     {
       "type": "table",
-      "columnCount": 1,
-      "widths": [ "100%" ],
+      "columnCount": 3,
+      "widths": [ "33%", "33%", "33%" ],
       "items": [
         {
           "type": "label",
-          "title": "Kubernetes"
+          "title": "Cluster Region"
         },
         {
           "type": "label",
-          "title": "Enter the name of an existing Kubernetes cluster within the selected region."
+          "title": "Cluster"
+        },
+        {
+          "type": "label",
+          "title": "Namespace"
+        },
+        {
+          "key": "target-cluster-region",
+          "type": "select",
+          "title": "Cluster Region"
+        },
+        {
+          "key": "target-cluster-name",
+          "readonly": false,
+          "type": "select",
+          "title": "Cluster Name"
+        },
+        {
+          "key": "registry-namespace",
+          "readonly": false,
+          "type": "select",
+          "title": "Image Registry Namespace",
+          "description": "The image registry namespace (4 chars at least,  letters/digits/underscores). New namespace will be automatically created, you can also create a new namespace with 'ibmcloud cr namespace-add'."
         }
       ]
-    },
-    {
-      "key": "target-cluster-name",
-      "readonly": false,
-      "type": "select",
-      "title": "Cluster Name"
-    },
-    {
-      "key": "registry-namespace",
-      "readonly": false,
-      "type": "select",
-      "title": "Image Registry Namespace",
-      "description": "The image registry namespace (4 chars at least,  letters/digits/underscores). New namespace will be automatically created, you can also create a new namespace with 'ibmcloud cr namespace-add'."
     },
     {
       "key": "image-name",

@@ -13,7 +13,7 @@ stages:
     build_type: cr
     # artifact_dir: output
     target:
-      region_id: ${REGION_ID}
+      region_id: ${CLUSTER_REGION}
       api_key: ${API_KEY}
     namespace: ${REGISTRY_NAMESPACE}
     image_name: ${IMAGE_NAME}
@@ -73,7 +73,7 @@ stages:
   - name: Deploy
     type: deployer
     target:
-      region_id: ${REGION_ID}
+      region_id: ${CLUSTER_REGION}
       organization: ${ORG_NAME}
       space: ${SPACE_NAME}
       api_key: ${API_KEY}
