@@ -8,20 +8,35 @@
     "target-region": {
       "description": "The IBM Cloud region",
       "type": "string",
-      "disabled": false
+      "disabled": false,
+      "validator": {
+        "v-type": "k8s-region",
+        "params": ["api-key"]
+      }
     },
     "target-organization": {
       "description": "The IBM Cloud org",
-      "type": "string"
+      "type": "string",
+      "validator": {
+        "v-type": "cf-org",
+        "params": ["target-region"]
+      }
     },
     "target-space": {
       "description": "The IBM Cloud space",
-      "type": "string"
+      "type": "string",
+      "validator": {
+        "v-type": "cf-space",
+        "params": ["target-organization"]
+      }
     },
     "api-key": {
       "description": "IBM Cloud API key (Obtain one using 'ibmcloud iam api-key-create my-new-key')",
       "type": "string",
-      "pattern": "\\S"
+      "pattern": "\\S",
+      "validator": {
+        "v-type": "api-key"
+      }
     },
     "target-cluster-name": {
       "description": "Existing Kubernetes cluster name (if empty, the toolchain will not deploy the service to Kubernetes)",
@@ -51,7 +66,7 @@
   ],
   "form": [{
       "type": "validator",
-      "url": "/devops/setup/bm-helper/helper.html"
+      "url": "/devops/validator/validator-v1.html"
     },
     {
       "type": "password",
@@ -135,7 +150,7 @@
       "readonly": false,
       "type": "select",
       "title": "Image Registry Namespace",
-      "description": "The image registry namespace (4 chars at least,  letters/digits/underscores). New namespace will be automatically created, you can also create a new namespace with 'ibmcloud cr namespace-add'.",
+      "description": "The image registry namespace (4 chars at least,  letters/digits/underscores). New namespace will be automatically created, you can also create a new namespace with 'ibmcloud cr namespace-add'."
     },
     {
       "key": "image-name",
