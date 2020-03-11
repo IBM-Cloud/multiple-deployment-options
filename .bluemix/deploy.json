@@ -110,11 +110,11 @@
       "items": [
         {
           "type": "label",
-          "title": "Cloud Foundry and Cloud Functions"
+          "title": "Cloud Foundry"
         },
         {
           "type": "label",
-          "title": "The toolchain will deploy the Fibonacci service as a Cloud Foundry application with a random route and as a Cloud Functions action. The action will also be exposed as an HTTP endpoint. Specify the space where the application and the action will be deployed."
+          "title": "The toolchain will deploy the Fibonacci service as a Cloud Foundry application with a random route. Specify the space where the application will be deployed."
         }
       ]
     },
@@ -158,7 +158,11 @@
       "items": [
         {
           "type": "label",
-          "title": "Kubernetes"
+          "title": "Kubernetes and Cloud Functions"
+        },
+        {
+          "type": "label",
+          "title": "The toolchain will deploy the Fibonacci service to a cluster and as a Cloud Functions action. The action will also be exposed as an HTTP endpoint. Specify the resource group where the cluster can be found and where the action will be created."
         }
       ]
     },
@@ -172,8 +176,8 @@
 
     {
       "type": "table",
-      "columnCount": 3,
-      "widths": [ "33%", "33%", "33%" ],
+      "columnCount": 2,
+      "widths": [ "33%", "33%" ],
       "items": [
         {
           "type": "label",
