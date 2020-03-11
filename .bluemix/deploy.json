@@ -74,7 +74,11 @@
       "description": "Image Registry Namespace",
       "type": "string",
       "enum": [],
-      "pattern": "^[a-z0-9][a-z0-9_-]{3,29}$"
+      "pattern": "^[a-z0-9][a-z0-9_-]{3,29}$",
+      "validator": {
+        "v-type": "k8s-registry-namespace",
+        "params": ["target-cluster-region"]
+      }
     }
   },
   "required": [
@@ -180,10 +184,6 @@
           "title": "Cluster"
         },
         {
-          "type": "label",
-          "title": "Namespace"
-        },
-        {
           "key": "target-cluster-region",
           "type": "select",
           "title": "Cluster Region"
@@ -193,16 +193,18 @@
           "readonly": false,
           "type": "select",
           "title": "Cluster Name"
-        },
-        {
-          "key": "registry-namespace",
-          "readonly": false,
-          "type": "select",
-          "title": "Image Registry Namespace",
-          "description": "The image registry namespace (4 chars at least,  letters/digits/underscores). New namespace will be automatically created, you can also create a new namespace with 'ibmcloud cr namespace-add'."
         }
       ]
     },
+
+    {
+      "key": "registry-namespace",
+      "readonly": false,
+      "type": "select",
+      "title": "Image Registry Namespace",
+      "description": "The image registry namespace (4 chars at least,  letters/digits/underscores). New namespace will be automatically created, you can also create a new namespace with 'ibmcloud cr namespace-add'."
+    },
+
     {
       "key": "image-name",
       "readonly": false,
