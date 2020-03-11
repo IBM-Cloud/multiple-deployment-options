@@ -29,9 +29,9 @@ stages:
   triggers:
   - type: stage
   properties:
-  - name: CF_ORG:
+  - name: CF_ORG
     value: ${ORG_NAME}
-  - name: CF_SPACE:
+  - name: CF_SPACE
     value: ${SPACE_NAME}
   jobs:
   - name: Deploy
