@@ -47,10 +47,23 @@
         "params": ["api-key"]
       }
     },
+    "target-resource-group": {
+      "description": "Resource Group",
+      "type": "string",
+      "pattern": "\\S",
+      "validator": {
+        "v-type": "resource-group",
+        "params": ["api-key"]
+      }
+    },
     "target-cluster-name": {
       "description": "Existing Kubernetes cluster name (if empty, the toolchain will not deploy the service to Kubernetes)",
       "type": "string",
-      "pattern": "\\S"
+      "pattern": "\\S",
+      "validator": {
+        "v-type": "k8s-cluster-name",
+        "params": ["target-cluster-region", "target-resource-group"]
+      }
     },
     "image-name": {
       "description": "Fibonacci service Docker image. Obtain the Docker namespace using 'bx cr namespace-list'.",
@@ -69,6 +82,7 @@
     "target-organization",
     "target-space",
     "api-key",
+    "target-resource-group",
     "target-cluster-region",
     "target-cluster-name",
     "image-name",
@@ -84,6 +98,7 @@
       "title": "IBM Cloud API Key",
       "key": "api-key"
     },
+
     {
       "type": "table",
       "columnCount": 1,
@@ -99,8 +114,6 @@
         }
       ]
     },
-
-
     {
       "type": "table",
       "columnCount": 3,
@@ -132,6 +145,25 @@
           "readonly": false
         }
       ]
+    },
+
+    {
+      "type": "table",
+      "columnCount": 1,
+      "widths": [ "100%" ],
+      "items": [
+        {
+          "type": "label",
+          "title": "Kubernetes"
+        }
+      ]
+    },
+
+    {
+      "type": "text",
+      "readonly": false,
+      "title": "Resource Group",
+      "key": "target-resource-group"
     },
 
     {

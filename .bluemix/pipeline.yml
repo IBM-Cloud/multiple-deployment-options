@@ -74,10 +74,9 @@ stages:
     type: deployer
     target:
       region_id: ${CLUSTER_REGION}
-      organization: ${ORG_NAME}
-      space: ${SPACE_NAME}
       api_key: ${API_KEY}
       kubernetes_cluster: ${CLUSTER_NAME}
+      resource_group: ${RESOURCE_GROUP}
     script: |-
       #!/bin/bash
       ./.bluemix/pipeline-DEPLOY-Kubernetes.sh
