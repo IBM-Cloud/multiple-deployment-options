@@ -77,9 +77,19 @@
       "pattern": "^[a-z0-9][-_a-z0-9]{2,28}[a-z0-9]$",
       "validator": {
         "v-type": "k8s-registry-namespace",
-        "params": ["target-cluster-region"]
+        "params": ["registry-region"],
+				"validate": false
       }
-    }
+    },
+    "registry-region": {
+			"description": "Image Registry Region",
+			"type": "string",
+			"disabled": false,
+			"validator": {
+				"v-type": "k8s-region",
+				"params": ["api-key"]
+			}
+		}
   },
   "required": [
     "target-region",
@@ -90,7 +100,8 @@
     "target-cluster-region",
     "target-cluster-name",
     "image-name",
-    "registry-namespace"
+    "registry-namespace",
+    "registry-region"
   ],
   "form": [{
       "type": "validator",
@@ -200,15 +211,33 @@
         }
       ]
     },
-
     {
-      "key": "registry-namespace",
-      "readonly": false,
-      "type": "select",
-      "title": "Image Registry Namespace",
-      "description": "The image registry namespace (4 chars at least,  letters/digits/underscores). New namespace will be automatically created, you can also create a new namespace with 'ibmcloud cr namespace-add'."
+      "type": "table",
+      "columnCount": 2,
+      "widths": [ "50%", "50%" ],
+      "items": [
+        {
+          "type": "label",
+          "title": "Container Registry Region"
+        },
+        {
+          "type": "label",
+          "title": "Container Registry Namespace"
+        },
+        {
+          "type": "select",
+          "title": "Image Registry Region",
+          "key": "registry-region"
+        },
+        {
+          "key": "registry-namespace",
+          "readonly": false,
+          "type": "select",
+          "title": "Image Registry Namespace",
+          "description": "The image registry namespace (4 chars at least,  letters/digits/underscores). New namespace will be automatically created, you can also create a new namespace with 'ibmcloud cr namespace-add'."
+        }
+      ]
     },
-
     {
       "key": "image-name",
       "readonly": false,

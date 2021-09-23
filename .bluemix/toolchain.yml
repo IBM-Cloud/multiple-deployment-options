@@ -41,6 +41,7 @@ services:
 
           CLUSTER_REGION: '{{form.pipeline.parameters.target-cluster-region}}'
           CLUSTER_NAME: '{{form.pipeline.parameters.target-cluster-name}}'
+          REGISTRY_REGION_ID: '{{form.pipeline.parameters.registry-region}}'
           REGISTRY_NAMESPACE: '{{form.pipeline.parameters.registry-namespace}}'
           IMAGE_NAME: '{{form.pipeline.parameters.image-name}}'
           RESOURCE_GROUP: '{{form.pipeline.parameters.target-resource-group}}'
